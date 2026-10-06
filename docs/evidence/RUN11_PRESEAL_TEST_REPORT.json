@@ -1,0 +1,138 @@
+{
+  "schema": "cybertiel-preseal-audit/v1",
+  "audit": "CT-AUDIT-2026-10-06-AUTOMATION-RUN11-v25-r2",
+  "installer_release": "2026-10-06.v25",
+  "checker": "CT-CHECK-2.8.0",
+  "package_revision": "2026-10-06.v25-r2",
+  "passed": 473,
+  "failed": 0,
+  "suites": [
+    {
+      "name": "installer",
+      "report": "TEST_REPORT.json",
+      "passed": 110,
+      "failed": 0
+    },
+    {
+      "name": "focused_final",
+      "report": "FINAL_TEST_REPORT.json",
+      "passed": 47,
+      "failed": 0
+    },
+    {
+      "name": "log_import",
+      "report": "LOG_IMPORT_SAFETY_TEST_REPORT.json",
+      "passed": 7,
+      "failed": 0
+    },
+    {
+      "name": "pi_lock",
+      "report": "PI_LOCK_TEST_REPORT.json",
+      "passed": 48,
+      "failed": 0
+    },
+    {
+      "name": "operation_lock",
+      "report": "OPERATION_LOCK_TEST_REPORT.json",
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "name": "project_import",
+      "report": "PROJECT_IMPORT_SAFETY_TEST_REPORT.json",
+      "passed": 4,
+      "failed": 0
+    },
+    {
+      "name": "setup",
+      "report": "SETUP_TEST_REPORT.json",
+      "passed": 41,
+      "failed": 0
+    },
+    {
+      "name": "host_lock_security",
+      "report": "LOCK_SECURITY_TEST_REPORT.json",
+      "passed": 8,
+      "failed": 0
+    },
+    {
+      "name": "snapshot_coordination",
+      "report": "SNAPSHOT_COORDINATION_TEST_REPORT.json",
+      "passed": 9,
+      "failed": 0
+    },
+    {
+      "name": "run08",
+      "report": "RUN08_REGRESSION_TEST_REPORT.json",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "name": "run09",
+      "report": "RUN09_REGRESSION_TEST_REPORT.json",
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "name": "run10",
+      "report": "RUN10_REGRESSION_TEST_REPORT.json",
+      "passed": 3,
+      "failed": 0
+    },
+    {
+      "name": "run11",
+      "report": "RUN11_REGRESSION_TEST_REPORT.json",
+      "passed": 6,
+      "failed": 0
+    },
+    {
+      "name": "checker",
+      "report": "checker/TEST_REPORT.json",
+      "passed": 134,
+      "failed": 0
+    },
+    {
+      "name": "checker_current",
+      "report": "checker/V3_TEST_REPORT.json",
+      "passed": 39,
+      "failed": 0
+    }
+  ],
+  "execution_contexts": {
+    "nonroot": [
+      "test-installer.py",
+      "test-final.py",
+      "test_log_import_safety.py"
+    ],
+    "root": [
+      "remaining contract/setup/checker suites"
+    ]
+  },
+  "additional_probes": {
+    "setup_plan": {
+      "rc": 0,
+      "result": "no mutations; exact v25 installer/checker pins verified by setup"
+    },
+    "checker_negative": {
+      "rc": 1,
+      "status": "ISSUES_FOUND",
+      "reason": "audit host is not the target; insufficient RAM/AppArmor/Docker/model state, with runtime/project/performance UNTESTED"
+    }
+  },
+  "development_failures_not_counted": [
+    {
+      "stage": "report aggregation",
+      "cause": "first aggregator assumed every suite used passed/failed keys; log-import report uses pass/fail; corrected aggregator re-read all real reports",
+      "counted_as_test_failure": false
+    }
+  ],
+  "not_executed": [
+    "real Ubuntu 24.04 target install",
+    "real Docker build/runtime",
+    "real Pi npm ci/CLI/SDK on target",
+    "38.5GB model/projector download/hash/inference",
+    "Xeon 262k soak",
+    "user project build",
+    "Windows VM execution"
+  ]
+}

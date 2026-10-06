@@ -1,0 +1,199 @@
+{
+  "precision_decision": {
+    "variant": "official UD-Q8_K_XL",
+    "is_bf16": false,
+    "requires_cli_acceptance": "--accept-official-q8",
+    "no_automatic_fallback": true
+  },
+  "model": {
+    "repo": "peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF",
+    "revision": "644bee2e6b9a75aa64c3bb818aaeeebe43d862bb",
+    "file": "Cyber-Tiel-Coder-35B-A3B-UD-Q8_K_XL.gguf",
+    "sha256": "7509f8c8e3b2df4c7bc5966fa711478c12c2c424f2832f7933f1e46dd180feb2",
+    "publisher_display_size": "38.5 GB at pinned non-MTP revision",
+    "mmproj_file": "mmproj-BF16.gguf",
+    "mmproj_sha256": "d9ce31026d1cb1f3f8d5152e2e2a014d9d2b302b6c93a7dc07bb0a0487f52837",
+    "runtime_start_context": 262144,
+    "runtime_start_kv": "f16/f16",
+    "predict_limit": -1,
+    "reasoning_budget": -1,
+    "mtp_decision": "not enabled by default; hardware-dependent speed feature, no target-Xeon benchmark, user prioritizes correctness over speed",
+    "correctness_profile_note": "Pinned model card says unrestricted reasoning/output is intentional and safer/better; if caps are needed, 32768/16384 are fallback recommendations. User prioritizes correctness over speed.",
+    "server_host_prompt_cache_mib": 0,
+    "server_cache_idle_slots": false,
+    "slot_prefix_reuse": "retained; --cache-ram 0 disables the separate server host prompt cache, not in-slot prefix reuse",
+    "context_checkpoints": "retained at llama.cpp v0.5.0 defaults pending target qwen35moe CPU soak; not conflated with --cache-ram"
+  },
+  "llama_cpp": {
+    "commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "release": "v0.5.0",
+    "release_provenance_note": "v0.5.0 is an annotated tag: tag object c13fcbf684171d5e0bca3fc5c34be6a99174b05f points to source commit 7fe450e19305b828c199d602c23a8337aaa1f03b. GitHub Release API separately reports target_commitish=d2e54583c7452353eb35d40431281f6ee984332f, which is three commits ahead. Deployment checks out the annotated tag target and records the release-API metadata separately.",
+    "post_release_compare_note": "GitHub repository comparison shows the three post-release commits touched an OpenCL source file, a test source and a workflow; no CPU/OpenBLAS runtime fix needed from those three commits was identified for this deployment.",
+    "build": "native CPU, OpenBLAS, GGML_NATIVE=ON, CUDA/Vulkan off, static llama libraries; not a full-static executable",
+    "openblas_note": "official docs describe CPU OpenBLAS as prompt-processing acceleration for sufficiently large batches; generation speed is not guaranteed",
+    "server_prompt_cache": "disabled with --cache-ram 0 and --no-cache-idle-slots because this deployment has one slot/one active agent conversation; in-slot prefix reuse remains available and host cache adds no intended benefit for this topology",
+    "context_checkpoint_scope": "not disabled in v6; this is a separate mechanism and requires target qwen35moe/CPU soak before any correctness/performance tradeoff change",
+    "annotated_tag_object": "c13fcbf684171d5e0bca3fc5c34be6a99174b05f",
+    "annotated_tag_target_commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+    "github_release_api_target_commitish": "d2e54583c7452353eb35d40431281f6ee984332f",
+    "tag_signature": "GitHub tag object currently reports unsigned; source integrity relies on immutable commit pin plus build/image receipts, not a claimed tag signature."
+  },
+  "powershell": {
+    "version": "7.6.6",
+    "platform_package": "powershell_7.6.6-1.deb_amd64.deb",
+    "sha256": "9585F38AB5A026C3FC0995486E26E12050777960FEF47A22DCA98B577C5D27A7",
+    "scope": "Linux PowerShell 7 in Debian 12 agent container; not Windows PowerShell 5.1 certification"
+  },
+  "v3_added_tooling": {
+    "python": [
+      "python3-pip",
+      "python3-dev",
+      "python3-pytest",
+      "python3-mypy"
+    ],
+    "c_cpp_analysis": [
+      "valgrind",
+      "clangd",
+      "bear"
+    ],
+    "build_systems": [
+      "autoconf",
+      "automake",
+      "libtool",
+      "meson"
+    ],
+    "target_smoke": [
+      "python py_compile",
+      "pytest tiny test",
+      "mypy tiny typed module",
+      "venv pip presence",
+      "PowerShell parser + runtime"
+    ]
+  },
+  "host": {
+    "supported_os": "Ubuntu 24.04 LTS x86_64",
+    "minimum_visible_ram_gib": 110,
+    "required_cpu_feature": "AVX2",
+    "planned_cpu": "Intel Xeon E5-2620 v4",
+    "planned_cpu_note": "Intel lists 8C/16T, DDR4 and AVX2; performance still requires target benchmark",
+    "disk_gate": "90 GiB DATA + 5 GiB generic root before Docker + 20 GiB on Docker-reported DockerRootDir after daemon start",
+    "provenance_receipt": "target captures CPU model(s), logical CPU count, kernel, AVX2 visibility, visible RAM, Docker version and base image platform; READY binds hashes"
+  },
+  "security_defaults": {
+    "agent_general_internet": false,
+    "model_host_port_published": false,
+    "docker_socket_mounted": false,
+    "host_ssh_keys_mounted": false,
+    "agent_root": false,
+    "cap_drop_all": true,
+    "no_new_privileges": true,
+    "read_only_container_root": true,
+    "docker_default_seccomp_retained": true,
+    "docker_internal_bridge": true,
+    "docker_internal_bridge_gateway_mode_ipv4": "isolated",
+    "docker_engine_minimum_for_network_isolation": "28.0",
+    "network_receipt_bound_to_ready": true,
+    "host_gateway_note": "plain --internal is insufficient to remove host bridge gateway reachability; v10 requires gateway_mode_ipv4=isolated and validates the inspected network option",
+    "internal_bridge_ipv6": "explicitly disabled with docker network create --ipv6=false; inspect must report EnableIPv6=false; live model-container inspect must not expose GlobalIPv6Address",
+    "dual_stack_rationale": "Docker Engine 27+ daemon default-network-opts can enable IPv6 by default for custom bridge networks; IPv4 and IPv6 gateway modes are separate. This deployment intentionally stays IPv4-only to keep the isolated-gateway proof simple and deterministic.",
+    "seccomp_profile": "explicit Docker builtin via --security-opt=seccomp=builtin; not inherited from daemon default",
+    "seccomp_runtime_gate": "READY requires model /proc/1/status Seccomp=2 and agent isolation smoke CT_AGENT_SECCOMP_MODE=2; model inspect must list seccomp=builtin",
+    "host_runtime_lock_dir": "/run/cybertiel mode 0700 root:root; operation/log-ingress flock files live only below this private directory"
+  },
+  "researched_on": "2026-10-06",
+  "installer_id": "2026-10-06.v25",
+  "checker": "CT-CHECK-2.8.0",
+  "lineage": {
+    "parent": "2026-10-06.v25-r1",
+    "parent_installer_sha256": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
+    "parent_checker_sha256": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5e",
+    "parent_setup_sha256": "e4e7ee977b3dc52975c68441f0f282967baceff59a509be46e17bf86e4f83c77",
+    "parent_zip_sha256": "d390a22b63fc88ecd6bc2b55a725e0e1d6a82a9a76498921665a7bba65f764b8",
+    "parent_retained": true
+  },
+  "agent": {
+    "npm_package": "@earendil-works/pi-coding-agent",
+    "version": "1.0.3",
+    "node_requirement": ">=22.19.0",
+    "node_base": "node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553",
+    "node_version": "24.21.0",
+    "npm_version": "11.19.0",
+    "install_mode": "npm ci --omit=dev --ignore-scripts from official installer root /opt/pi/install",
+    "official_package_url": "https://github.com/earendil-works/pi/releases/download/v1.0.3/pi-coding-agent-install-package.json",
+    "official_package_sha256": "9cae3572dc8090c7fd3ff7c7662ec7bba1b95529126e2054d6b42220be3b2fea",
+    "official_lock_url": "https://github.com/earendil-works/pi/releases/download/v1.0.3/pi-coding-agent-install-package-lock.json",
+    "official_lock_sha256": "d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7",
+    "brace_expansion_required": "5.0.12",
+    "published_shrinkwrap_required": false,
+    "expected_tools": [
+      "read",
+      "bash",
+      "edit",
+      "write",
+      "grep",
+      "find",
+      "ls"
+    ],
+    "session_mode": "ephemeral --no-session; fresh writable settings runtime from read-only templates; Git/WORKLOG recovery",
+    "extensions": "discovery disabled, only pinned local bash-timeout.ts explicitly loaded",
+    "asset_metadata_verified": true,
+    "actual_new_asset_bytes_downloaded_here": false,
+    "actual_npm_ci_executed_here": false,
+    "target_required": "Verify official asset SHA256; verify graph and installed metadata before Pi executes; run actual Pi SDK and end-to-end smoke."
+  },
+  "primary_sources": [
+    {
+      "url": "https://github.com/earendil-works/pi/releases",
+      "use": "Fresh upstream release check on 2026-10-06: v1.0.4 is Latest, published 2026-10-05T22:03:50Z. Current deployment remains pinned to audited v1.0.3 pending explicit --no-mcp/tool-semantics integration test."
+    },
+    {
+      "url": "https://github.com/earendil-works/pi/releases/tag/v1.0.1",
+      "use": "brace-expansion 5.0.12 repair lineage and packaging change"
+    },
+    {
+      "url": "https://raw.githubusercontent.com/earendil-works/pi/v1.0.3/packages/coding-agent/package.json",
+      "use": "Pi 1.0.3 package identity, Node engine, direct dependency pins"
+    },
+    {
+      "url": "https://docs.npmjs.com/cli/v11/commands/npm-ci/",
+      "use": "official locked-install behavior"
+    },
+    {
+      "url": "https://huggingface.co/peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF/blob/644bee2e6b9a75aa64c3bb818aaeeebe43d862bb/Cyber-Tiel-Coder-35B-A3B-UD-Q8_K_XL.gguf",
+      "use": "pinned Q8 blob identity, 38.5 GB display size and SHA-256"
+    },
+    {
+      "url": "https://huggingface.co/peculiar-ragdoll/Cyber-Tiel-Coder-35B-A3B-GGUF/blob/644bee2e6b9a75aa64c3bb818aaeeebe43d862bb/mmproj-BF16.gguf",
+      "use": "pinned mmproj identity, 903 MB display size and SHA-256"
+    },
+    {
+      "url": "https://github.com/ggml-org/llama.cpp/releases",
+      "use": "current release check: v0.6.0 is now latest; v0.5.0 deployment pin retained pending target A/B rather than silently upgraded"
+    },
+    {
+      "url": "https://github.com/systemd/systemd/blob/main/tmpfiles.d/legacy.conf",
+      "use": "upstream legacy /run/lock tmpfiles convention is mode 1777; supports rejecting predictable root flock files directly below /run/lock"
+    }
+  ],
+  "deployment_qualification": {
+    "status": "LOCAL_CORRECTED_V23_CANDIDATE_TARGET_PENDING",
+    "Docker_build": false,
+    "Pi_actual_runtime": false,
+    "full_model_download": false,
+    "model_inference": false,
+    "user_server": false,
+    "Windows_execution": false
+  },
+  "changed_scope": [
+    "CT-BUG-034: SOURCE_LOCK.json is corrected from stale v23/checker-2.6 lineage metadata to the actual v25/checker-2.8 package state and exact v25-r1 parent ZIP.",
+    "Package revision advances to 2026-10-06.v25-r2; installer and checker runtime bytes are deliberately unchanged; setup only reports the corrected package revision.",
+    "SOURCE_LOCK now explicitly binds the exact installer, checker and setup script SHA-256 values so future package validation can reject semantic drift."
+  ],
+  "unchanged_scope": "CyberTiel installer runtime remains 2026-10-06.v25 and checker remains CT-CHECK-2.8.0. Model/revision/hashes, Pi 1.0.3 locked package, Node digest/version, llama.cpp v0.5.0 pin, generated runtime files, Docker/toolchain policy, project/log safety and target constraints are unchanged. The investigated FIFO/Unix-socket special-node hypothesis was falsified: v25 already fails closed because rsync emits the skipped non-regular path into the verifier pipeline. No target Docker/model/Pi/Windows execution is claimed.",
+  "package_revision": "2026-10-06.v25-r2",
+  "script_bindings": {
+    "install-cybertiel.sh": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
+    "check-cybertiel-server.sh": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5",
+    "setup-cybertiel.sh": "dfcf9fe5a5c7e4bf15667e4f1929d15a637b8e9702d61150c1242ff9ab2a9796"
+  }
+}

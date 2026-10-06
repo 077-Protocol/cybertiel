@@ -1,0 +1,33 @@
+{
+  "schema": "cybertiel-audit-falsification/v1",
+  "run": "AUTOMATION_RUN_10",
+  "timestamp_utc": "2026-10-06T08:09:18.171769+00:00",
+  "finding_id": "CT-BUG-033",
+  "baseline": "2026-10-06.v24-r1",
+  "area": "project import hard-link topology / inode identity",
+  "probe": {
+    "source": {
+      "a_inode": 1573490,
+      "b_inode": 1573490,
+      "same_inode": true,
+      "link_count": 2
+    },
+    "v24_staging": {
+      "a_inode": 1573505,
+      "b_inode": 1573521,
+      "same_inode": false,
+      "a_link_count": 1,
+      "b_link_count": 1
+    },
+    "v24_verify_without_H": {
+      "output": "",
+      "reported_difference": false
+    },
+    "control_verify_with_H": {
+      "output": "hf          b.txt",
+      "reported_difference": true
+    }
+  },
+  "conclusion": "REPRODUCED",
+  "claim_boundary": "This demonstrates a local semantic mismatch in v24 project import for in-tree hard-link topology. It does not demonstrate a host escape or any target-server/runtime behavior."
+}

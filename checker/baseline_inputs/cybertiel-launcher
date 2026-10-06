@@ -1,0 +1,119 @@
+#!/usr/bin/env bash
+set -Eeuo pipefail
+export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+if (( EUID != 0 )); then
+    exec sudo -- /usr/local/bin/cybertiel "$@"
+fi
+BASE=/opt/cybertiel
+DATA=/srv/cybertiel
+LABEL=2026-10-05.v16
+[[ -f "$BASE/runtime.env" && ! -L "$BASE/runtime.env" ]] || {
+    echo "Installatieconfig ontbreekt." >&2; exit 1;
+}
+# Refuse unsafe host config before sourcing shell variables.
+[[ "$(stat -c '%u' "$BASE/runtime.env")" == 0 && "$(stat -c '%a' "$BASE/runtime.env")" == 600 ]] || {
+    echo "Onveilige eigenaar/rechten van runtime.env." >&2; exit 1;
+}
+# This file is root-owned and not mounted writable inside the agent.
+source "$BASE/runtime.env"
+export DOCKER_HOST=unix:///var/run/docker.sock
+unset DOCKER_CONTEXT DOCKER_TLS_VERIFY DOCKER_CERT_PATH
+managed() {
+    [[ "$(docker inspect -f '{{index .Config.Labels "io.cybertiel.managed"}}' "$1" 2>/dev/null)" == "$LABEL" ]]
+}
+case "${1:-}" in
+    status)
+        docker ps -a --filter "label=io.cybertiel.managed=$LABEL"
+        if [[ -f "$BASE/READY.json" ]]; then cat "$BASE/READY.json"; else
+            echo "Nog geen geslaagde volledige installatiesmoketest."
+        fi
+        exit 0;;
+    logs)
+        managed cybertiel-model || exit 1
+        exec docker logs --tail 150 cybertiel-model;;
+    start)
+        managed cybertiel-model || exit 1
+        exec docker start cybertiel-model;;
+    stop)
+        for name in cybertiel-agent cybertiel-model; do
+            if managed "$name"; then docker stop -t 20 "$name"; fi
+        done
+        exit 0;;
+esac
+if [[ "${1:-}" == import-log ]]; then
+    [[ $# == 2 ]] || { echo "Gebruik: sudo cybertiel import-log /absoluut/pad/debug.log" >&2; exit 2; }
+    exec 8>/run/lock/cybertiel-log-ingress.lock
+    flock -n 8 || { echo "Er loopt al een logimport." >&2; exit 1; }
+    exec python3 "$BASE/bundle/import-debug-log.py" "$2" "$DATA/project"
+fi
+
+exec 9>/run/lock/cybertiel-operation.lock
+flock -n 9 || { echo "Er is al een installatie, import of agent actief." >&2; exit 1; }
+
+for path in "$DATA/project"; do
+    [[ -d "$path" && ! -L "$path" && "$(realpath -m -- "$path")" == "$path" ]] || {
+        echo "Afwijkend/symlink-projectpad geweigerd: $path" >&2; exit 1;
+    }
+done
+
+if [[ "${1:-}" == import ]]; then
+    [[ $# == 2 && -d "$2" ]] || {
+        echo "Gebruik: sudo cybertiel import /absoluut/pad/naar/project" >&2; exit 2;
+    }
+    [[ -z "$(find "$DATA/project" -mindepth 1 -maxdepth 1 -print -quit)" ]] || {
+        echo "Import weigert een niet-lege projectmap te overschrijven." >&2; exit 1;
+    }
+    src=$(realpath -- "$2")
+    [[ "$src" != / && "$DATA/project/" != "$src/"* && "$src/" != "$DATA/project/"* ]] || {
+        echo "Bron- en doelmap mogen niet in elkaar liggen." >&2; exit 2;
+    }
+    rsync -rltog --links --safe-links --no-devices --no-specials \
+        --chown=1000:1000 -- "$src/" "$DATA/project/"
+    echo "Project gekopieerd naar $DATA/project. Bronmap ongewijzigd."
+    exit 0
+fi
+[[ -f "$BASE/READY.json" ]] || {
+    echo "Installatiesmoketest nog niet geslaagd. Zie: sudo cybertiel logs" >&2; exit 1;
+}
+python3 "$BASE/bundle/check-ready.py" "$BASE" "$LABEL"
+managed cybertiel-model || { echo "Modelcontainer ontbreekt of is onbekend." >&2; exit 1; }
+docker exec cybertiel-model curl -fsS --max-time 10 \
+    http://127.0.0.1:8080/health >/dev/null || {
+    echo "Model niet gereed. Gebruik sudo cybertiel start en daarna status/logs." >&2; exit 1;
+}
+if docker container inspect cybertiel-agent >/dev/null 2>&1; then
+    managed cybertiel-agent || { echo "Onbekende naamconflict: cybertiel-agent" >&2; exit 1; }
+    if [[ "$(docker inspect -f '{{.State.Running}}' cybertiel-agent)" == true ]]; then
+        echo "Er draait al een agent; gebruik de bestaande tmux-sessie." >&2; exit 1
+    fi
+    docker rm cybertiel-agent >/dev/null
+fi
+args=(run --rm --init --name cybertiel-agent
+    --label "io.cybertiel.managed=$LABEL"
+    --network cybertiel-internal
+    --user 1000:1000 --cap-drop=ALL
+    --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only
+    --pids-limit 1024 --memory 16g --memory-swap 16g --cpus 8
+    --ulimit core=0:0
+    --tmpfs /tmp:rw,nosuid,nodev,size=2g,mode=1777
+    --tmpfs /home/node:rw,nosuid,nodev,size=2g,mode=0700,uid=1000,gid=1000
+    --tmpfs /sessions:rw,nosuid,nodev,size=1g,mode=0700,uid=1000,gid=1000
+    --mount "type=bind,src=$DATA/project,dst=/workspace"
+    --mount "type=bind,src=$BASE/config,dst=/opt/cybertiel/pi-config,readonly"
+    --env HOME=/home/node --env PI_OFFLINE=1 \
+    --env PI_CODING_AGENT_SESSION_DIR=/sessions \
+    --env POWERSHELL_TELEMETRY_OPTOUT=1 --env DOTNET_CLI_TELEMETRY_OPTOUT=1 \
+    --env GIT_TERMINAL_PROMPT=0
+    --env TERM=xterm-256color --workdir /workspace)
+if [[ -t 0 && -t 1 ]]; then args+=(-it); else args+=(-i); fi
+if [[ "${1:-}" == shell ]]; then
+    shift
+    exec docker "${args[@]}" --entrypoint /bin/bash "$AGENT_IMAGE" "$@"
+fi
+if [[ "${1:-}" == agent ]]; then shift; fi
+exec docker "${args[@]}" "$AGENT_IMAGE" \
+    --offline --no-approve --no-extensions -e /opt/cybertiel/bash-timeout.ts --no-skills \
+    --no-prompt-templates --no-context-files --no-themes \
+    --append-system-prompt /opt/cybertiel/agent-policy.md \
+    --tools read,bash,edit,write,grep,find,ls --provider cybertiel-local --model cybertiel-35b \
+    --no-session "$@"

@@ -1,0 +1,21 @@
+{
+  "source_package": "2026-10-06.v25-r2",
+  "verified_manifest_entries": 173,
+  "content_errors": [],
+  "mode_mismatches": [],
+  "source_zip_available": false,
+  "source_zip_hash_verified": false,
+  "current_script_bindings": {
+    "install-cybertiel.sh": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
+    "check-cybertiel-server.sh": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5",
+    "setup-cybertiel.sh": "dfcf9fe5a5c7e4bf15667e4f1929d15a637b8e9702d61150c1242ff9ab2a9796"
+  },
+  "limitations": [
+    "Source manifest is not a digital signature or independent publisher authentication.",
+    "Historical parent_checker_sha256 has 65 characters; retained as source metadata, not a valid SHA-256.",
+    "Historical sealed report and package validation JSON are not present in supplied directory.",
+    "Curated Git repository is a distinct distribution, not the original sealed ZIP."
+  ],
+  "source_sha256sums_checked": 173,
+  "source_sha256sums_errors": []
+}

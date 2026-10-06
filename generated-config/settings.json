@@ -1,0 +1,29 @@
+{
+  "defaultProvider": "cybertiel-local",
+  "defaultModel": "cybertiel-35b",
+  "defaultThinkingLevel": "high",
+  "defaultProjectTrust": "never",
+  "httpIdleTimeoutMs": 7200000,
+  "retry": {
+    "provider": {
+      "timeoutMs": 7200000
+    }
+  },
+  "defaultTools": [
+    "read",
+    "bash",
+    "edit",
+    "write",
+    "grep",
+    "find",
+    "ls"
+  ],
+  "compaction": {
+    "enabled": true,
+    "reserveTokens": 32768,
+    "keepRecentTokens": 16000
+  },
+  "enableInstallTelemetry": false,
+  "enableAnalytics": false,
+  "cacheWarming": "off"
+}

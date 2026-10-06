@@ -1,0 +1,9 @@
+__pycache__/
+*.pyc
+.DS_Store
+/TEST_REPORT.json
+/*_TEST_REPORT.json
+/checker/*TEST_REPORT.json
+setup-result.json
+*.log
+.env

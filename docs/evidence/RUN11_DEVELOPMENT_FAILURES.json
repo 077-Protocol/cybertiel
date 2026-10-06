@@ -1,0 +1,18 @@
+{
+  "schema": "cybertiel-run11-development-failures/v1",
+  "failures": [
+    {
+      "stage": "preseal report aggregation",
+      "result": "FAILED_DEVELOPMENT_RUN_NOT_COUNTED",
+      "cause": "The first aggregator assumed every suite report used passed/failed; LOG_IMPORT_SAFETY_TEST_REPORT.json uses pass/fail.",
+      "resolution": "Aggregator was corrected and all 15 real suite reports were re-read; total 473/0."
+    },
+    {
+      "stage": "first sealed package validation",
+      "candidate_zip_sha256": "a4536c128346e0533ca09a14bb6dd8acf6cc9af4b2f00348a3c75a11b65b8ba9",
+      "result": "FAILED_SEAL_NOT_PUBLISHED",
+      "cause": "Audit test execution had created Python __pycache__/pyc files inside the working release tree. The validator's generated-config reproduction gate detected 19 entries instead of the required 18.",
+      "resolution": "All audit-generated __pycache__/pyc artifacts were removed before resealing; final validation also explicitly rejects such files."
+    }
+  ]
+}

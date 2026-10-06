@@ -1,0 +1,23 @@
+{
+  "audit": "CT-AUDIT-2026-10-06-AUTOMATION-RUN11-v25-r2",
+  "package_revision": "2026-10-06.v25-r2",
+  "installer_release": "2026-10-06.v25",
+  "checker": "CT-CHECK-2.8.0",
+  "preseal_passed": 473,
+  "preseal_failed": 0,
+  "new_defects_fixed": [
+    "CT-BUG-034"
+  ],
+  "next_defect_id": "CT-BUG-035",
+  "qualification": "GESCHIKT_VOOR_GECONTROLEERDE_TARGETPROEF_ONLY_AFTER_SEALED_VALIDATION",
+  "not_proven": [
+    "real Ubuntu target host gates",
+    "real Docker builds/runtime",
+    "real Pi npm ci/CLI/SDK",
+    "full model+projector download and inference",
+    "Xeon 262k-context soak",
+    "user project build correctness",
+    "Windows VM execution",
+    "machine-readable end-to-end artifact/build/debuglog provenance"
+  ]
+}

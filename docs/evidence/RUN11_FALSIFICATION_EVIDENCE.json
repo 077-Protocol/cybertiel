@@ -1,0 +1,52 @@
+{
+  "schema": "cybertiel-run11-falsification-evidence/v1",
+  "parent_zip": "CyberTiel_Server_Installer_v25_audit_run10_2026-10-06.zip",
+  "parent_zip_sha256": "d390a22b63fc88ecd6bc2b55a725e0e1d6a82a9a76498921665a7bba65f764b8",
+  "ct_bug_034": {
+    "actual_installer_id": "2026-10-06.v25",
+    "actual_checker_version": "CT-CHECK-2.8.0",
+    "source_lock_installer_id": "2026-10-06.v23",
+    "source_lock_checker": "CT-CHECK-2.6.0",
+    "source_lock_lineage": {
+      "parent": "2026-10-06.v22-r1",
+      "parent_installer_sha256": "14c5520fe3aecf5e74c086df04461de384c4118323a51b072a67e412daa73051",
+      "parent_zip_sha256": "8bab7d5e3b84e966d225f8a0a5993710f114aecf032356520dbdb67d347ca134",
+      "parent_retained": true
+    },
+    "ids_match": false,
+    "checker_baseline_has_v25": true,
+    "audit_register_supported_baselines": [
+      "2026-10-05.v16",
+      "2026-10-05.v17",
+      "2026-10-06.v18",
+      "2026-10-06.v19",
+      "2026-10-06.v20",
+      "2026-10-06.v21",
+      "2026-10-06.v22",
+      "2026-10-06.v23",
+      "2026-10-06.v24"
+    ],
+    "audit_register_lists_v25": false
+  },
+  "falsified_not_a_bug": {
+    "hypothesis": "v25 project import silently accepts FIFO/Unix-socket source entries because copy and verifier both use --no-specials",
+    "result": "FALSIFIED: the exact emitted project_import already fails closed because rsync reports the skipped non-regular pathname into the verifier pipeline, making verify_marker non-empty.",
+    "fixtures": {
+      "fifo": {
+        "rc": 1,
+        "stdout": "skipping non-regular file \"build.pipe\"\n",
+        "stderr": "Projectbron veranderde tijdens import; niets gepubliceerd.\n",
+        "canonical_empty": true,
+        "special_path_reported": true
+      },
+      "socket": {
+        "rc": 1,
+        "stdout": "skipping non-regular file \"runtime.sock\"\n",
+        "stderr": "Projectbron veranderde tijdens import; niets gepubliceerd.\n",
+        "canonical_empty": true,
+        "special_path_reported": true
+      }
+    },
+    "product_change_from_this_hypothesis": "NONE"
+  }
+}

@@ -1,0 +1,213 @@
+{
+  "date": "2026-10-06",
+  "platform": "Darwin arm64",
+  "checks": [
+    {
+      "check": "python_syntax:test_run10_regressions.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_setup.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_project_import_safety.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_run09_regressions.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:setup_helper.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_run08_regressions.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_operation_lock_contract.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_lock_security.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_log_import_safety.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_snapshot_coordination.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test-installer.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:test_lock_contract.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:tools/verify_release.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/test_checker_v3.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/check_cybertiel.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/gdb-result-check.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/check-ready.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/import-debug-log.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/agent-entrypoint.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/trace-check.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/verify-agent.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:generated-config/verify-pi-lock.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/gdb-result-check.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/check-ready.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/import-debug-log.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/agent-entrypoint.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/trace-check.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/verify-agent.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "python_syntax:checker/baseline_inputs/verify-pi-lock.py",
+      "status": "PASS",
+      "detail": "parsed without execution"
+    },
+    {
+      "check": "bash_syntax:install-cybertiel.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "bash_syntax:setup-cybertiel.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "bash_syntax:check-cybertiel-server.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "bash_syntax:preflight-server.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "bash_syntax:generated-config/cybertiel-launcher",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "check": "emitted_configuration",
+      "status": "PASS",
+      "detail": "18 generated files compared byte for byte"
+    },
+    {
+      "check": "setup_plan",
+      "status": "PASS",
+      "detail": {
+        "returncode": 0,
+        "installation_requested": false
+      }
+    },
+    {
+      "check": "suite:TEST_REPORT.json",
+      "status": "FAIL",
+      "detail": {
+        "passed": 106,
+        "failed": 4,
+        "scope": "publication workstation; no target installation"
+      }
+    },
+    {
+      "check": "suite:checker/V3_TEST_REPORT.json",
+      "status": "PASS",
+      "detail": {
+        "passed": 39,
+        "failed": 0,
+        "scope": "publication workstation; no target installation"
+      }
+    }
+  ],
+  "qualification": "TARGET_RUNTIME_NOT_VERIFIED",
+  "notes": [
+    "Installer suite: 106 PASS / 4 FAIL on macOS. Two failures report unsupported GNU realpath -m. Two stale-download mock assertions also failed; BSD wc whitespace is a suspected fixture incompatibility, not established target correctness.",
+    "Checker current contracts: 39 PASS / 0 FAIL. Synthetic receipts, not a live installation.",
+    "Source manifest integrity and generated-file reproduction are separate from test-suite success."
+  ]
+}

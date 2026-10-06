@@ -1,0 +1,202 @@
+{
+  "results": [
+    {
+      "id": "v18_installer_hash_exact",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "v16_history_preserved",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "current_no_shrinkwrap_receipt",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "v16_keeps_historical_binding",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_Dockerfile.agent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_Dockerfile.llama",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_accept.cpp",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_agent-entrypoint.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_agent-policy.md",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_bash-timeout.ts",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_check-ready.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_cybertiel-launcher",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_gdb-result-check.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_import-debug-log.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_mingw-x64.cmake",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_models.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_pi-settings-check.mjs",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_settings.json",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_toolchain-smoke.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_trace-check.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_verify-agent.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_verify-pi-lock.py",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "bundle_binding_cybertiel-launcher",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_positive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_status_24",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_pi_version_25",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_brace_expansion_26",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_lock_sha256_27",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_package_sha256_28",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_release_hashes_checked_29",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_installed_metadata_checked_30",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_installed_packages_31",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_installed_packages_32",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_reject_installed_packages_33",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "live_proof_missing_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "runtime_version_injected_not_hardcoded",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "current_upload_recognized_not_v16_advisory",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "current_missing_install_data_not_green",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "current_runtime_state_selected",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "passed": 39,
+  "failed": 0,
+  "scope": "synthetic receipts/managed data; exact local file hashes; not a Docker/server test"
+}

@@ -1,0 +1,40 @@
+{
+  "providers": {
+    "cybertiel-local": {
+      "baseUrl": "http://cybertiel-model:8080/v1",
+      "api": "openai-completions",
+      "apiKey": "@LOCAL_KEY@",
+      "models": [
+        {
+          "id": "cybertiel-35b",
+          "name": "CyberTiel 35B-A3B official UD-Q8_K_XL (not BF16)",
+          "reasoning": true,
+          "input": [
+            "text",
+            "image"
+          ],
+          "cost": {
+            "input": 0,
+            "output": 0,
+            "cacheRead": 0,
+            "cacheWrite": 0
+          },
+          "contextWindow": 262144,
+          "maxTokens": 258048,
+          "samplingParams": {
+            "temperature": 0.6,
+            "top_p": 0.95,
+            "top_k": 20,
+            "min_p": 0
+          },
+          "compat": {
+            "supportsStore": false,
+            "supportsDeveloperRole": false,
+            "supportsReasoningEffort": false,
+            "maxTokensField": "max_tokens"
+          }
+        }
+      ]
+    }
+  }
+}
