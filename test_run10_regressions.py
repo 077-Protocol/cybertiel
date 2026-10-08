@@ -52,6 +52,6 @@ with tempfile.TemporaryDirectory(prefix='ct-run10-') as td:
         return {'rc':0,'difference_visible':True,'itemized':p.stdout.strip()[:200]}
     rec('v25_verifier_detects_split_hardlink_topology',topology_race_rejected)
 
-report={'schema':'cybertiel-run10-regressions/v1','installer_release':'2026-10-06.v25','passed':sum(x['status']=='PASS' for x in RESULTS),'failed':sum(x['status']=='FAIL' for x in RESULTS),'results':RESULTS}
+report={'schema':'cybertiel-run10-regressions/v1','installer_release':'2026-10-06.v25-r3','passed':sum(x['status']=='PASS' for x in RESULTS),'failed':sum(x['status']=='FAIL' for x in RESULTS),'results':RESULTS}
 (ROOT/'RUN10_REGRESSION_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 raise SystemExit(1 if report['failed'] else 0)

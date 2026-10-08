@@ -47,7 +47,7 @@ It can produce Windows x64 EXEs for compatible projects; MSVC/MFC/ATL/WDK,
 proprietary libraries or Windows SDK-specific projects can require a native
 Windows build environment. Diagnose such a dependency; do not invent a build.
 For PowerShell scripts on this Linux worker, invoke pwsh with -NoLogo, -NoProfile,
--NonInteractive and -File through bash. Pi 1.0.0's built-in `powershell` tool is
+-NonInteractive and -File through bash. Pi 1.0.x's built-in `powershell` tool is
 Windows-only, so it is intentionally not exposed here even though pwsh is installed.
 Do not claim Windows PowerShell 5.1 compatibility merely because PowerShell 7 on
 Linux accepted a script.

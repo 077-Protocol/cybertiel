@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Start each Pi process from fresh settings, while keeping templates immutable.
-Writable settings locks are required by Pi 1.0.0. No previous session/config is
+Writable settings locks are required by Pi 1.0.x. No previous session/config is
 imported. This is NOT an in-process sandbox against code running as the same UID.
 """
 import hashlib

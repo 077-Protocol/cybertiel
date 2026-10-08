@@ -50,6 +50,6 @@ with tempfile.TemporaryDirectory(prefix='ct-run09-') as td:
         return {'rc':0,'safe_relative_symlink_preserved':True,'target':os.readlink(link)}
     rec('v24_safe_internal_symlink_preserved',safe_preserved)
 
-report={'schema':'cybertiel-run09-regressions/v1','installer_release':'2026-10-06.v25','passed':sum(x['status']=='PASS' for x in RESULTS),'failed':sum(x['status']=='FAIL' for x in RESULTS),'results':RESULTS}
+report={'schema':'cybertiel-run09-regressions/v1','installer_release':'2026-10-06.v25-r3','passed':sum(x['status']=='PASS' for x in RESULTS),'failed':sum(x['status']=='FAIL' for x in RESULTS),'results':RESULTS}
 (ROOT/'RUN09_REGRESSION_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 raise SystemExit(1 if report['failed'] else 0)

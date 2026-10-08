@@ -106,6 +106,6 @@ with tempfile.TemporaryDirectory(prefix='ct-project-import-') as td:
         return {'contracts':required,'direct_copy_to_canonical':False}
     rec('v24_project_import_staging_verification_contracts_present',contracts)
 
-report={'schema':'cybertiel-project-import-safety-tests/v1','installer_release':'2026-10-06.v25','passed':sum(r['status']=='PASS' for r in RESULTS),'failed':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
+report={'schema':'cybertiel-project-import-safety-tests/v1','installer_release':'2026-10-06.v25-r3','passed':sum(r['status']=='PASS' for r in RESULTS),'failed':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
 (ROOT/'PROJECT_IMPORT_SAFETY_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 raise SystemExit(1 if report['failed'] else 0)

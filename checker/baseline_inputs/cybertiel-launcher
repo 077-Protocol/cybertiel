@@ -6,7 +6,7 @@ if (( EUID != 0 )); then
 fi
 BASE=/opt/cybertiel
 DATA=/srv/cybertiel
-LABEL=2026-10-05.v16
+LABEL=2026-10-06.v25-r3
 [[ -f "$BASE/runtime.env" && ! -L "$BASE/runtime.env" ]] || {
     echo "Installatieconfig ontbreekt." >&2; exit 1;
 }
@@ -21,6 +21,50 @@ unset DOCKER_CONTEXT DOCKER_TLS_VERIFY DOCKER_CERT_PATH
 managed() {
     [[ "$(docker inspect -f '{{index .Config.Labels "io.cybertiel.managed"}}' "$1" 2>/dev/null)" == "$LABEL" ]]
 }
+acquire_base_coordination_lock() {
+    local perms
+    [[ -d "$BASE" && ! -L "$BASE" && "$(realpath -m -- "$BASE")" == "$BASE" ]] || {
+        echo "Onveilig CyberTiel-coördinatiepad: $BASE" >&2; exit 1;
+    }
+    [[ "$(stat -c '%u' -- "$BASE")" == 0 ]] || {
+        echo "CyberTiel-coördinatiepad is niet van root: $BASE" >&2; exit 1;
+    }
+    perms=$(stat -c '%a' -- "$BASE")
+    (( (8#$perms & 8#022) == 0 )) || {
+        echo "CyberTiel-coördinatiepad is schrijfbaar door groep/anderen: $BASE" >&2; exit 1;
+    }
+    exec 7<"$BASE"
+    flock -n 7 || { echo "Er draait al een CyberTiel-mutatie of controle." >&2; exit 1; }
+}
+refuse_running_agent() {
+    # operation.lock is a host-process lock. A killed/disconnected docker CLI must not
+    # make an already-running agent container invisible to later mutating commands.
+    if docker container inspect cybertiel-agent >/dev/null 2>&1; then
+        managed cybertiel-agent || { echo "Onbekende naamconflict: cybertiel-agent" >&2; exit 1; }
+        [[ "$(docker inspect -f '{{.State.Running}}' cybertiel-agent)" != true ]] || {
+            echo "Er draait nog een cybertiel-agent; mutatie geweigerd." >&2; exit 1;
+        }
+    fi
+}
+secure_lock_dir() {
+    local dir=/run/cybertiel perms
+    [[ ! -L "$dir" ]] || { echo "Onveilige runtime-lockmap: $dir" >&2; exit 1; }
+    if [[ -e "$dir" ]]; then
+        [[ -d "$dir" && "$(stat -c '%u' -- "$dir")" == 0 ]] || {
+            echo "Onveilige runtime-lockmap: $dir" >&2; exit 1;
+        }
+        perms=$(stat -c '%a' -- "$dir")
+        (( (8#$perms & 8#077) == 0 )) || {
+            echo "Runtime-lockmap is toegankelijk voor groep/anderen: $dir" >&2; exit 1;
+        }
+        chmod 0700 -- "$dir"
+    else
+        install -d -o root -g root -m 0700 -- "$dir"
+    fi
+    [[ ! -L "$dir" && -d "$dir" && "$(stat -c '%u' -- "$dir")" == 0 && "$(stat -c '%a' -- "$dir")" == 700 ]] || {
+        echo "Runtime-lockmap kon niet veilig worden vastgelegd: $dir" >&2; exit 1;
+    }
+}
 case "${1:-}" in
     status)
         docker ps -a --filter "label=io.cybertiel.managed=$LABEL"
@@ -32,9 +76,16 @@ case "${1:-}" in
         managed cybertiel-model || exit 1
         exec docker logs --tail 150 cybertiel-model;;
     start)
+        acquire_base_coordination_lock
         managed cybertiel-model || exit 1
         exec docker start cybertiel-model;;
     stop)
+        # Runtime state is part of the checker snapshot. Never stop containers while
+        # a checker or another conforming mutator owns the persistent BASE lock.
+        # A normal foreground agent owns this lock through its docker CLI process; stop
+        # that run from its own terminal. An orphaned container can be stopped here once
+        # the host-side lock has been released.
+        acquire_base_coordination_lock
         for name in cybertiel-agent cybertiel-model; do
             if managed "$name"; then docker stop -t 20 "$name"; fi
         done
@@ -42,13 +93,23 @@ case "${1:-}" in
 esac
 if [[ "${1:-}" == import-log ]]; then
     [[ $# == 2 ]] || { echo "Gebruik: sudo cybertiel import-log /absoluut/pad/debug.log" >&2; exit 2; }
-    exec 8>/run/lock/cybertiel-log-ingress.lock
+    acquire_base_coordination_lock
+    secure_lock_dir
+    # Een debuglog wordt bewijs/input voor dezelfde projectgeneratie. Serialiseer import daarom
+    # met installer/import/project-agent, niet alleen met andere logimports.
+    exec 9>/run/cybertiel/operation.lock
+    flock -n 9 || { echo "Er is al een installatie, import of agent actief; logimport geweigerd." >&2; exit 1; }
+    refuse_running_agent
+    exec 8>/run/cybertiel/log-ingress.lock
     flock -n 8 || { echo "Er loopt al een logimport." >&2; exit 1; }
     exec python3 "$BASE/bundle/import-debug-log.py" "$2" "$DATA/project"
 fi
 
-exec 9>/run/lock/cybertiel-operation.lock
+acquire_base_coordination_lock
+secure_lock_dir
+exec 9>/run/cybertiel/operation.lock
 flock -n 9 || { echo "Er is al een installatie, import of agent actief." >&2; exit 1; }
+refuse_running_agent
 
 for path in "$DATA/project"; do
     [[ -d "$path" && ! -L "$path" && "$(realpath -m -- "$path")" == "$path" ]] || {
@@ -56,20 +117,93 @@ for path in "$DATA/project"; do
     }
 done
 
-if [[ "${1:-}" == import ]]; then
-    [[ $# == 2 && -d "$2" ]] || {
-        echo "Gebruik: sudo cybertiel import /absoluut/pad/naar/project" >&2; exit 2;
-    }
+# CT_PROJECT_IMPORT_FUNCTION_BEGIN
+project_import() (
+    set -Eeuo pipefail
+    local requested="$1" src parent staging='' verify_marker='' stale
+    local -a pipe_rc
+    [[ -d "$requested" ]] || { echo "Projectbron bestaat niet of is geen map." >&2; exit 2; }
     [[ -z "$(find "$DATA/project" -mindepth 1 -maxdepth 1 -print -quit)" ]] || {
         echo "Import weigert een niet-lege projectmap te overschrijven." >&2; exit 1;
     }
-    src=$(realpath -- "$2")
+    src=$(realpath -- "$requested")
     [[ "$src" != / && "$DATA/project/" != "$src/"* && "$src/" != "$DATA/project/"* ]] || {
         echo "Bron- en doelmap mogen niet in elkaar liggen." >&2; exit 2;
     }
-    rsync -rltog --links --safe-links --no-devices --no-specials \
-        --chown=1000:1000 -- "$src/" "$DATA/project/"
-    echo "Project gekopieerd naar $DATA/project. Bronmap ongewijzigd."
+    parent=$(dirname -- "$DATA/project")
+    [[ "$parent" == "$DATA" && -d "$parent" && ! -L "$parent" ]] || {
+        echo "Onveilige project-parentmap." >&2; exit 1;
+    }
+    # A killed older import may leave only a private staging directory. Since operation.lock is
+    # held by the caller, no live CyberTiel import can own such a stale path now.
+    shopt -s nullglob
+    for stale in "$parent"/.project-import.*; do
+        [[ -d "$stale" && ! -L "$stale" && "$(stat -c '%u' -- "$stale")" == 0 && "$(stat -c '%a' -- "$stale")" == 700 ]] || {
+            echo "Onveilige achtergebleven importstaging geweigerd: $stale" >&2; exit 1;
+        }
+        rm -rf --one-file-system -- "$stale"
+    done
+    for stale in "$parent"/.project-verify.*; do
+        [[ -f "$stale" && ! -L "$stale" && "$(stat -c '%u' -- "$stale")" == 0 && "$(stat -c '%a' -- "$stale")" == 600 && "$(stat -c '%h' -- "$stale")" == 1 ]] || {
+            echo "Onveilig achtergebleven importverificatiebestand geweigerd: $stale" >&2; exit 1;
+        }
+        rm -f -- "$stale"
+    done
+    shopt -u nullglob
+    staging=$(mktemp -d "$parent/.project-import.XXXXXXXX")
+    verify_marker=$(mktemp "$parent/.project-verify.XXXXXXXX")
+    chmod 0700 -- "$staging"; chmod 0600 -- "$verify_marker"
+    cleanup_import() {
+        local rc=$?
+        trap - EXIT HUP INT TERM
+        [[ -z "$verify_marker" ]] || rm -f -- "$verify_marker"
+        [[ -z "$staging" ]] || rm -rf --one-file-system -- "$staging"
+        exit "$rc"
+    }
+    trap cleanup_import EXIT HUP INT TERM
+    # Copy only into private staging. A crash/failure cannot make the canonical project non-empty.
+    # Preserve the source owner-execute bit while normalizing the imported working copy
+    # to agent-owned/private files. Owner read/write is added so the coding agent can edit
+    # source files; group/other and set-id bits are intentionally not part of the published
+    # project semantics. -p makes owner-execute changes observable to the verification pass.
+    rsync -rltogpH --chmod='Du+rwx,Dgo-rwx,Fu+rw,Fgo-rwx,ugo-s' \
+        --links --safe-links --no-devices --no-specials \
+        --chown=1000:1000 -- "$src/" "$staging/"
+    # Detect an operator/editor/source update that raced the copy. Compare file content,
+    # path/type/symlink identity, hardlink topology, normalized owner-execute permissions and mtimes. The copy
+    # deliberately uses --safe-links so links escaping the selected source tree are never
+    # imported. Verification deliberately omits --safe-links: any such skipped link is then
+    # visible as a missing item and the import fails instead of silently publishing an
+    # incomplete project. We only need one itemized difference; head bounds output.
+    set +e
+    rsync -rcnptH --delete --itemize-changes --out-format='%i' \
+        --chmod='Du+rwx,Dgo-rwx,Fu+rw,Fgo-rwx,ugo-s' \
+        --links --no-devices --no-specials -- "$src/" "$staging/" \
+        | head -n 1 >"$verify_marker"
+    pipe_rc=("${PIPESTATUS[@]}")
+    set -e
+    if [[ -s "$verify_marker" ]]; then
+        echo "Projectbron veranderde tijdens import; niets gepubliceerd." >&2; exit 1
+    fi
+    if (( ${pipe_rc[0]} != 0 || ${pipe_rc[1]} != 0 )); then
+        echo "Projectverificatie mislukte; niets gepubliceerd." >&2; exit 1
+    fi
+    [[ -z "$(find "$DATA/project" -mindepth 1 -maxdepth 1 -print -quit)" ]] || {
+        echo "Projectdoel veranderde tijdens import; niets gepubliceerd." >&2; exit 1;
+    }
+    # Same-filesystem directory rename publishes the already-verified tree in one namespace step.
+    chown 1000:1000 -- "$staging"; chmod 0750 -- "$staging"
+    mv -T -- "$staging" "$DATA/project"
+    staging=''
+    rm -f -- "$verify_marker"; verify_marker=''
+    trap - EXIT HUP INT TERM
+)
+# CT_PROJECT_IMPORT_FUNCTION_END
+
+if [[ "${1:-}" == import ]]; then
+    [[ $# == 2 ]] || { echo "Gebruik: sudo cybertiel import /absoluut/pad/naar/project" >&2; exit 2; }
+    project_import "$2"
+    echo "Project atomair gekopieerd naar $DATA/project en na kopie opnieuw met checksums vergeleken. Bronmap ongewijzigd."
     exit 0
 fi
 [[ -f "$BASE/READY.json" ]] || {
@@ -83,9 +217,6 @@ docker exec cybertiel-model curl -fsS --max-time 10 \
 }
 if docker container inspect cybertiel-agent >/dev/null 2>&1; then
     managed cybertiel-agent || { echo "Onbekende naamconflict: cybertiel-agent" >&2; exit 1; }
-    if [[ "$(docker inspect -f '{{.State.Running}}' cybertiel-agent)" == true ]]; then
-        echo "Er draait al een agent; gebruik de bestaande tmux-sessie." >&2; exit 1
-    fi
     docker rm cybertiel-agent >/dev/null
 fi
 args=(run --rm --init --name cybertiel-agent

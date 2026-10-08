@@ -1,0 +1,11 @@
+PASS official package
+PASS official package-lock
+PASS @earendil-works/chord@1.0.3
+PASS @earendil-works/pi-agent-core@1.0.3
+PASS @earendil-works/pi-ai@1.0.3
+PASS @earendil-works/pi-codemode@1.0.3
+PASS @earendil-works/pi-coding-agent@1.0.3
+PASS @earendil-works/pi-mcp@1.0.3
+PASS @earendil-works/pi-telemetry@1.0.3
+PASS @earendil-works/pi-tui@1.0.3
+PASS official pair + 8/8 metadata/tarballs; no dependency code executed

@@ -25,8 +25,11 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
 # manifest/lock pair and reject dependency drift before any Pi code executes.
 COPY verify-pi-lock.py /opt/cybertiel/verify-pi-lock.py
 COPY pi-official-install-package.json /opt/pi/install/package.json
-COPY pi-official-install-package-lock.json /opt/pi/install/package-lock.json
+COPY pi-official-install-package-lock.json /opt/pi/install/official-package-lock.json
+COPY pi-derived-install-package-lock.json /opt/pi/install/package-lock.json
+COPY pi-sri-manifest.json /opt/cybertiel/pi-sri-manifest.json
 RUN cd /opt/pi/install \
+    && python3 /opt/cybertiel/verify-pi-lock.py package.json official-package-lock.json --require-release-hashes >/dev/null \
     && python3 /opt/cybertiel/verify-pi-lock.py package.json package-lock.json --require-release-hashes >/dev/null \
     && npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
     && ln -s /opt/pi/install/node_modules/@earendil-works/pi-coding-agent /opt/pi/package \

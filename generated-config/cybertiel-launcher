@@ -6,7 +6,7 @@ if (( EUID != 0 )); then
 fi
 BASE=/opt/cybertiel
 DATA=/srv/cybertiel
-LABEL=2026-10-06.v25
+LABEL=2026-10-06.v25-r3
 [[ -f "$BASE/runtime.env" && ! -L "$BASE/runtime.env" ]] || {
     echo "Installatieconfig ontbreekt." >&2; exit 1;
 }

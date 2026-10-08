@@ -4,6 +4,7 @@ No npm install, scripts, network, or project execution. Hash pins originate from
 GitHub's official v1.0.3 release-asset metadata. Does not claim a full CVE audit.
 """
 import argparse
+import copy
 import base64
 import hashlib
 import json
@@ -18,6 +19,9 @@ VERSION = "1.0.3"
 NAME = "@earendil-works/pi-coding-agent"
 PACKAGE_SHA = "9cae3572dc8090c7fd3ff7c7662ec7bba1b95529126e2054d6b42220be3b2fea"
 LOCK_SHA = "d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7"
+DERIVED_LOCK_SHA = '1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a'
+SRI_MANIFEST_SHA = '0ccc765161d1a5023ab8ac02f06642d99cf51156738a76075362af3f2ec56bd8'
+SRI_MANIFEST = {'official_lock_sha256': 'd2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7', 'packages': {'node_modules/@earendil-works/chord': {'integrity': 'sha512-H5pKMs3S1z2q4V7NkDGKDFzOMW+OkzdsnGxxj5wNJUANG03VKj29UVmc1xnnnf0FAc03COHYNxwgNApO0nt0fg==', 'metadata_sha256': '7aeb6ef45eb76d0331378ef991714979583cfcb93736bc78062051b0155c2e3b', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/chord/1.0.3', 'name': '@earendil-works/chord', 'resolved': 'https://registry.npmjs.org/@earendil-works/chord/-/chord-1.0.3.tgz', 'tarball_bytes': 209518, 'tarball_sha256': '2b4bdd82da35b9c1e4e10fb0fe1ba2cd99e46eb7419aa2616de0f124e701a8ed', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-agent-core': {'integrity': 'sha512-lnvi2PJYaq8mDLzwWBttNqfxrLS63SSMONUJnTCypdvt/flmNJchXwWXsXUOJ5Yhe/mN+iHkrXu696lWZZ8o+w==', 'metadata_sha256': '92500d96b193a6d42b437e0f28e9d35efd076a04a9f4d68ab77ea91050eaed1c', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-agent-core/1.0.3', 'name': '@earendil-works/pi-agent-core', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-agent-core/-/pi-agent-core-1.0.3.tgz', 'tarball_bytes': 61366, 'tarball_sha256': '1a6466c6d10849960f62f6066ce6d159c721c4d294bcf3536519f65684a719e1', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-ai': {'integrity': 'sha512-p+/EUrbmfT0xWOtL/NJRtWOsyzcKKFSyiivHLDBMG0DUVpHdaIykd5jFibq0YZDFGBN/nv61zdOelMb+ylPfSg==', 'metadata_sha256': '4e5fd07a7945a467743683d8698425f44d982d052ac83122972a2e4cad8d5560', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-ai/1.0.3', 'name': '@earendil-works/pi-ai', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.0.3.tgz', 'tarball_bytes': 774640, 'tarball_sha256': 'dd8995fb1df3ca3e2bd033053bd2c28b40c44bb7f53c253578ca68082611e0ee', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-codemode': {'integrity': 'sha512-/rgWAXA9PhuFm0+j6N5FVvvWrAwt1LnhmbjA3Hy5+Q033XUHgh0YCMGAmU76S90ocr0Vfxm50ddYT/O76T5OGQ==', 'metadata_sha256': 'a00845637438a179576ee3b25ab88d7364abf28eff1d77216b858e4fa63831f6', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-codemode/1.0.3', 'name': '@earendil-works/pi-codemode', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-codemode/-/pi-codemode-1.0.3.tgz', 'tarball_bytes': 54560, 'tarball_sha256': '698162182c454bf98d7f208b7b8d345781c2d4d33cae6886fd92a087e145c183', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-coding-agent': {'integrity': 'sha512-t2lb0dw4y/jr5a2PRo6eTHGTZOPB3/YAMVyhhYFC1W3Hl5xE+462I/gMWjF4gCLuhGipNEfuNqONFmdqLFz4SQ==', 'metadata_sha256': '0d31f06a59bb8f5529b8b8a533162d50248fd1c86698ca4bd603ab98ba957b77', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-coding-agent/1.0.3', 'name': '@earendil-works/pi-coding-agent', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-coding-agent/-/pi-coding-agent-1.0.3.tgz', 'tarball_bytes': 7474225, 'tarball_sha256': '106eadb1f823f72f012c08f23bd36e435f9e62f6c81e98a5d8f70c8a9543dd05', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-mcp': {'integrity': 'sha512-ZAhL/g0rpjyKtcKzD0jSDk7sFIrMCQocmKtpAE1F9eRnI5fGGVWUyiZwALG/Tn1sagzxFbSqtc29zGx5OvDDGA==', 'metadata_sha256': '155613f97f0601765a777eb24bf88e04162c2dff150c048834c9c465af0554a3', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-mcp/1.0.3', 'name': '@earendil-works/pi-mcp', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-mcp/-/pi-mcp-1.0.3.tgz', 'tarball_bytes': 90153, 'tarball_sha256': '0ca4a95f2a1459e51ab1d761ac84186bf2cf2bd2c236034d8f18513e964df229', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-telemetry': {'integrity': 'sha512-Li4YamN09x9zzCquPbtEL2AQmwqv3Vn3sNOYqG0DRg24fjiMfntCsb7QKbejCXZssTAyaN+hutLl6O0UnJDrfg==', 'metadata_sha256': '38ab5d44f2cb293e3d0c267b5cfb3ea00b84bfd4fb9ec218705b20c8cf3fe014', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-telemetry/1.0.3', 'name': '@earendil-works/pi-telemetry', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-telemetry/-/pi-telemetry-1.0.3.tgz', 'tarball_bytes': 27361, 'tarball_sha256': 'a7331de30f12f42b32b743681b572cc8e414eacbff49c973212c096bf1029ea2', 'version': '1.0.3'}, 'node_modules/@earendil-works/pi-tui': {'integrity': 'sha512-C7b8Y+7iz+/oPEZUJubv6NPm3M/4ziq0hjQ2jhqMNpBwcXeqDMYKL2FYP90t2b5S1IoGc2io47dj5ZlIC1IZWg==', 'metadata_sha256': '1bae98370443df6b2758b8afce06d94a994d076b2fcc061a1ed1e7751a715cc4', 'metadata_url': 'https://registry.npmjs.org/@earendil-works/pi-tui/1.0.3', 'name': '@earendil-works/pi-tui', 'resolved': 'https://registry.npmjs.org/@earendil-works/pi-tui/-/pi-tui-1.0.3.tgz', 'tarball_bytes': 513772, 'tarball_sha256': '673000db8f98fd8c3166d7ca8fb9b6679bf341a4aa6961966f6e20834dbfa205', 'version': '1.0.3'}}, 'schema': 'cybertiel-pi-sri/v1'}
 MAX_BYTES = 8 * 1024 * 1024
 
 
@@ -74,6 +78,23 @@ def package_name(key):
     if not result or not re.fullmatch(r"(?:@[A-Za-z0-9_.-]+/)?[A-Za-z0-9_.-]+",result):
         raise ValueError("invalid package name")
     return result
+
+
+def derive_lock(lock):
+    # Only callable for the authenticated official asset. Never general missing-SRI repair.
+    derived = copy.deepcopy(lock)
+    missing = {k for k,e in lock['packages'].items() if k and 'integrity' not in e}
+    if missing != set(SRI_MANIFEST['packages']):
+        raise ValueError('unexpected missing-SRI package set')
+    for key, pin in SRI_MANIFEST['packages'].items():
+        entry = derived['packages'][key]
+        if package_name(key) != pin['name'] or any(entry.get(f) != pin[f] for f in ('version','resolved')):
+            raise ValueError('SRI supplement identity mismatch')
+        entry['integrity'] = pin['integrity']
+    raw = (json.dumps(derived,indent=2,sort_keys=True)+'\n').encode()
+    if hashlib.sha256(raw).hexdigest() != DERIVED_LOCK_SHA:
+        raise ValueError('derived lock SHA256 mismatch')
+    return derived, raw
 
 
 def check_pair(pkg, lock):
@@ -176,14 +197,27 @@ def main():
     ap=argparse.ArgumentParser()
     ap.add_argument("package");ap.add_argument("lock")
     ap.add_argument("--require-release-hashes",action="store_true")
-    ap.add_argument("--installed-root");ap.add_argument("--tree")
+    ap.add_argument("--write-install-lock");ap.add_argument("--installed-root");ap.add_argument("--tree")
     args=ap.parse_args()
     pkg,ph=load(args.package);lock,lh=load(args.lock)
-    if args.require_release_hashes and (ph != PACKAGE_SHA or lh != LOCK_SHA):
+    if args.require_release_hashes and (ph != PACKAGE_SHA or lh not in (LOCK_SHA, DERIVED_LOCK_SHA)):
         raise ValueError("official release asset SHA256 mismatch")
+    original = lh == LOCK_SHA
+    if original:
+        if ph != PACKAGE_SHA: raise ValueError('official manifest mismatch')
+        lock, derived_raw = derive_lock(lock)
+    if args.write_install_lock:
+        if not args.require_release_hashes or not original:
+            raise ValueError('derivation requires authenticated official pair')
+        # Exclusive creation: no symlink, no overwrite of existing lock.
+        fd = os.open(args.write_install_lock, os.O_WRONLY|os.O_CREAT|os.O_EXCL|os.O_NOFOLLOW, 0o644)
+        with os.fdopen(fd,'wb') as f: f.write(derived_raw)
     entries,allowed,brace=check_pair(pkg,lock)
     result={"status":"PASS","pi_version":VERSION,"brace_expansion":"5.0.12",
-        "package_sha256":ph,"lock_sha256":lh,"package_entries":len(entries)-1,
+        "package_sha256":ph,"lock_sha256":lh,
+        "official_lock_sha256":LOCK_SHA if args.require_release_hashes else None,
+        "derived_lock_sha256":DERIVED_LOCK_SHA if args.require_release_hashes else None,
+        "sri_manifest_sha256":SRI_MANIFEST_SHA if args.require_release_hashes else None,"package_entries":len(entries)-1,
         "release_hashes_checked":args.require_release_hashes,"full_vulnerability_audit":False,
         "installed_metadata_checked":False,"installed_tree_checked":False}
     if args.tree:

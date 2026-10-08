@@ -74,6 +74,6 @@ with tempfile.TemporaryDirectory(prefix='ct-log-safety-') as td:
         p=run(['python3',str(imp),str(src),str(project)]);assert p.returncode==0,(p.stdout,p.stderr)
         return {'returncode':0,'stable_regular_file':True}
     rec('v20_log_import_stable_same_size_not_false_rejected',same_size_static)
-report={'schema':'cybertiel-log-import-safety-tests/v1','installer_release':'2026-10-06.v25','pass':sum(r['status']=='PASS' for r in RESULTS),'fail':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
+report={'schema':'cybertiel-log-import-safety-tests/v1','installer_release':'2026-10-06.v25-r3','pass':sum(r['status']=='PASS' for r in RESULTS),'fail':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
 (ROOT/'LOG_IMPORT_SAFETY_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 raise SystemExit(1 if report['fail'] else 0)

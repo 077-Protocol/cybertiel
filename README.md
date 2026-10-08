@@ -1,83 +1,19 @@
-# CyberTiel
+# CyberTiel v25-r3 — Pi 1.0.3 SRI repair
 
-A local coding-agent environment for a dedicated Ubuntu CPU server, with a pinned installer, an independent checker and explicit readiness gates.
+Complete local installer distribution based on public commit `6acfe4624607581223b56163d4617adbe99345f5` of `077-Protocol/cybertiel`. The repair is published as a reviewable patch with its sealed installer ZIP. Target-side installation and runtime qualification remain pending.
 
-CyberTiel brings together Cyber-Tiel-Coder-35B-A3B, llama.cpp and the Pi coding agent. The agent works inside a restricted Docker container with a C/C++ and Windows cross-compilation toolchain. This repository focuses on the boundary around that agent: what it can access, how projects enter the workspace, and what evidence is needed before an installation can be trusted.
+The official Pi 1.0.3 installer lock is preserved byte for byte (SHA256 `d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7`). Its eight missing SHA512 SRI values are supplied by a separate pinned manifest. Each official tarball was freshly downloaded and checked against npm registry metadata. A deterministic derived lock changes exactly those eight `integrity` fields; npm ci uses that derived lock with scripts disabled. Original and derived hashes, installed metadata, dependency tree, READY receipts and independent checker pins are enforced.
 
-I am publishing this as part of my cybersecurity portfolio. The useful part is not a claim that the system is “secure”; it is a reviewable implementation, concrete failure cases and an honest account of what remains untested.
+Package and runtime installer: `2026-10-06.v25-r3`. Checker: `CT-CHECK-2.9.0`. Generated files, setup script bindings, checker baseline source snapshots and source pins have been updated together. Historical checker baseline identities remain present. Model, llama.cpp, Node base, container restrictions and host gates remain pinned to the parent values.
 
-**Status: candidate for a controlled target trial.** This is not a production certification or proof of a working end-to-end deployment.
+Download the exact installer from [`releases/v25-r3/cybertiel-v25-r3.zip`](releases/v25-r3/cybertiel-v25-r3.zip) and compare its [SHA256](releases/v25-r3/cybertiel-v25-r3.zip.sha256). The ZIP is the same artifact used for the final sealed-package tests; its contents are preserved unchanged.
 
-## Who this is for
+**Start with `SERVER_STEPS.txt`.** It includes independent verification and guarded archival of the failed v25-r2 installation. The archival helper preserves all files and refuses qualified installations, project data, active installers and managed containers. It does not relabel old evidence as a new installation.
 
-People comfortable reviewing shell and Python code, managing a dedicated Linux host and testing container isolation. The intended target is a fresh **Ubuntu 24.04 LTS x86_64 CPU server**, with AVX2 and at least **110 GiB of visible RAM** (the original profile targets a 128 GB Xeon server). The preflight also requires at least 90 GiB free for `/srv` and 5 GiB for `/`; installation performs additional storage checks.
+Validation: **330 PASS / 0 FAIL across 14 Linux suites**, plus **8 PASS / 0 FAIL archive negative tests**. Actual npm ci and npm ls passed on macOS arm64 with Node 24.21.0/npm 11.19.0. A corrupt SRI was rejected by npm with EINTEGRITY. See `evidence/v25-r3/VALIDATION_SUMMARY.json` and individual reports/logs. The final ZIP verification is recorded in `evidence/v25-r3/SEALED_VERIFICATION.json`: 338 PASS / 0 FAIL across 15 suites run against the extracted ZIP.
 
-The profile requires Docker Engine 28 or newer and checks AppArmor/seccomp enforcement. It is not a macOS installer, an ARM deployment or an unattended migration of an existing server. Review the pinned dependencies before using it on a current host.
+Ubuntu 24.04 x86_64 deployment, Docker builds, Pi runtime, model inference and Windows execution have not been performed here. The installer retains its target-side gates and smoke tests. Linux regression execution used an isolated Alpine VM with GNU tools, not a claimed Ubuntu server installation. Older `docs/evidence` files are parent/historical evidence; current results are in `evidence/v25-r3`.
 
-The model is the official **UD-Q8_K_XL**, not BF16 and not a Q4/Q5 fallback. The source lock records approximately 38.5 GB for the model plus a BF16 vision projector. No model weights are included. The configured 262,144-token context is a requested setting, not a demonstrated memory or throughput result.
+No model weights or upstream tarballs are bundled. The unchanged original release assets and npm metadata are included under `upstream` for review. Tarballs can be checked again with `python3 tools/verify_pi_sri.py`, which downloads but never executes dependency code.
 
-## What is included
-
-- `setup-cybertiel.sh`: coordinator that verifies the installer/checker bytes before staging and running them.
-- `install-cybertiel.sh`: host gates, pinned downloads, container builds and installation checks.
-- `check-cybertiel-server.sh` and `checker/`: independent inspection with PASS, FAIL, WARN and UNTESTED results.
-- `generated-config/`: the 18 files emitted by the installer, including the installed `cybertiel` launcher, policies and validation helpers.
-- Offline regression tests and selected historical evidence, with their scope explained in [audit notes](docs/AUDIT.md).
-
-## Try it on the intended server
-
-Read [the threat model](docs/THREAT_MODEL.md) and [the operator guide](docs/USAGE.md) first. Use scripts from one checkout; mixing versions defeats the byte pins.
-
-```bash
-git clone https://github.com/077-Protocol/cybertiel.git
-cd cybertiel
-python3 tools/verify_release.py
-bash preflight-server.sh
-bash setup-cybertiel.sh --plan
-```
-
-A blocked preflight is a reason to investigate, not to remove a gate. `--plan` does not install the system. Installation is a separate, deliberate step that changes the host, downloads large assets and builds containers:
-
-```bash
-sudo bash setup-cybertiel.sh --install --accept-official-q8
-sudo bash check-cybertiel-server.sh --installer ./install-cybertiel.sh
-```
-
-After installation and successful checks:
-
-```bash
-sudo cybertiel import /path/to/project
-sudo cybertiel
-sudo cybertiel status
-```
-
-Import expects an empty managed project directory. Review the source project for credentials before importing it. The agent can edit and execute files in that workspace.
-
-## Evidence and limitations
-
-The supplied package contains a historical pre-seal report of **473 PASS / 0 FAIL across 15 suites**. That is reported source evidence, not a fresh result for this Git checkout. The separate final sealed-ZIP report was not present in the supplied directory.
-
-During preparation for publication, all **173 source-manifest entries** matched their hashes, sizes and modes. The three current script bindings also matched. Fresh local checks are recorded separately in [publication validation](docs/evidence/PUBLICATION_VALIDATION.json); they must not be confused with the earlier Linux regressions or a target installation.
-
-**Fresh local suite results:** checker contracts 39/0; installer tests 106/4 on macOS. Two failures involve GNU `realpath -m`; two download-mock assertions also failed and need Linux reproduction. The local result is not all green.
-
-Still required: a real Ubuntu installation, Docker builds and runtime isolation tests, Pi dependency/CLI/SDK checks, complete model/projector download and inference, CPU memory/soak measurements, a real project build and execution in a clean Windows VM. A cross-compiled Windows executable is not proof that it runs correctly on Windows.
-
-## Version and provenance
-
-| Component | Source identity |
-|---|---|
-| Package | `2026-10-06.v25-r2` |
-| Installer | `2026-10-06.v25` |
-| Checker | `CT-CHECK-2.8.0` |
-| Parent recorded by source | `2026-10-06.v25-r1` |
-
-This repository is a curated distribution of the supplied directory, not the original sealed ZIP. Runtime scripts and generated configuration are preserved byte for byte. Older archives, temporary logs and repetitive audit narratives are omitted. Its own `SHA256SUMS` describes the published files.
-
-There is a known source metadata error: `SOURCE_LOCK.json` records a **65-character parent checker hash**, which is not a valid SHA-256. It is retained for transparency and must not be used to authenticate the parent. Current script bindings are valid and verified. See [audit notes](docs/AUDIT.md) for the consequences.
-
-## Contributing
-
-A useful issue includes the exact checkout, a minimal reproduction, expected and actual behavior, and sanitized evidence. Please distinguish static checks, mocked execution and real target results. Do not attach API keys, private project code or raw machine logs.
-
-Model weights and upstream dependencies are not redistributed here. Their respective licenses and terms still apply. This initial publication does not add a repository-wide license grant.
+Operator details: [usage](docs/USAGE.md), [threat model](docs/THREAT_MODEL.md). This distribution adds no repository-wide license grant.

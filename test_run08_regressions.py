@@ -24,7 +24,7 @@ def launcher_fixture(td):
     docker=binp/'docker'
     docker.write_text(r'''#!/usr/bin/env bash
 printf '%q ' "$@" >> "$CT_DOCKER_LOG"; printf '\n' >> "$CT_DOCKER_LOG"
-if [[ "$1" == inspect && "$2" == -f ]]; then printf '%s\n' '2026-10-06.v25'; exit 0; fi
+if [[ "$1" == inspect && "$2" == -f ]]; then printf '%s\n' '2026-10-06.v25-r3'; exit 0; fi
 if [[ "$1" == stop ]]; then exit 0; fi
 if [[ "$1" == container && "$2" == inspect ]]; then exit 1; fi
 exit 0
@@ -113,6 +113,6 @@ def stable_modes():
         return {'executable_mode':'0700','nonexec_mode':'0600','owner':1000}
 rec('v24_project_import_normalizes_editable_private_modes',stable_modes)
 
-report={'schema':'cybertiel-run08-regressions/v1','installer_release':'2026-10-06.v25','passed':sum(r['status']=='PASS' for r in RESULTS),'failed':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
+report={'schema':'cybertiel-run08-regressions/v1','installer_release':'2026-10-06.v25-r3','passed':sum(r['status']=='PASS' for r in RESULTS),'failed':sum(r['status']=='FAIL' for r in RESULTS),'results':RESULTS}
 (ROOT/'RUN08_REGRESSION_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n')
 raise SystemExit(1 if report['failed'] else 0)

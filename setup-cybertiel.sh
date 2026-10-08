@@ -14,11 +14,11 @@ import argparse, hashlib, json, os, signal, stat, subprocess, sys, tempfile
 from pathlib import Path
 
 # Replaced when the final scripts are frozen; regenerated wrapper embeds this file.
-PINS = {'install-cybertiel.sh': '9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761', 'check-cybertiel-server.sh': '333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5'}
+PINS = {'install-cybertiel.sh': '8067240bb7173ded2bf4f44e62574752cff3df118373df559fc7aa5c0cb543ac', 'check-cybertiel-server.sh': '006af519e70c8f03d3b030ca6e972f08a6034c09f45b70c49d66e73f0adfc0c1'}
 ENV = {'PATH':'/usr/sbin:/usr/bin:/sbin:/bin','HOME':'/root','LANG':'C.UTF-8',
        'TERM':os.environ.get('TERM','xterm-256color')}
 MAX_SCRIPT = 4 * 1024 * 1024
-EXPECTED_CHECKER = 'CT-CHECK-2.8.0'
+EXPECTED_CHECKER = 'CT-CHECK-2.9.0'
 CHECK_STATUSES = ('PASS','FAIL','WARN','UNTESTED','NOT_APPLICABLE')
 
 
@@ -187,7 +187,7 @@ def drive(mode, paths, dest, startup, smoke, jobs, runner=run_command):
             semantic_error='checker exitcode contradicts report counts'
         report_state='valid' if semantic_error is None else 'contradiction'
     status,rc=outcome(mode,irc,crc,report_state)
-    result={'schema':'cybertiel-setup/v1','installer_release':'2026-10-06.v25','package_revision':'2026-10-06.v25-r2',
+    result={'schema':'cybertiel-setup/v1','installer_release':'2026-10-06.v25-r3','package_revision':'2026-10-06.v25-r3',
         'status':status,'installer_exit_code':irc,'checker_exit_code':crc,
         'checker_report_verified':report_state=='valid',
         'checker_report':str(checker_report) if checker_report is not None else None,
@@ -215,7 +215,7 @@ def main(argv=None):
     a=ap.parse_args(argv)
     if not 60<=a.startup_timeout<=7200 or not 60<=a.smoke_timeout<=14400 or not 1<=a.build_jobs<=16:ap.error('Timeout/jobs buiten ondersteund bereik.')
     if not a.install and not a.check:
-        print('PLAN: verifieer v25 installer + checker2.8; installeer alleen met --install --accept-official-q8; voer daarna checker uit. Geen wijzigingen uitgevoerd.\nGebruik op de bedoelde Ubuntu-server: sudo bash setup-cybertiel.sh --install --accept-official-q8');return 0
+        print('PLAN: verifieer v25-r3 installer + checker2.9; installeer alleen met --install --accept-official-q8; voer daarna checker uit. Geen wijzigingen uitgevoerd.\nGebruik op de bedoelde Ubuntu-server: sudo bash setup-cybertiel.sh --install --accept-official-q8');return 0
     if a.install and not a.accept_official_q8:ap.error('Expliciet --accept-official-q8 nodig; dit is Q8, geen BF16.')
     if sys.platform!='linux' or os.geteuid()!=0:ap.error('Voer installatie/controle op de Linux-server uit met sudo, niet op de Mac.')
     os.umask(0o077)

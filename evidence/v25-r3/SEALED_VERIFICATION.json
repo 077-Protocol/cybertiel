@@ -1,0 +1,172 @@
+{
+  "status": "PASS",
+  "zip_sha256": "d4c7ab1ea5592ff5e0e1519bcc03af0be02a17f1da870144d4e0d5148f0b4634",
+  "checked_files": 129,
+  "zip_bytes": 369109,
+  "scope": "Complete archive byte integrity and safe paths; no publisher signature or server qualification",
+  "source_verification": {
+    "status": "PASS",
+    "checked_files": 129,
+    "errors": [],
+    "warnings": [],
+    "scope": "Local byte/identity consistency; not publisher authentication or runtime qualification"
+  },
+  "tests": {
+    "date": "2026-10-09",
+    "base_commit": "6acfe4624607581223b56163d4617adbe99345f5",
+    "linux_regressions": {
+      "environment": "temporary QEMU x86_64 Alpine Linux 3.22, kernel 6.12.110, GNU coreutils/bash/dpkg; root and ordinary-user suites as required",
+      "suites": 14,
+      "passed": 330,
+      "failed": 0,
+      "server_install_executed": false
+    },
+    "archive_negative_tests": {
+      "passed": 8,
+      "failed": 0,
+      "environment": "macOS arm64 Python 3.13"
+    },
+    "real_npm_ci": {
+      "platform": "macOS arm64",
+      "node": "24.21.0",
+      "npm": "11.19.0",
+      "node_distribution_sha256": "bed7eea5325e1108f32ce5228ddd6a5f0f08a499ee42aa7442aea583702f6057",
+      "real_npm_ci_exit": 0,
+      "real_npm_ls_exit": 0,
+      "installed_metadata_check": "PASS",
+      "installed_tree_check": "PASS",
+      "lock_unchanged": true,
+      "negative_corrupt_SRI_exit": 1,
+      "negative_corrupt_SRI_EINTEGRITY": true,
+      "Pi_executed": false,
+      "Docker_build": false
+    },
+    "official_lock_sha256": "d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7",
+    "derived_lock_sha256": "1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a",
+    "sri_manifest_sha256": "0ccc765161d1a5023ab8ac02f06642d99cf51156738a76075362af3f2ec56bd8",
+    "verified_registry_tarballs": 8,
+    "not_executed": [
+      "Ubuntu target installation",
+      "Docker image builds",
+      "Pi CLI/SDK runtime",
+      "model download and inference",
+      "Windows runtime"
+    ],
+    "qualification": "Pi SRI bug fixed and locally tested; complete target qualification remains guarded by installer/checker"
+  },
+  "sealed_zip_regressions": {
+    "status": "PASS",
+    "tested_zip_sha256": "d4c7ab1ea5592ff5e0e1519bcc03af0be02a17f1da870144d4e0d5148f0b4634",
+    "passed": 338,
+    "failed": 0,
+    "suites": [
+      "test-installer.py 0",
+      "test_log_import_safety.py 0",
+      "test_lock_contract.py 0",
+      "test_lock_security.py 0",
+      "test_operation_lock_contract.py 0",
+      "test_project_import_safety.py 0",
+      "test_run08_regressions.py 0",
+      "test_run09_regressions.py 0",
+      "test_run10_regressions.py 0",
+      "test_setup.py 0",
+      "test_snapshot_coordination.py 0",
+      "test_pi_sri_repair.py 0",
+      "test_partial_archive.py 0",
+      "test_sealed_zip.py 0",
+      "checker/test_checker_v3.py 0"
+    ],
+    "reports": [
+      {
+        "report": "LOCK_SECURITY_TEST_REPORT.json",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "report": "LOG_IMPORT_SAFETY_TEST_REPORT.json",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "report": "OPERATION_LOCK_TEST_REPORT.json",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "report": "PARTIAL_ARCHIVE_TEST_REPORT.json",
+        "passed": 7,
+        "failed": 0
+      },
+      {
+        "report": "PI_LOCK_TEST_REPORT.json",
+        "passed": 48,
+        "failed": 0
+      },
+      {
+        "report": "PI_SRI_REPAIR_TEST_REPORT.json",
+        "passed": 36,
+        "failed": 0
+      },
+      {
+        "report": "PROJECT_IMPORT_SAFETY_TEST_REPORT.json",
+        "passed": 4,
+        "failed": 0
+      },
+      {
+        "report": "RUN08_REGRESSION_TEST_REPORT.json",
+        "passed": 6,
+        "failed": 0
+      },
+      {
+        "report": "RUN09_REGRESSION_TEST_REPORT.json",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "report": "RUN10_REGRESSION_TEST_REPORT.json",
+        "passed": 3,
+        "failed": 0
+      },
+      {
+        "report": "SEALED_ZIP_NEGATIVE_TEST_REPORT.json",
+        "passed": 8,
+        "failed": 0
+      },
+      {
+        "report": "SETUP_TEST_REPORT.json",
+        "passed": 41,
+        "failed": 0
+      },
+      {
+        "report": "SNAPSHOT_COORDINATION_TEST_REPORT.json",
+        "passed": 9,
+        "failed": 0
+      },
+      {
+        "report": "TEST_REPORT.json",
+        "passed": 110,
+        "failed": 0
+      },
+      {
+        "report": "V3_TEST_REPORT.json",
+        "passed": 40,
+        "failed": 0
+      }
+    ],
+    "source_verification_before_tests": {
+      "status": "PASS",
+      "checked_files": 129,
+      "errors": [],
+      "warnings": [],
+      "scope": "Local byte/identity consistency; not publisher authentication or runtime qualification"
+    },
+    "archive_verification_before_tests": {
+      "status": "PASS",
+      "zip_sha256": "d4c7ab1ea5592ff5e0e1519bcc03af0be02a17f1da870144d4e0d5148f0b4634",
+      "checked_files": 129,
+      "zip_bytes": 369109,
+      "scope": "Complete archive byte integrity and safe paths; no publisher signature or server qualification"
+    },
+    "environment": "Isolated QEMU x86_64 Linux Alpine 3.22 with GNU tools; ordinary-user and root suites as appropriate; actual delivered ZIP extracted and tested; no real server installation"
+  }
+}
