@@ -1,78 +1,48 @@
-CyberTiel v25-r3 — concrete Ubuntu 24.04 server steps
+CyberTiel v25-r3.1 — resume after the llama CMake/PkgConfig failure
 
-Use this delivered ZIP, not a fresh clone of the published v25-r2 repository.
-The server profile remains x86_64, AVX2, >=110 GiB visible RAM, Docker >=28,
-AppArmor/seccomp, and the existing storage/host security gates.
+The original v25-r3 Pi SRI repair is retained. This update adds pkg-config to the
+llama builder and corrects the checker's verified modprobe alias invocation.
+Package revision is v25-r3.1; the managed installer identity stays v25-r3 so the
+existing partial /opt/cybertiel and /srv/cybertiel directories can resume.
 
-1. INDEPENDENT CHECK BEFORE USING ANY INSTALLER
-Transfer cybertiel-v25-r3.zip and cybertiel-v25-r3.zip.sha256 to a new directory.
-Compare the ZIP SHA256 with the hash shown in the delivery, not only a checksum
-file received through the same untrusted channel. Checksums are not signatures.
+DO NOT archive the partial v25-r3 installation or change its markers. Keep the
+v25-r2 backups. Docker remains installed. No security gate is disabled.
 
-  sha256sum -c cybertiel-v25-r3.zip.sha256
-  unzip cybertiel-v25-r3.zip
-  cd cybertiel-v25-r3
+1. Download cybertiel-v25-r3.1.zip into a new server directory and compare its
+SHA256 with the separately supplied delivery hash. Use the ZIP from the pinned
+GitHub commit in the delivery, not a moving branch or main.
+
+2. From the download directory, after the ZIP hash matches:
+
+  python3 -m zipfile -e cybertiel-v25-r3.1.zip .
+  cd cybertiel-v25-r3.1
   sha256sum -c SHA256SUMS
   python3 tools/verify_release.py
-  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.zip
+  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.1.zip
   python3 tools/verify_pi_sri.py
-  python3 test_pi_sri_repair.py
 
-The last command writes a fresh report, so run the package checksum verification
-before that test, or run the test in a separate copy. verify_pi_sri must end with
-PASS official pair + 8/8 metadata/tarballs. Review the manifest, validator,
-Dockerfile, checker and archival helper before using sudo.
+Every check must pass. SRI verification must report the official pair + 8/8
+metadata/tarballs. Original and derived Pi lock hashes are unchanged.
 
-Original official lock:
-  d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7
-Derived npm-ci lock:
-  1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a
-Separate SRI manifest:
-  0ccc765161d1a5023ab8ac02f06642d99cf51156738a76075362af3f2ec56bd8
-
-2. PRESERVE THE FAILED v25-r2 INSTALLATION
-Your earlier report showed Docker active and no installer process. Check again:
-
-  pgrep -af 'setup-cybertiel|install-cybertiel|verify-pi-lock' || true
-  sudo systemctl is-active docker
-  sudo python3 tools/archive_partial_v25_r2.py
-
-The helper prints a plan. It verifies old managed markers and the original lock,
-refuses READY/project data/managed containers/active installers, and holds the
-installer's private coordination lock. Inspect its proposed backup destinations.
-After that independent review, preserve the partial directories:
-
-  sudo python3 tools/archive_partial_v25_r2.py --apply
-
-This renames /opt/cybertiel and, if present, /srv/cybertiel to timestamped backups
-beside the originals. It deletes nothing. It leaves Docker installed and running.
-If refused, investigate its reason; do not change markers, delete READY, remove
-locks or disable a gate. Retain the backups until the new install is qualified.
-On a fresh server without partial managed directories, skip step 2.
-
-3. PLAN, THEN INSTALL THE REPAIRED PACKAGE
-From the same extracted package directory:
+3. Resume with this package's paired, pinned scripts:
 
   bash preflight-server.sh
   bash setup-cybertiel.sh --plan
   sudo bash setup-cybertiel.sh --install --accept-official-q8
 
-The install changes host packages, downloads large assets and builds containers.
-If the existing host update/reboot gate requires reboot, reboot normally, return
-to this same package directory and repeat the setup install command. Do not rerun
-the v25-r2 archival helper against a partial v25-r3 installation; the same v25-r3
-installer can resume its own partial managed directories.
+Docker may reuse previous layers; the changed dependency layer installs
+pkg-config inside the builder. Installing pkg-config only on the host would
+not fix the container. Do not manually edit a hash-bound Dockerfile or installer.
 
-4. QUALIFY THE ACTUAL SERVER
+If the existing host gate explicitly requires a reboot, reboot normally and
+repeat only this same setup installation command. Stop on any other failure and
+retain the reported log. Do not weaken a gate or remove coordination locks.
+
+4. After setup succeeds:
 
   sudo bash check-cybertiel-server.sh --installer ./install-cybertiel.sh --deep-model-hash --runtime
   sudo cybertiel status
 
-Review setup-result.json and the checker reports at the paths printed by the
-scripts. FAIL and UNTESTED are not target qualification. All installation smoke
-checks must pass before normal use. Do not infer server success from local tests.
-
-Local proof: real release bytes, 8/8 verified tarballs, 330/0 Linux regressions,
-8/0 archive-negative tests, actual npm-ci/tree/metadata checks with exact Node/npm
-on macOS, and npm rejecting a corrupt SRI. No real server installation, Docker
-build, Pi runtime or model inference was performed for this delivery.
+Review the checker and setup reports. Their independent live/ready checks remain
+required; local regression/configure success does not prove model inference or
+Windows runtime. No server installation was executed by the assistant.

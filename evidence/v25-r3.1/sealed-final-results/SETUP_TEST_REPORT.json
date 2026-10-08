@@ -1,0 +1,212 @@
+{
+  "results": [
+    {
+      "id": "real_companion_hash_install-cybertiel.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "real_companion_hash_check-cybertiel-server.sh",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "stage_verified_bytes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "stage_private_permissions",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "corrupt_upload_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "symlink_upload_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "FIFO_rejected_without_block",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "hardlink_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "install_fail_both_commands_executed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "install_fail_status_and_return",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "install_fail_no_project_success_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "install_fail_report_written",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "postcheck_fail_both_commands_executed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "postcheck_fail_status_and_return",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "postcheck_fail_no_project_success_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "postcheck_fail_report_written",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "remaining_unknown_both_commands_executed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "remaining_unknown_status_and_return",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "remaining_unknown_no_project_success_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "remaining_unknown_report_written",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all_smokes_both_commands_executed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all_smokes_status_and_return",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all_smokes_no_project_success_claim",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "all_smokes_report_written",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "failure_no_runtime",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "success_runtime",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_embedded_matches",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_--help",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_--plan",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_reject_['--install']",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_reject_['--build-jobs', '0']",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_reject_['--install', '--check']",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_cli_reject_['--unknown']",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "missing_checker_report_never_claimed_available",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_fail_report_exit0_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_count_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_runtime_optin_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_identity_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_overall_status_mismatch_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "clean_command_environment",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_SIGTERM_reaps_child_group",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "passed": 41,
+  "failed": 0,
+  "scope": "real harmless shell subprocesses and private local files; actual installer never run; ownership semantics require root as production does"
+}

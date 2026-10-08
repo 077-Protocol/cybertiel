@@ -1,0 +1,115 @@
+{"name": "embedded_files_render", "status": "PASS", "seconds": 0.4689, "detail": ["Dockerfile.agent", "Dockerfile.llama", "accept.cpp", "agent-entrypoint.py", "agent-policy.md", "bash-timeout.ts", "check-ready.py", "cybertiel-launcher", "gdb-result-check.py", "import-debug-log.py", "mingw-x64.cmake", "models.json", "pi-settings-check.mjs", "pi-sri-manifest.json", "settings.json", "toolchain-smoke.sh", "trace-check.py", "verify-agent.py", "verify-pi-lock.py"]}
+{"name": "embedded_files_readable_with_umask077", "status": "PASS", "seconds": 0.4221, "detail": null}
+{"name": "independent_acceptance_readable_by_nonroot", "status": "PASS", "seconds": 0.0181, "detail": null}
+{"name": "bash_syntax_installer", "status": "PASS", "seconds": 0.0332, "detail": null}
+{"name": "bash_syntax_launcher", "status": "PASS", "seconds": 0.0126, "detail": null}
+{"name": "bash_syntax_toolchain-smoke", "status": "PASS", "seconds": 0.0086, "detail": null}
+{"name": "python_syntax_trace-check.py", "status": "PASS", "seconds": 0.0396, "detail": "syntax compiled"}
+{"name": "python_syntax_verify-agent.py", "status": "PASS", "seconds": 0.0107, "detail": "syntax compiled"}
+{"name": "python_syntax_verify-pi-lock.py", "status": "PASS", "seconds": 0.0422, "detail": "syntax compiled"}
+{"name": "safe_cli_valid_0", "status": "PASS", "seconds": 0.0516, "detail": null}
+{"name": "safe_cli_valid_1", "status": "PASS", "seconds": 0.0677, "detail": null}
+{"name": "safe_cli_valid_2", "status": "PASS", "seconds": 0.0488, "detail": null}
+{"name": "safe_cli_valid_3", "status": "PASS", "seconds": 0.0514, "detail": null}
+{"name": "safe_cli_valid_4", "status": "PASS", "seconds": 0.0493, "detail": null}
+{"name": "safe_cli_valid_5", "status": "PASS", "seconds": 0.0489, "detail": null}
+{"name": "cli_reject_--install", "status": "PASS", "seconds": 0.0407, "detail": null}
+{"name": "cli_reject_--unknown", "status": "PASS", "seconds": 0.0406, "detail": null}
+{"name": "cli_reject_--build-jobs", "status": "PASS", "seconds": 0.0395, "detail": null}
+{"name": "cli_reject_--build-jobs_0", "status": "PASS", "seconds": 0.0395, "detail": null}
+{"name": "cli_reject_--build-jobs_17", "status": "PASS", "seconds": 0.044, "detail": null}
+{"name": "cli_reject_--smoke-timeout_59", "status": "PASS", "seconds": 0.0391, "detail": null}
+{"name": "cli_reject_--smoke-timeout_14401", "status": "PASS", "seconds": 0.039, "detail": null}
+{"name": "cli_reject_--startup-timeout_7201", "status": "PASS", "seconds": 0.0409, "detail": null}
+{"name": "cli_reject_--startup-timeout_-1", "status": "PASS", "seconds": 0.0401, "detail": null}
+{"name": "cli_reject_--build-jobs_1;touch /tmp/unsafe", "status": "PASS", "seconds": 0.0386, "detail": null}
+{"name": "cli_reject_--build-jobs_999999999999999", "status": "PASS", "seconds": 0.038, "detail": null}
+{"name": "nonroot_stops_before_host_changes", "status": "PASS", "seconds": 0.0387, "detail": "FOUT: Start met sudo bash install-cybertiel.sh --install --accept-official-q8"}
+{"name": "sha256_correct", "status": "PASS", "seconds": 0.2542, "detail": null}
+{"name": "sha512_npm_integrity_correct", "status": "PASS", "seconds": 0.2521, "detail": null}
+{"name": "sha256_mismatch_rejected", "status": "PASS", "seconds": 0.2503, "detail": null}
+{"name": "hash_missing_rejected", "status": "PASS", "seconds": 0.2517, "detail": null}
+{"name": "hash_symlink_rejected", "status": "PASS", "seconds": 0.3499, "detail": null}
+{"name": "directory_not_regular_file", "status": "PASS", "seconds": 0.038, "detail": null}
+{"name": "symlink_not_regular_file", "status": "PASS", "seconds": 0.0366, "detail": null}
+{"name": "absent_file_allowed", "status": "PASS", "seconds": 0.0355, "detail": null}
+{"name": "download_fresh", "status": "PASS", "seconds": 0.288, "detail": {"curl_calls": 1, "network": "MOCK_ONLY"}}
+{"name": "download_partial_resume", "status": "PASS", "seconds": 0.5112, "detail": {"curl_calls": 1, "network": "MOCK_ONLY"}}
+{"name": "download_verified_existing_no_request", "status": "PASS", "seconds": 0.2712, "detail": {"curl_calls": 0, "network": "MOCK_ONLY"}}
+{"name": "download_complete_part_recovered", "status": "PASS", "seconds": 0.2724, "detail": {"curl_calls": 0, "network": "MOCK_ONLY"}}
+{"name": "download_corrupt_existing_preserved", "status": "PASS", "seconds": 0.2632, "detail": {"curl_calls": 0, "network": "MOCK_ONLY"}}
+{"name": "download_wrong_hash_not_finalized", "status": "PASS", "seconds": 0.2849, "detail": {"curl_calls": 1, "network": "MOCK_ONLY"}}
+{"name": "download_HTTP_failure_not_finalized", "status": "PASS", "seconds": 0.0504, "detail": {"curl_calls": 1, "network": "MOCK_ONLY"}}
+{"name": "directory_idempotent_creation", "status": "PASS", "seconds": 0.1458, "detail": null}
+{"name": "unknown_nonempty_directory_rejected", "status": "PASS", "seconds": 0.057, "detail": null}
+{"name": "unknown_version_rejected", "status": "PASS", "seconds": 0.0645, "detail": null}
+{"name": "world_writable_root_directory_rejected", "status": "PASS", "seconds": 0.0778, "detail": null}
+{"name": "symlink_root_directory_rejected", "status": "PASS", "seconds": 0.04, "detail": null}
+{"name": "agent_home_direct_symlink_rejected", "status": "PASS", "seconds": 0.0389, "detail": null}
+{"name": "agent_home_ancestor_symlink_rejected", "status": "PASS", "seconds": 0.0483, "detail": null}
+{"name": "missing_plain_home_directory_allowed", "status": "PASS", "seconds": 0.0448, "detail": null}
+{"name": "single_local_model_config", "status": "PASS", "seconds": 0.0029, "detail": null}
+{"name": "trace_read_edit_positive", "status": "PASS", "seconds": 0.2305, "detail": null}
+{"name": "trace_unicode_separators_not_framing", "status": "PASS", "seconds": 0.223, "detail": null}
+{"name": "trace_CRLF", "status": "PASS", "seconds": 0.2208, "detail": null}
+{"name": "trace_missing_settled_rejected", "status": "PASS", "seconds": 0.2266, "detail": null}
+{"name": "trace_no_read_rejected", "status": "PASS", "seconds": 0.2202, "detail": null}
+{"name": "trace_wrong_debuglog_path_rejected", "status": "PASS", "seconds": 0.2186, "detail": null}
+{"name": "trace_wrong_source_edit_path_rejected", "status": "PASS", "seconds": 0.2177, "detail": null}
+{"name": "trace_claim_only_rejected", "status": "PASS", "seconds": 0.2791, "detail": null}
+{"name": "trace_wrong_owner_rejected", "status": "PASS", "seconds": 0.219, "detail": null}
+{"name": "trace_missing_isError_rejected", "status": "PASS", "seconds": 0.2194, "detail": null}
+{"name": "trace_failed_edit_rejected", "status": "PASS", "seconds": 0.2195, "detail": null}
+{"name": "trace_error_rejected", "status": "PASS", "seconds": 0.217, "detail": null}
+{"name": "trace_truncated_rejected", "status": "PASS", "seconds": 0.2215, "detail": null}
+{"name": "trace_retry_rejected", "status": "PASS", "seconds": 0.3318, "detail": null}
+{"name": "trace_duplicate_id_rejected", "status": "PASS", "seconds": 0.2248, "detail": null}
+{"name": "trace_malformed_rejected", "status": "PASS", "seconds": 0.287, "detail": null}
+{"name": "trace_array_rejected", "status": "PASS", "seconds": 0.2252, "detail": null}
+{"name": "actual_CXX_broken_rejected", "status": "PASS", "seconds": 0.9416, "detail": {"compiler": "/usr/bin/g++", "returncode": 1, "stdout": "", "platform": "Linux-native, NOT Windows"}}
+{"name": "actual_CXX_fixed_4_cases", "status": "PASS", "seconds": 0.3675, "detail": {"compiler": "/usr/bin/g++", "returncode": 0, "stdout": "CT_NATIVE_ACCEPTANCE_OK", "platform": "Linux-native, NOT Windows"}}
+{"name": "download_stale_part_resume_failure_clean_retry", "status": "PASS", "seconds": 0.5863, "detail": {"curl_calls": 2, "first_resume": true, "clean_retry": true, "network": "MOCK_ONLY"}}
+{"name": "download_stale_part_bad_digest_clean_retry", "status": "PASS", "seconds": 0.7951, "detail": {"curl_calls": 2, "first_resume": true, "clean_retry": true, "network": "MOCK_ONLY"}}
+{"name": "v6_cumulative_material_fixes_static_invariants", "status": "PASS", "seconds": 0.004, "detail": "v6 cumulative PowerShell/Python/C-C++ tooling/disk/resource/least-privilege invariants"}
+{"name": "v3_dynamic_docker_root_space_gate", "status": "PASS", "seconds": 0.002, "detail": "actual DockerRootDir is discovered after daemon startup; /var/lib is not assumed"}
+{"name": "v3_python_cpp_build_analysis_tooling", "status": "PASS", "seconds": 0.0009, "detail": {"packages": ["python3-pip", "python3-dev", "python3-pytest", "python3-mypy", "valgrind", "autoconf", "automake", "libtool", "meson", "bear", "clangd"], "note": "static packaging + emitted smoke logic; target package installation still server-only"}}
+{"name": "agent_policy_balanced_backticks", "status": "PASS", "seconds": 0.0005, "detail": null}
+{"name": "v6_launcher_managed_identity_bound_to_current_installer", "status": "PASS", "seconds": 0.0049, "detail": {"installer_id": "2026-10-06.v25-r3", "launcher_label": "2026-10-06.v25-r3", "same": true}}
+{"name": "v4_target_provenance_receipts_static", "status": "PASS", "seconds": 0.0023, "detail": "Target host/Docker/base-image identity is captured and bound into READY; execution remains server-only"}
+{"name": "v5_cybertiel_correctness_profile", "status": "PASS", "seconds": 0.0028, "detail": "Correctness-first CyberTiel profile: 262k context; server output/reasoning budgets unrestricted"}
+{"name": "v5_target_model_props_effective_config_gate", "status": "PASS", "seconds": 0.0027, "detail": "Target server /props is captured and effective context/output/sampling profile is gated before READY"}
+{"name": "v17_pi_official_installer_lock_provenance_gate", "status": "PASS", "seconds": 0.0028, "detail": "Pi 1.0.3 official installer-lock hashes and actual installed metadata/tree replace removed shrinkwrap; target execution still required"}
+{"name": "v8_llama_v0_5_0_annotated_tag_provenance", "status": "PASS", "seconds": 0.0023, "detail": {"git_tag": "v0.5.0", "annotated_tag_target": "7fe450e19305b828c199d602c23a8337aaa1f03b", "annotated_tag_object": "c13fcbf684171d5e0bca3fc5c34be6a99174b05f", "release_api_target_commitish": "d2e54583c7452353eb35d40431281f6ee984332f", "policy": "checkout annotated tag target; retain contradictory release metadata as provenance"}}
+{"name": "v6_single_slot_host_prompt_cache_disabled", "status": "PASS", "seconds": 0.0021, "detail": "Host-RAM prompt-cache serialization disabled and target container argv gate binds the setting before READY"}
+{"name": "v6_cache_hardening_scope_is_narrow", "status": "PASS", "seconds": 0.0021, "detail": "single-slot prefix reuse/checkpoints remain enabled; only idle/host prompt serialization is disabled"}
+{"name": "v6_git_checkpoint_identity_and_smoke", "status": "PASS", "seconds": 0.0031, "detail": "Agent Git checkpoints have a non-human local identity and the target toolchain smoke performs a real local commit"}
+{"name": "v7_pi_navigation_tools_and_linux_powershell_boundary", "status": "PASS", "seconds": 0.0028, "detail": {"enabled": ["read", "bash", "edit", "write", "grep", "find", "ls"], "linux_powershell": "pwsh via bash; Pi native powershell tool intentionally disabled"}}
+{"name": "v9_base_image_digest_and_node_npm_runtime_gate", "status": "PASS", "seconds": 0.0022, "detail": {"base_image": "node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553", "node": "24.21.0", "npm": "11.19.0", "note": "pre-audited digest; npm 11 + root npm ci applies the official installer lock"}}
+{"name": "v16_pi_official_installer_lock_drives_root_npm_ci", "status": "PASS", "seconds": 0.0025, "detail": "npm ci uses the official installer root/package-lock; official release lock is checked before install; installed package metadata is checked separately."}
+{"name": "v8_final_image_package_inventory_receipts", "status": "PASS", "seconds": 0.0022, "detail": "Both final image Debian package inventories are frozen and bound to READY."}
+{"name": "v8_active_native_analysis_and_debug_capability_smokes", "status": "PASS", "seconds": 0.0026, "detail": "Static analysis, sanitizers and Valgrind execute real fixtures; GDB capability is measured without weakening sandbox."}
+{"name": "v9_debuglog_multifile_policy_realism_gate", "status": "PASS", "seconds": 0.0037, "detail": "Target smoke proves debug-log read + correct multi-file source edit under normal appended policy; v11 also adds a runtime timeout guard."}
+{"name": "v10_docker_engine_28_plus_gate_accepts_supported_versions", "status": "PASS", "seconds": 0.3814, "detail": "Docker 28+ accepted"}
+{"name": "v10_docker_engine_isolation_gate_rejects_old_versions", "status": "PASS", "seconds": 0.3804, "detail": "Docker <28 and unparsable versions rejected"}
+{"name": "v10_network_receipt_validator_positive_and_negative", "status": "PASS", "seconds": 0.8301, "detail": "Synthetic inspect receipt: valid IPv4-isolated/IPv6-disabled network accepted; missing isolated mode, wrong label, and IPv6-enabled variants rejected"}
+{"name": "v10_internal_bridge_gateway_isolated_and_receipted", "status": "PASS", "seconds": 0.0024, "detail": "Internal bridge uses Docker Engine 28+ IPv4 isolated gateway mode, explicitly disables IPv6, and binds network/model inspect receipts to READY."}
+{"name": "v10_agent_policy_prompt_injection_sentence_repaired", "status": "PASS", "seconds": 0.0006, "detail": "Prompt-injection boundary and bash-timeout policy are syntactically coherent."}
+{"name": "v12_hidden_cross_run_session_state_removed", "status": "PASS", "seconds": 0.0039, "detail": "Baseline Pi templates are read-only; a fresh writable runtime copy and HOME/session state are ephemeral; visible Git+WORKLOG state replaces hidden writable cross-run session history."}
+{"name": "v17_official_pi_release_lock_and_dependency_positive_negative", "status": "PASS", "seconds": 0.108, "detail": "New official-lock contract and patched-dependency gate; synthetic data, not fetched release bytes."}
+{"name": "v11_hard_bash_timeout_extension_unit_test", "status": "PASS", "seconds": 0.9945, "detail": "Pure extension handler supplies/caps bash timeouts at 7200 s; explicit -e is used while discovery remains disabled."}
+{"name": "v11_config_mount_permissions_preserve_api_key_boundary", "status": "PASS", "seconds": 0.0024, "detail": "Whole config directory can be traversed by uid1000, but api-key remains root:65534 0640; agent uses the scoped key embedded in read-only models.json."}
+{"name": "v13_dual_stack_internal_network_ipv6_disabled", "status": "PASS", "seconds": 0.0024, "detail": "Docker network creation disables IPv6 even if daemon default-network-opts enables it; network receipt and live model-container inspect reject unexpected IPv6."}
+{"name": "v13_pi_http_provider_timeout_allows_slow_cpu_inference", "status": "PASS", "seconds": 0.0031, "detail": "Pi provider/header-body timeout raised from upstream default 300000 ms to explicit 7200000 ms for slow CPU inference; llama-server remains aligned at 7200 s."}
+{"name": "v14_builtin_seccomp_explicit_and_runtime_gated", "status": "PASS", "seconds": 0.0034, "detail": "Model and agent execution explicitly force Docker builtin seccomp and READY requires target runtime Seccomp=2 evidence; daemon custom/unconfined defaults cannot silently remove the filter."}
+{"name": "v14_model_inspect_seccomp_positive_negative", "status": "PASS", "seconds": 0.5516, "detail": "Extracted production model-inspect validator accepts builtin seccomp and rejects both missing and explicit unconfined seccomp in synthetic Docker inspect receipts."}
+{"name": "v15_apparmor_explicit_and_runtime_gated", "status": "PASS", "seconds": 0.0035, "detail": "All untrusted/project-bearing target containers explicitly request docker-default AppArmor; model and agent runtime evidence must show enforce mode before READY."}
+{"name": "v15_docker_host_security_options_positive_negative", "status": "PASS", "seconds": 0.5092, "detail": "Extracted production Docker-host validator accepts AppArmor+seccomp and rejects either missing LSM/filter capability."}
+{"name": "v15_model_inspect_apparmor_positive_negative", "status": "PASS", "seconds": 0.556, "detail": "Production model-inspect validator requires both explicit apparmor=docker-default and Docker-reported AppArmorProfile=docker-default."}
+{"name": "v15_copy_fail_cve_2026_31431_fail_closed_gate", "status": "PASS", "seconds": 0.0188, "detail": "Installer upgrades kmod to at least Ubuntu Noble's Copy Fail mitigation, requires algif_aead blocked/not loaded, and refuses pending reboot before model/agent containers."}
+{"name": "v14_current_official_node_lts_rebuild_digest", "status": "PASS", "seconds": 0.0021, "detail": {"base_image": "node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553", "node": "24.21.0", "npm": "11.19.0", "note": "current official rebuilt LTS digest; hard runtime gates prevent silent Node/npm drift"}}
+{"name": "sandbox_pinning_static_invariants", "status": "PASS", "seconds": 0.0041, "detail": "Static invariants only; not Docker runtime qualification"}
+{
+  "passed": 110,
+  "failed": 0,
+  "failures": []
+}

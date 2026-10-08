@@ -7,11 +7,11 @@ import argparse, hashlib, json, os, signal, stat, subprocess, sys, tempfile
 from pathlib import Path
 
 # Replaced when the final scripts are frozen; regenerated wrapper embeds this file.
-PINS = {'install-cybertiel.sh': '8067240bb7173ded2bf4f44e62574752cff3df118373df559fc7aa5c0cb543ac', 'check-cybertiel-server.sh': '006af519e70c8f03d3b030ca6e972f08a6034c09f45b70c49d66e73f0adfc0c1'}
+PINS = {'install-cybertiel.sh': '69461b077c5d8391b8282691d4eeb9d6486302f6dd2c97c085760d2e90c54362', 'check-cybertiel-server.sh': '76a1d13c6b2ebaab90d438d6a2be323adf950d93a9d6be23c14393ef147caffb'}
 ENV = {'PATH':'/usr/sbin:/usr/bin:/sbin:/bin','HOME':'/root','LANG':'C.UTF-8',
        'TERM':os.environ.get('TERM','xterm-256color')}
 MAX_SCRIPT = 4 * 1024 * 1024
-EXPECTED_CHECKER = 'CT-CHECK-2.9.0'
+EXPECTED_CHECKER = 'CT-CHECK-2.9.1'
 CHECK_STATUSES = ('PASS','FAIL','WARN','UNTESTED','NOT_APPLICABLE')
 
 
@@ -180,7 +180,7 @@ def drive(mode, paths, dest, startup, smoke, jobs, runner=run_command):
             semantic_error='checker exitcode contradicts report counts'
         report_state='valid' if semantic_error is None else 'contradiction'
     status,rc=outcome(mode,irc,crc,report_state)
-    result={'schema':'cybertiel-setup/v1','installer_release':'2026-10-06.v25-r3','package_revision':'2026-10-06.v25-r3',
+    result={'schema':'cybertiel-setup/v1','installer_release':'2026-10-06.v25-r3','package_revision':'2026-10-06.v25-r3.1',
         'status':status,'installer_exit_code':irc,'checker_exit_code':crc,
         'checker_report_verified':report_state=='valid',
         'checker_report':str(checker_report) if checker_report is not None else None,

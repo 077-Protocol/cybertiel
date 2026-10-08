@@ -3,7 +3,7 @@ FROM ${BASE_IMAGE} AS builder
 ARG LLAMA_COMMIT
 ARG BUILD_JOBS=4
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ca-certificates git build-essential cmake ninja-build libopenblas-dev \
+    ca-certificates git build-essential cmake ninja-build pkg-config libopenblas-dev \
     && rm -rf /var/lib/apt/lists/*
 RUN git init /src && cd /src \
     && git remote add origin https://github.com/ggml-org/llama.cpp.git \

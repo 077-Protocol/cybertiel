@@ -1,0 +1,47 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "results": [
+    {
+      "id": "complete_synthetic_zip_accepted",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "wrong_external_ZIP_SHA_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_changed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_extra",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_traversal",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_missing",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_duplicate",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_symlink",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "scope": "synthetic malformed archives; final actual ZIP checked separately"
+}

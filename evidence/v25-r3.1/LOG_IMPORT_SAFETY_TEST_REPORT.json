@@ -1,0 +1,79 @@
+{
+  "schema": "cybertiel-log-import-safety-tests/v1",
+  "installer_release": "2026-10-06.v25-r3",
+  "pass": 7,
+  "fail": 0,
+  "results": [
+    {
+      "name": "v20_log_import_regular_stable_passes",
+      "status": "PASS",
+      "seconds": 0.245,
+      "detail": {
+        "returncode": 0,
+        "sha256_bound": true,
+        "mode": "0600"
+      }
+    },
+    {
+      "name": "v20_log_import_fifo_rejected_without_block",
+      "status": "PASS",
+      "seconds": 0.237,
+      "detail": {
+        "returncode": 1,
+        "seconds": 0.2361,
+        "blocking": false
+      }
+    },
+    {
+      "name": "v20_log_import_symlink_rejected",
+      "status": "PASS",
+      "seconds": 0.2372,
+      "detail": {
+        "returncode": 1
+      }
+    },
+    {
+      "name": "v20_log_import_oversized_rejected",
+      "status": "PASS",
+      "seconds": 0.2378,
+      "detail": {
+        "returncode": 1
+      }
+    },
+    {
+      "name": "v20_log_import_concurrent_mutation_rejected",
+      "status": "PASS",
+      "seconds": 0.4349,
+      "detail": {
+        "returncode": 1,
+        "writer_iterations": 120,
+        "destination_created": false
+      }
+    },
+    {
+      "name": "v20_log_import_nonblocking_and_identity_contracts_present",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "contracts": [
+          "os.O_NONBLOCK",
+          "os.O_NOFOLLOW",
+          "os.O_CLOEXEC",
+          "end=os.fstat(fd)",
+          "named=os.lstat(sys.argv[1])",
+          "_identity(st)!=_identity(end)",
+          "_identity(named)!=_identity(st)"
+        ]
+      }
+    },
+    {
+      "name": "v20_log_import_stable_same_size_not_false_rejected",
+      "status": "PASS",
+      "seconds": 0.2358,
+      "detail": {
+        "returncode": 0,
+        "stable_regular_file": true
+      }
+    }
+  ]
+}

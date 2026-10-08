@@ -1,0 +1,28 @@
+{
+  "date": "2026-10-09",
+  "package_revision": "2026-10-06.v25-r3.1",
+  "managed_installer_identity": "2026-10-06.v25-r3",
+  "checker": "CT-CHECK-2.9.1",
+  "linux_tests": {
+    "passed": 351,
+    "failed": 0,
+    "suites": 16,
+    "environment": "isolated QEMU x86_64 Alpine Linux 3.22 VM with GNU tools; root and ordinary-user suites as required"
+  },
+  "installer_sha256": "69461b077c5d8391b8282691d4eeb9d6486302f6dd2c97c085760d2e90c54362",
+  "fixes": [
+    "pkg-config explicitly installed in llama builder",
+    "verified executable alias name preserved for modprobe/kmod dispatch"
+  ],
+  "Pi_SRI_pins_unchanged": true,
+  "target_installation_executed": false,
+  "full_llama_compile_executed": false,
+  "Pi_model_runtime_executed": false,
+  "CMake_Docker_configuration": {
+    "status": "PASS",
+    "old_exit": 1,
+    "fixed_exit": 0,
+    "original_missing_PkgConfig_reproduced": true,
+    "scope": "Pinned llama source and Docker builder configuration only; full compilation and target runtime remain unverified"
+  }
+}

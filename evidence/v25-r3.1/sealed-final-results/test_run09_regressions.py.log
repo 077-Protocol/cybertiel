@@ -1,0 +1,3 @@
+{"name": "v24_verifier_does_not_hide_skipped_unsafe_symlink", "status": "PASS", "seconds": 0.0, "detail": {"copy_safe_links": true, "verify_safe_links": false}}
+{"name": "v24_unsafe_source_symlink_rejected_atomically", "status": "PASS", "seconds": 0.2101, "detail": {"rc": 1, "canonical_empty": true, "unsafe_symlink_published": false}}
+{"name": "v24_safe_internal_symlink_preserved", "status": "PASS", "seconds": 0.2232, "detail": {"rc": 0, "safe_relative_symlink_preserved": true, "target": "../target.txt"}}

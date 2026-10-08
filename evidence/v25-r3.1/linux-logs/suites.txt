@@ -1,0 +1,16 @@
+test-installer.py 0
+test_log_import_safety.py 0
+test_lock_contract.py 0
+test_lock_security.py 0
+test_operation_lock_contract.py 0
+test_project_import_safety.py 0
+test_run08_regressions.py 0
+test_run09_regressions.py 0
+test_run10_regressions.py 0
+test_setup.py 0
+test_snapshot_coordination.py 0
+test_pi_sri_repair.py 0
+test_partial_archive.py 0
+test_sealed_zip.py 0
+test_build_resume_regressions.py 0
+checker/test_checker_v3.py 0

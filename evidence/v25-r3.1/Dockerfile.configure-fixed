@@ -1,0 +1,23 @@
+ARG BASE_IMAGE
+FROM ${BASE_IMAGE} AS builder
+ARG LLAMA_COMMIT
+ARG BUILD_JOBS=4
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
+    ca-certificates git build-essential cmake ninja-build pkg-config libopenblas-dev \
+    && rm -rf /var/lib/apt/lists/*
+RUN git init /src && cd /src \
+    && git remote add origin https://github.com/ggml-org/llama.cpp.git \
+    && git fetch --depth 1 origin "${LLAMA_COMMIT}" \
+    && git checkout --detach FETCH_HEAD \
+    && test "$(git rev-parse HEAD)" = "${LLAMA_COMMIT}" \
+    && printf '%s\n' "${LLAMA_COMMIT}" > /src/.cybertiel-source-commit
+RUN cmake -S /src -B /build -G Ninja \
+    -DCMAKE_BUILD_TYPE=Release \
+    -DBUILD_SHARED_LIBS=OFF -DGGML_NATIVE=ON \
+    -DGGML_CUDA=OFF -DGGML_VULKAN=OFF \
+    -DGGML_BLAS=ON -DGGML_BLAS_VENDOR=OpenBLAS \
+    -DLLAMA_OPENSSL=OFF -DLLAMA_SUBPROCESS=OFF \
+    -DLLAMA_BUILD_UI=OFF -DLLAMA_USE_PREBUILT_UI=OFF \
+    -DLLAMA_BUILD_TESTS=OFF -DLLAMA_BUILD_EXAMPLES=OFF \
+    -DLLAMA_BUILD_APP=OFF -DLLAMA_BUILD_TOOLS=ON -DLLAMA_BUILD_SERVER=ON \
+

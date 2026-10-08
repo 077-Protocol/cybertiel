@@ -102,13 +102,11 @@
   },
   "researched_on": "2026-10-06",
   "installer_id": "2026-10-06.v25-r3",
-  "checker": "CT-CHECK-2.9.0",
+  "checker": "CT-CHECK-2.9.1",
   "lineage": {
-    "parent": "2026-10-06.v25-r2",
-    "parent_git_commit": "6acfe4624607581223b56163d4617adbe99345f5",
-    "parent_installer_sha256": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
-    "parent_checker_sha256": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5",
-    "parent_setup_sha256": "dfcf9fe5a5c7e4bf15667e4f1929d15a637b8e9702d61150c1242ff9ab2a9796"
+    "parent": "2026-10-06.v25-r3",
+    "parent_git_commit": "ec855899a137c15463c22846e3c974f64595e414",
+    "parent_zip_sha256": "d4c7ab1ea5592ff5e0e1519bcc03af0be02a17f1da870144d4e0d5148f0b4634"
   },
   "agent": {
     "npm_package": "@earendil-works/pi-coding-agent",
@@ -184,16 +182,19 @@
     "full_model_download": false,
     "model_inference": false,
     "user_server": false,
-    "Windows_execution": false
+    "Windows_execution": false,
+    "local_llama_Docker_configure": true
   },
   "changed_scope": [
-    "Strict eight-package SRI supplement; immutable official lock retained; deterministic pinned derived npm-ci lock; checker and READY bindings updated."
+    "Add pkg-config to the llama Docker builder: pinned upstream BLAS configuration requires it.",
+    "Preserve verified executable alias paths in checker command discovery: modprobe symlink must retain argv[0], without weakening ownership/mode checks.",
+    "Package revision r3.1; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated."
   ],
   "unchanged_scope": "Model, Node/npm base, llama, host and container gates retained.",
-  "package_revision": "2026-10-06.v25-r3",
+  "package_revision": "2026-10-06.v25-r3.1",
   "script_bindings": {
-    "install-cybertiel.sh": "8067240bb7173ded2bf4f44e62574752cff3df118373df559fc7aa5c0cb543ac",
-    "check-cybertiel-server.sh": "006af519e70c8f03d3b030ca6e972f08a6034c09f45b70c49d66e73f0adfc0c1",
-    "setup-cybertiel.sh": "23a1e31b122a0a6df526ae89431147367a2290adf9810e632bf81d73cea1cb09"
+    "install-cybertiel.sh": "69461b077c5d8391b8282691d4eeb9d6486302f6dd2c97c085760d2e90c54362",
+    "check-cybertiel-server.sh": "76a1d13c6b2ebaab90d438d6a2be323adf950d93a9d6be23c14393ef147caffb",
+    "setup-cybertiel.sh": "a6dc500227fc32b7aafda3b4f73db7517f468826c3ef04fb88ddee4ac81df4fc"
   }
 }

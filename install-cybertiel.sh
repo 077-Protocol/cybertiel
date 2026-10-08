@@ -2,8 +2,8 @@
 # CyberTiel/Pi installer candidate 2026-10-06.v25-r3
 # Supports a fresh Ubuntu 24.04 LTS x86_64 host with >=110 GiB RAM.
 # It installs the OFFICIAL Q8_K_XL CyberTiel build, NOT a BF16 source model.
-# No remote server, Docker build or full-model inference has been executed
-# by the author in this chat. Target-side checks must pass before READY.
+# Target installation, complete production images and model inference remain
+# subject to the intended server tests. Target-side checks must pass before READY.
 set -Eeuo pipefail
 export PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 readonly INSTALL_ID=2026-10-06.v25-r3
@@ -293,7 +293,7 @@ FROM ${BASE_IMAGE} AS builder
 ARG LLAMA_COMMIT
 ARG BUILD_JOBS=4
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends \
-    ca-certificates git build-essential cmake ninja-build libopenblas-dev \
+    ca-certificates git build-essential cmake ninja-build pkg-config libopenblas-dev \
     && rm -rf /var/lib/apt/lists/*
 RUN git init /src && cd /src \
     && git remote add origin https://github.com/ggml-org/llama.cpp.git \

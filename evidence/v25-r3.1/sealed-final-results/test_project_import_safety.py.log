@@ -1,0 +1,4 @@
+{"name": "v24_project_import_stable_atomic_publish", "status": "PASS", "seconds": 0.2317, "detail": {"rc": 0, "published_tree_owner": 1000, "mode": "0750", "staging_left": false}}
+{"name": "v24_project_import_interruption_keeps_canonical_empty_and_retryable", "status": "PASS", "seconds": 0.2968, "detail": {"killed_rc": -9, "canonical_empty_after_kill": true, "retry_rc": 0, "stale_reclaimed": true}}
+{"name": "v24_project_import_source_generation_race_rejected", "status": "PASS", "seconds": 7.3456, "detail": {"rc": 1, "mixed_generation_published": false, "staging_cleaned": true}}
+{"name": "v24_project_import_staging_verification_contracts_present", "status": "PASS", "seconds": 0.0001, "detail": {"contracts": [".project-import.XXXXXXXX", "rsync -rcnptH --delete --itemize-changes", "--out-format='%i'", "pipe_rc=(\"${PIPESTATUS[@]}\")", "mv -T -- \"$staging\" \"$DATA/project\"", "rm -rf --one-file-system"], "direct_copy_to_canonical": false}}
