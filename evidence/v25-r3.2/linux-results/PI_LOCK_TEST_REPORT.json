@@ -1,0 +1,296 @@
+{
+  "results": [
+    {
+      "id": "official_lock_contract_positive_synthetic",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0006
+    },
+    {
+      "id": "reject_dependency_5.0.9",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "reject_dependency_5.0.11",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0006
+    },
+    {
+      "id": "reject_dependency_5.0.12-rc.1",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "reject_dependency_UNKNOWN",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0006
+    },
+    {
+      "id": "reject_dependency_1.1.20",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0006
+    },
+    {
+      "id": "reject_dependency_3.0.8",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "lock_reject_missing_brace",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "lock_reject_missing_pi",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "lock_reject_old_pi",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "lock_reject_http_url",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "lock_reject_foreign_registry",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "lock_reject_registry_credentials",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "lock_reject_bad_sri",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "lock_reject_missing_sri",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "lock_reject_link_entry",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0006
+    },
+    {
+      "id": "lock_reject_lock_version_bool",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "lock_reject_lock_root_mismatch",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "lock_reject_path_traversal",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "lock_reject_nested_vulnerable",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "installed_tree_positive_synthetic",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_unknown_dependency",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "tree_reject_vulnerable",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_extraneous",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_missing",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_reported_problem",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_wrong_root",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "tree_reject_missing_brace",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "real_files_installed_metadata_positive",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0047
+    },
+    {
+      "id": "real_files_installed_vulnerable_reject",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0039
+    },
+    {
+      "id": "real_files_installed_symlink_reject",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0032
+    },
+    {
+      "id": "CLI_synthetic_positive",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "CLI_synthetic_not_official_hash_reject",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0
+    },
+    {
+      "id": "JSON_reject_duplicate",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0009
+    },
+    {
+      "id": "JSON_reject_nan",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.001
+    },
+    {
+      "id": "JSON_reject_broken",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0007
+    },
+    {
+      "id": "JSON_reject_deep",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0045
+    },
+    {
+      "id": "JSON_symlink_reject",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "npm_alias_lock_supported",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0009
+    },
+    {
+      "id": "npm_alias_installed_metadata_supported",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0061
+    },
+    {
+      "id": "npm_alias_vulnerable_rejected",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0008
+    },
+    {
+      "id": "lock_key_repeated_separator_rejected",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0003
+    },
+    {
+      "id": "lock_key_dot_component_rejected",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0002
+    },
+    {
+      "id": "real_node_extension_logic_not_Pi_integration",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0
+    },
+    {
+      "id": "model_download_after_toolchain",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "no_shrinkwrap_runtime_requirement",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0001
+    },
+    {
+      "id": "Pi_version_consistent",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0
+    },
+    {
+      "id": "dependency_proof_before_Pi_exec",
+      "status": "PASS",
+      "detail": "",
+      "seconds": 0.0
+    }
+  ],
+  "passed": 48,
+  "failed": 0,
+  "evidence": "synthetic lock/tree plus real local filesystem/CLI/Node execution; no Docker/model/npm dependency download",
+  "installer_sha256": "df7d5acfcf595eee7c979b44e7aededac8cd107dc771c8ee18489d1a9578b4f7"
+}

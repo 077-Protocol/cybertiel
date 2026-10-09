@@ -1,0 +1,713 @@
+{
+  "checker": "CT-CHECK-2.9.6",
+  "counts": {
+    "PASS": 131,
+    "WARN": 3,
+    "NOT_APPLICABLE": 1,
+    "UNTESTED": 4
+  },
+  "checks": [
+    {
+      "status": "PASS",
+      "id": "host.linux",
+      "message": "Dit controlescript is voor Linux."
+    },
+    {
+      "status": "PASS",
+      "id": "host.root",
+      "message": "Rootrechten nodig voor volledige leescontrole van beheerbestanden en Docker."
+    },
+    {
+      "status": "PASS",
+      "id": "host.os",
+      "message": "Installer ondersteunt Ubuntu 24.04 LTS."
+    },
+    {
+      "status": "PASS",
+      "id": "host.arch",
+      "message": "x86_64 vereist."
+    },
+    {
+      "status": "PASS",
+      "id": "host.avx2",
+      "message": "AVX2 zichtbaar aan het OS."
+    },
+    {
+      "status": "WARN",
+      "id": "host.cpu_sku",
+      "message": "Controleer geleverde CPU tegen de bestelling; andere AVX2-CPU is niet automatisch incompatibel."
+    },
+    {
+      "status": "PASS",
+      "id": "host.ram",
+      "message": "Minimaal 110 GiB zichtbaar RAM voor dit installerprofiel."
+    },
+    {
+      "status": "PASS",
+      "id": "host.memory_pressure",
+      "message": "Actuele vrije RAM gemeten; geen modelperformancebewijs."
+    },
+    {
+      "status": "PASS",
+      "id": "host.reboot",
+      "message": "Geen openstaande Ubuntu-herstartmelding vereist."
+    },
+    {
+      "status": "PASS",
+      "id": "disk.root",
+      "message": "Vrije schijfruimte/inodes gemeten; 90 GiB v\u00f3\u00f3r verse installatie en extra projectruimte blijven nodig."
+    },
+    {
+      "status": "PASS",
+      "id": "disk.rootsrv",
+      "message": "Vrije schijfruimte/inodes gemeten; 90 GiB v\u00f3\u00f3r verse installatie en extra projectruimte blijven nodig."
+    },
+    {
+      "status": "PASS",
+      "id": "host.apparmor",
+      "message": "AppArmor moet actief zijn voor dit profiel."
+    },
+    {
+      "status": "PASS",
+      "id": "host.algif_aead",
+      "message": "algif_aead niet geladen; dit alleen bewijst geen gepatchte kernel."
+    },
+    {
+      "status": "PASS",
+      "id": "host.kmod",
+      "message": "kmod vergeleken met vastgelegde Noble-mitigatie."
+    },
+    {
+      "status": "PASS",
+      "id": "host.mitigation_file",
+      "message": "Offici\u00eble blokkadeconfig gecontroleerd."
+    },
+    {
+      "status": "PASS",
+      "id": "host.modprobe_dryrun",
+      "message": "Alleen modprobe dry-run; geen module geladen/verwijderd."
+    },
+    {
+      "status": "WARN",
+      "id": "host.cached_updates",
+      "message": "Alleen bestaande lokale APT-cache bekeken, geen apt update. Nul meldingen bewijst niet dat alles actueel is."
+    },
+    {
+      "status": "PASS",
+      "id": "upload.installer",
+      "message": "Upload vergeleken met onafhankelijke releasehash; niet uitgevoerd."
+    },
+    {
+      "status": "PASS",
+      "id": "install.release",
+      "message": "Herkende installatie."
+    },
+    {
+      "status": "PASS",
+      "id": "audit.pi_pin",
+      "message": "V17 en latere huidige profielen vereisen Pi 1.0.3 met hash-gepinde offici\u00eble installer-lock; werkelijk ge\u00efnstalleerde dependencies worden apart gecontroleerd."
+    },
+    {
+      "status": "PASS",
+      "id": "install.runtime_env_valid",
+      "message": "Image-ID-config veilig geparsed, niet als shellcode uitgevoerd."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.Dockerfile.agent",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.Dockerfile.llama",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.accept.cpp",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.agent-entrypoint.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.agent-policy.md",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.bash-timeout.ts",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.check-ready.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.cybertiel-launcher",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.gdb-result-check.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.import-debug-log.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.mingw-x64.cmake",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.models.json",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.pi-settings-check.mjs",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.settings.json",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.toolchain-smoke.sh",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.trace-check.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.verify-agent.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.verify-pi-lock.py",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.launcher",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "file.bundle.pi-sri-manifest.json",
+      "message": "Bestand vergeleken met extern ingebouwde baseline."
+    },
+    {
+      "status": "PASS",
+      "id": "config.settings.json",
+      "message": "Structuur/instellingen vergeleken; geheime inhoud niet in rapport."
+    },
+    {
+      "status": "PASS",
+      "id": "config.models.json",
+      "message": "Structuur/instellingen vergeleken; geheime inhoud niet in rapport."
+    },
+    {
+      "status": "PASS",
+      "id": "config.key_permissions",
+      "message": "API-sleutel alleen op vorm/rechten gecontroleerd; geen inhoud of sleutelhash gepubliceerd."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.record",
+      "message": "Historisch rooktestverslag aanwezig; dit is niet automatisch bewijs voor de huidige installatie."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.runtime_config_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_models_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_settings_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_policy_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_bash_timeout_extension_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_entrypoint_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_settings_checker_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.node_npm_version_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.llama_source_provenance_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.llama_dpkg_inventory_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_dpkg_inventory_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.host_hardware_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.docker_version_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.docker_security_options_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.host_copy_fail_mitigation_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.docker_network_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.model_container_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.model_seccomp_mode_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.model_apparmor_profile_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.model_props_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_installed_tree_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_official_install_package_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_official_install_lock_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.agent_config_isolation_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.toolchain_smoke_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_installed_lock_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_lock_verification_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_installed_tree_check_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_sri_manifest_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "ready.binding.pi_derived_install_lock_sha256",
+      "message": "Opgeslagen bewijs/config opnieuw gehasht; geen live functieclaim."
+    },
+    {
+      "status": "PASS",
+      "id": "pi.official_hash.pi-official-install-package.json",
+      "message": "Bestand tegen onafhankelijke offici\u00eble v1.0.3-releasehash gecontroleerd; niet alleen tegen READY."
+    },
+    {
+      "status": "PASS",
+      "id": "pi.official_hash.pi-official-install-package-lock.json",
+      "message": "Bestand tegen onafhankelijke offici\u00eble v1.0.3-releasehash gecontroleerd; niet alleen tegen READY."
+    },
+    {
+      "status": "PASS",
+      "id": "pi.official_hash.pi-installed-lock.json",
+      "message": "Bestand tegen onafhankelijke offici\u00eble v1.0.3-releasehash gecontroleerd; niet alleen tegen READY."
+    },
+    {
+      "status": "PASS",
+      "id": "pi.official_hash.pi-derived-install-package-lock.json",
+      "message": "Bestand tegen onafhankelijke offici\u00eble v1.0.3-releasehash gecontroleerd; niet alleen tegen READY."
+    },
+    {
+      "status": "PASS",
+      "id": "pi.official_hash.pi-sri-manifest.json",
+      "message": "Bestand tegen onafhankelijke offici\u00eble v1.0.3-releasehash gecontroleerd; niet alleen tegen READY."
+    },
+    {
+      "status": "PASS",
+      "id": "dependencies.pi-official-install-package-lock.json",
+      "message": "Vastgelegde dependencyversies op drie concrete advisories getoetst; inventaris is geen volledige CVE-scan."
+    },
+    {
+      "status": "PASS",
+      "id": "dependencies.pi-installed-lock.json",
+      "message": "Vastgelegde dependencyversies op drie concrete advisories getoetst; inventaris is geen volledige CVE-scan."
+    },
+    {
+      "status": "PASS",
+      "id": "dependencies.pi-installed-tree.json",
+      "message": "Vastgelegde dependencyversies op drie concrete advisories getoetst; inventaris is geen volledige CVE-scan."
+    },
+    {
+      "status": "PASS",
+      "id": "model.gguf.header",
+      "message": "Bestand aanwezig met GGUF-v3-header; dit is nog geen integriteitsbewijs."
+    },
+    {
+      "status": "PASS",
+      "id": "model.gguf.hash",
+      "message": "Volledig modelbestand gehasht met no-follow/object-continu\u00efteitscontrole."
+    },
+    {
+      "status": "PASS",
+      "id": "model.projector.header",
+      "message": "Bestand aanwezig met GGUF-v3-header; dit is nog geen integriteitsbewijs."
+    },
+    {
+      "status": "PASS",
+      "id": "model.projector.hash",
+      "message": "Volledig modelbestand gehasht met no-follow/object-continu\u00efteitscontrole."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.cli",
+      "message": "Docker CLI aanwezig; expliciet alleen lokale daemon gebruikt."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.engine",
+      "message": "Engineversie voor isolated gateway mode gecontroleerd."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.security_support",
+      "message": "Daemon rapporteert AppArmor en seccomp; geen inhoudelijke firewall-/LSM-audit."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.disk",
+      "message": "Werkelijke DockerRootDir-schijf gemeten; 20 GiB vrije buildreserve is richtwaarde."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.network",
+      "message": "Huidige netwerkconfig gecontroleerd; geen actieve internet/host-escapeproef."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.image.LLAMA_IMAGE",
+      "message": "Lokale immutable image-ID/platform/releaselabel gecontroleerd."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.image.AGENT_IMAGE",
+      "message": "Lokale immutable image-ID/platform/releaselabel gecontroleerd."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.policy.model",
+      "message": "Werkelijke containerconfig vergeleken met dit profiel."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.state.model",
+      "message": "Actuele processtatus, OOM en restarttoestand."
+    },
+    {
+      "status": "PASS",
+      "id": "docker.live_sandbox.model",
+      "message": "Werkelijke init-processtatus gelezen; geen garantie tegen alle kernel-/containerlekken."
+    },
+    {
+      "status": "NOT_APPLICABLE",
+      "id": "docker.container.agent",
+      "message": "Geen actieve agentcontainer; normaal wanneer geen taak draait."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.node",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.npm",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pi",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.gcc",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.gxx",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.clang",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.clangd",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.clang_tidy",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.clang_format",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.cmake",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.ninja",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.meson",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.gdb",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.valgrind",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.cppcheck",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.shellcheck",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.git",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.bear",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.python",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pip",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pytest",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.mypy",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pwsh",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.mingw",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.cpp_runtime",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.cpp_negative_control",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.windows_x64_build_NOT_EXECUTION",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pytest_runtime",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.powershell_linux_runtime",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.git_checkpoint",
+      "message": "Beperkte synthetische runtimeprobe, geen projecttest."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.brace_expansion",
+      "message": "Werkelijke image-dependencytree vergeleken met advisories."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pi_official_lock",
+      "message": "Actuele ge\u00efnstalleerde package-metadata door hash-gepinde lock gecontroleerd; geen algemene CVE-vrijheid."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.model_health",
+      "message": "GET /health vanuit de agentnetwerkroute; geen inference."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.model_props",
+      "message": "Geauthenticeerde GET /props: effectieve modelinstellingen; sleutel niet gerapporteerd."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.model_identity",
+      "message": "GET /v1/models bevat de beoogde alias."
+    },
+    {
+      "status": "PASS",
+      "id": "runtime.pi_settings",
+      "message": "Werkelijke Pi-entrypoint/SDK-configprobe in nieuwe tijdelijke HOME."
+    },
+    {
+      "status": "UNTESTED",
+      "id": "qualification.model_inference",
+      "message": "Geen modelantwoord/toolcalling-loop gegenereerd door dit script. Health/props zijn geen inferencebewijs."
+    },
+    {
+      "status": "UNTESTED",
+      "id": "qualification.user_project",
+      "message": "Jouw broncode, 500 bevindingen, EXE en Windows-VM niet uitgevoerd/gevalideerd."
+    },
+    {
+      "status": "UNTESTED",
+      "id": "qualification.security_updates",
+      "message": "Geen volledige actuele CVE-scan of online apt-refresh. Bekende advisories apart getoetst."
+    },
+    {
+      "status": "WARN",
+      "id": "qualification.quotas",
+      "message": "Geen onafhankelijke hard byte/inode-workspacequota bewezen; RAM/PID-grenzen vervangen dat niet."
+    },
+    {
+      "status": "UNTESTED",
+      "id": "qualification.performance",
+      "message": "262k-context en langdurige reparatierondes niet gebenchmarkt; een voorbeeld van de maker is geen Xeon-kwalificatie."
+    }
+  ],
+  "console_sha256": "c8460fa1cea3c04db778be9d0bfbc9f8a2f6209f29766f4ac0feaebada760d31",
+  "setup_statuses": [
+    "INSTALL_SMOKE_PASSED_WITH_UNTESTED_ITEMS",
+    "INCOMPLETE"
+  ],
+  "installation_smoke_status": "INSTALLATION_SMOKE_PASS",
+  "scope": "Auto-postinstall checker used deep model hashes and live runtime probes; model inference separately proved by completed Pi repair/acceptance receipt."
+}

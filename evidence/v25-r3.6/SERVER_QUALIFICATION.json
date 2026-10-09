@@ -1,0 +1,76 @@
+{
+  "status": "INSTALLATION_SMOKE_PASS",
+  "tested_at_utc": "2026-10-09T05:29:14.826733+00:00",
+  "model": "Cyber-Tiel-Coder-35B-A3B-UD-Q8_K_XL.gguf",
+  "precision": "official Q8_K_XL; NOT BF16",
+  "model_revision": "644bee2e6b9a75aa64c3bb818aaeeebe43d862bb",
+  "model_sha256": "7509f8c8e3b2df4c7bc5966fa711478c12c2c424f2832f7933f1e46dd180feb2",
+  "llama_commit": "7fe450e19305b828c199d602c23a8337aaa1f03b",
+  "pi_version": "1.0.3",
+  "base_image": "node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553",
+  "installer_id": "2026-10-06.v25-r3",
+  "agent_settings_sdk_verified": true,
+  "smoke_header_and_debuglog_unchanged": true,
+  "context_window": 262144,
+  "model_seccomp_mode": 2,
+  "model_apparmor_profile": "docker-default (enforce)",
+  "agent_seccomp_runtime_mode": 2,
+  "agent_apparmor_profile": "docker-default (enforce)",
+  "server_predict_unlimited": true,
+  "server_reasoning_budget_unlimited": true,
+  "server_host_prompt_cache_mib": 0,
+  "server_cache_idle_slots": false,
+  "native_acceptance": {
+    "status": "PASS",
+    "debug_log_driven_multifile_fixture": true,
+    "native_acceptance_cases": 4,
+    "windows_exe_built": true,
+    "windows_exe_executed": false,
+    "exe_sha256": "404e9b5dbce99477c155bfe283db9042b6c5408ffe6fcdc1d1c71b43a3a425db",
+    "source_sha256": "e7349fab44f59f35c6bb8e6dc9b0a4d5c263540a2222b6fb19e721fbfdcf79c8",
+    "header_sha256": "5da331d23d6ee4886110784b5ea0407aeb84f5f07a56534376872c4a35f4ef78",
+    "debug_log_sha256": "37fcb0be1d995b7fbe975e358005422ff46ffc93142ae61303262fa0a9d162d0"
+  },
+  "agent_tools": {
+    "status": "PASS",
+    "observed_completed_tools": [
+      "bash",
+      "edit",
+      "read"
+    ],
+    "debug_log_read_proven": true,
+    "math_source_edit_proven": true,
+    "debug_log_paths": [
+      "/workspace/debug.log"
+    ],
+    "source_edit_paths": [
+      "/workspace/src/math.cpp"
+    ],
+    "agent_settled": true
+  },
+  "python_pytest_mypy_smoke_tested_in_linux_container": true,
+  "debug_log_driven_multifile_smoke_tested": true,
+  "debug_log_read_proven_by_pi_trace": true,
+  "math_source_edit_proven_by_pi_trace": true,
+  "powershell_runtime_and_parser_tested_in_linux_container": true,
+  "vision_projector_loaded": true,
+  "image_inference_tested": false,
+  "user_project_tested": false,
+  "windows_runtime_tested": false,
+  "pi_official_install_lock_sha256": "d2a441d6f2f137a0a7fe2687cda0350e2028e49724776574db337674d2097fe7",
+  "pi_installed_lock_sha256": "1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a",
+  "pi_derived_install_lock_sha256": "1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a",
+  "pi_sri_manifest_sha256": "0ccc765161d1a5023ab8ac02f06642d99cf51156738a76075362af3f2ec56bd8",
+  "server_environment": {
+    "os": "Ubuntu 24.04.5 LTS",
+    "architecture": "x86_64",
+    "kernel": "6.8.0-146-generic",
+    "logical_cpu_count": 40,
+    "ram_gib": 125.51
+  },
+  "script_bindings": {
+    "install-cybertiel.sh": "d66dd8be840d75d35954df58de67b6b8cbc56e9809129bd6786106e941c76d45",
+    "check-cybertiel-server.sh": "5e2452a477fe89f549567ba957bb2098d800384f54b92fdfd7476550b94ed33a",
+    "setup-cybertiel.sh": "fb475c00117413ea4796aea52e18c935223995f3362f20c686cdfeb4dd5a91fa"
+  }
+}

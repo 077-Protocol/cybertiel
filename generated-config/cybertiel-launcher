@@ -6,7 +6,7 @@ if (( EUID != 0 )); then
 fi
 BASE=/opt/cybertiel
 DATA=/srv/cybertiel
-LABEL=2026-10-06.v25
+LABEL=2026-10-06.v25-r3
 [[ -f "$BASE/runtime.env" && ! -L "$BASE/runtime.env" ]] || {
     echo "Installatieconfig ontbreekt." >&2; exit 1;
 }
@@ -226,7 +226,7 @@ args=(run --rm --init --name cybertiel-agent
     --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only
     --pids-limit 1024 --memory 16g --memory-swap 16g --cpus 8
     --ulimit core=0:0
-    --tmpfs /tmp:rw,nosuid,nodev,size=2g,mode=1777
+    --tmpfs /tmp:rw,exec,nosuid,nodev,size=2g,mode=1777
     --tmpfs /home/node:rw,nosuid,nodev,size=2g,mode=0700,uid=1000,gid=1000
     --tmpfs /sessions:rw,nosuid,nodev,size=1g,mode=0700,uid=1000,gid=1000
     --mount "type=bind,src=$DATA/project,dst=/workspace"

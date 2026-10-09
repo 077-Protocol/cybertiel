@@ -1,0 +1,6 @@
+npm warn deprecated node-domexception@1.0.0: Use your platform's native DOMException instead
+npm warn tarball tarball data for @earendil-works/pi-ai@https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.0.3.tgz (sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==) seems to be corrupted. Trying again.
+npm warn tarball tarball data for @earendil-works/pi-ai@https://registry.npmjs.org/@earendil-works/pi-ai/-/pi-ai-1.0.3.tgz (sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==) seems to be corrupted. Trying again.
+npm error code EINTEGRITY
+npm error sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA== integrity checksum failed when using sha512: wanted sha512-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA== but got sha512-p+/EUrbmfT0xWOtL/NJRtWOsyzcKKFSyiivHLDBMG0DUVpHdaIykd5jFibq0YZDFGBN/nv61zdOelMb+ylPfSg==. (774640 bytes)
+npm error A complete log of this run can be found in: /Users/joeylee/.npm/_logs/2026-10-08T23_22_05_489Z-debug-0.log

@@ -1,0 +1,63 @@
+{
+  "schema": "cybertiel-run08-regressions/v1",
+  "installer_release": "2026-10-06.v25-r3",
+  "passed": 6,
+  "failed": 0,
+  "results": [
+    {
+      "name": "v24_stop_requires_persistent_coordination_lock",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "base_lock_before_stop": true
+      }
+    },
+    {
+      "name": "v24_checker_shared_lock_blocks_stop_mutation",
+      "status": "PASS",
+      "seconds": 0.0616,
+      "detail": {
+        "rc": 1,
+        "docker_stop_called": false
+      }
+    },
+    {
+      "name": "v24_stop_still_works_when_coordination_is_free",
+      "status": "PASS",
+      "seconds": 0.091,
+      "detail": {
+        "rc": 0,
+        "stopped_managed_containers": 2
+      }
+    },
+    {
+      "name": "v24_project_metadata_contract",
+      "status": "PASS",
+      "seconds": 0.0,
+      "detail": {
+        "copy_preserves_normalized_owner_execute": true,
+        "verification_checks_perms_and_mtime": true
+      }
+    },
+    {
+      "name": "v24_project_owner_execute_race_rejected",
+      "status": "PASS",
+      "seconds": 0.2357,
+      "detail": {
+        "rc": 1,
+        "canonical_empty": true,
+        "mode_change_rejected": true
+      }
+    },
+    {
+      "name": "v24_project_import_normalizes_editable_private_modes",
+      "status": "PASS",
+      "seconds": 0.2226,
+      "detail": {
+        "executable_mode": "0700",
+        "nonexec_mode": "0600",
+        "owner": 1000
+      }
+    }
+  ]
+}

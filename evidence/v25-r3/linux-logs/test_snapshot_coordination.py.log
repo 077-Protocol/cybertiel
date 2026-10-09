@@ -1,0 +1,14 @@
+{"name": "installer_persistent_directory_lock_contract", "status": "PASS", "detail": null}
+{"name": "launcher_persistent_directory_lock_contract", "status": "PASS", "detail": null}
+{"name": "import_log_directory_lock_before_volatile_lock", "status": "PASS", "detail": null}
+{"name": "normal_mutation_directory_lock_before_volatile_lock", "status": "PASS", "detail": null}
+{"name": "checker_uses_readonly_persistent_shared_lock", "status": "PASS", "detail": null}
+{"name": "installer_first_install_parent_lock_contract", "status": "PASS", "detail": null}
+{"name": "checker_fresh_host_parent_shared_lock_contract", "status": "PASS", "detail": null}
+{"name": "shared_checker_lock_blocks_new_mutator", "status": "PASS", "detail": {"mutator_rc": 7}}
+{"name": "exclusive_mutator_lock_blocks_checker", "status": "PASS", "detail": {"checker_rc": 7}}
+{
+  "passed": 9,
+  "failed": 0,
+  "failures": []
+}

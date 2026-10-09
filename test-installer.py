@@ -28,7 +28,7 @@ with tempfile.TemporaryDirectory(prefix="cybertiel-offline-") as td:
     tmp=Path(td);bundle=tmp/"bundle"
     def render():
         okay(bash('emit_bundle "$1"',bundle))
-        expect(len(list(bundle.iterdir()))==18)
+        expect(len(list(bundle.iterdir()))==19)
         return sorted(p.name for p in bundle.iterdir())
     record("embedded_files_render",render)
     def restricted_umask():
@@ -119,7 +119,7 @@ download_checked "https://invalid.example/not-fetched" "$1" sha256 "$5"
     record("download_HTTP_failure_not_finalized",lambda:download("badhttp",httpfail=True,valid=False))
     def owned():
         d=tmp/"owned";okay(bash('ensure_owned_tree "$1"; ensure_owned_tree "$1"',d))
-        expect((d/".cybertiel-install-id").read_text().strip()=="2026-10-06.v25")
+        expect((d/".cybertiel-install-id").read_text().strip()=="2026-10-06.v25-r3")
     record("directory_idempotent_creation",owned)
     unknown=tmp/"unknown";unknown.mkdir();(unknown/"userfile").write_text("preserve")
     record("unknown_nonempty_directory_rejected",lambda:rejected(bash('ensure_owned_tree "$1"',unknown)))
@@ -404,7 +404,7 @@ cat "$TEST_CURL_SOURCE" > "$out"
     def v11_pi_root_npm_ci_lock_enforcement():
         df=(bundle/"Dockerfile.agent").read_text(); text=INSTALLER.read_text()
         expect('COPY pi-official-install-package.json /opt/pi/install/package.json' in df)
-        expect('COPY pi-official-install-package-lock.json /opt/pi/install/package-lock.json' in df)
+        expect('COPY pi-derived-install-package-lock.json /opt/pi/install/package-lock.json' in df)
         expect('cd /opt/pi/install' in df)
         expect('test -s /opt/pi/package/npm-shrinkwrap.json' not in df)
         expect('--require-release-hashes --installed-root /opt/pi/install' in df)
@@ -462,17 +462,17 @@ cat "$TEST_CURL_SOURCE" > "$out"
 
     def v10_network_receipt_validator():
         good=tmp/"network-good.json"
-        good.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":False,"Labels":{"io.cybertiel.managed":"2026-10-06.v25"},"Options":{"com.docker.network.bridge.gateway_mode_ipv4":"isolated"}}]))
-        okay(bash('validate_network_receipt "$1" "$2"',good,"2026-10-06.v25"))
+        good.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":False,"Labels":{"io.cybertiel.managed":"2026-10-06.v25-r3"},"Options":{"com.docker.network.bridge.gateway_mode_ipv4":"isolated"}}]))
+        okay(bash('validate_network_receipt "$1" "$2"',good,"2026-10-06.v25-r3"))
         bad=tmp/"network-bad.json"
-        bad.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":False,"Labels":{"io.cybertiel.managed":"2026-10-06.v25"},"Options":{}}]))
-        rejected(bash('validate_network_receipt "$1" "$2"',bad,"2026-10-06.v25"))
+        bad.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":False,"Labels":{"io.cybertiel.managed":"2026-10-06.v25-r3"},"Options":{}}]))
+        rejected(bash('validate_network_receipt "$1" "$2"',bad,"2026-10-06.v25-r3"))
         wrong=tmp/"network-wrong-label.json"
         wrong.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":False,"Labels":{"io.cybertiel.managed":"OTHER"},"Options":{"com.docker.network.bridge.gateway_mode_ipv4":"isolated"}}]))
-        rejected(bash('validate_network_receipt "$1" "$2"',wrong,"2026-10-06.v25"))
+        rejected(bash('validate_network_receipt "$1" "$2"',wrong,"2026-10-06.v25-r3"))
         ipv6=tmp/"network-ipv6-enabled.json"
-        ipv6.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":True,"Labels":{"io.cybertiel.managed":"2026-10-06.v25"},"Options":{"com.docker.network.bridge.gateway_mode_ipv4":"isolated"}}]))
-        rejected(bash('validate_network_receipt "$1" "$2"',ipv6,"2026-10-06.v25"))
+        ipv6.write_text(json.dumps([{"Name":"cybertiel-internal","Driver":"bridge","Internal":True,"EnableIPv6":True,"Labels":{"io.cybertiel.managed":"2026-10-06.v25-r3"},"Options":{"com.docker.network.bridge.gateway_mode_ipv4":"isolated"}}]))
+        rejected(bash('validate_network_receipt "$1" "$2"',ipv6,"2026-10-06.v25-r3"))
         return "Synthetic inspect receipt: valid IPv4-isolated/IPv6-disabled network accepted; missing isolated mode, wrong label, and IPv6-enabled variants rejected"
     record("v10_network_receipt_validator_positive_and_negative",v10_network_receipt_validator)
 

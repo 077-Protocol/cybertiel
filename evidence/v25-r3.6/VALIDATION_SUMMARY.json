@@ -1,0 +1,24 @@
+{
+  "date": "2026-10-09",
+  "package_revision": "2026-10-06.v25-r3.6",
+  "managed_installer_identity": "2026-10-06.v25-r3",
+  "checker": "CT-CHECK-2.9.6",
+  "linux_tests": {
+    "passed": 355,
+    "failed": 0,
+    "suites": 16,
+    "supplemental_cppcheck_checks_passed": 2
+  },
+  "candidate_zip_sha256": "2387a424712ddcf5ae15fda7efe27007c614da656444e62c5a351979568d3d40",
+  "installer_sha256": "d66dd8be840d75d35954df58de67b6b8cbc56e9809129bd6786106e941c76d45",
+  "target_qualification": "PASS: real model/Pi source repair, native acceptance, toolchain, deep model hashes and live checker",
+  "sandbox_execution_policy": "Only ephemeral agent/build scratch explicitly exec; nosuid,nodev, non-root, read-only root, capability drop, seccomp and AppArmor retained",
+  "target_checker_counts": {
+    "PASS": 131,
+    "WARN": 3,
+    "NOT_APPLICABLE": 1,
+    "UNTESTED": 4
+  },
+  "qualification_receipt": "SERVER_QUALIFICATION.json",
+  "tested_executable_bytes_unchanged_in_final_archive": true
+}

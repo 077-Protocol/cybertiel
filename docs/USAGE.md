@@ -1,5 +1,7 @@
 # Operator guide
 
+For this v25-r3.6 distribution, first follow `../SERVER_STEPS.txt`, including independent ZIP/SRI checks. Resume an existing partial v25-r3 installation without archiving it. Use the delivered package rather than the still-published v25-r2 GitHub checkout. Current validation evidence lives in `../evidence/v25-r3`.
+
 ## Before installation
 
 Use a dedicated fresh Ubuntu 24.04 x86_64 server. Review the scripts, source pins and threat model. Keep access to the provider console or a persistent terminal session during downloads and builds. Prepare backups outside the managed workspace.

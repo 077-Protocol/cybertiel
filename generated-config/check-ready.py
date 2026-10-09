@@ -8,6 +8,8 @@ import stat
 import sys
 
 BINDINGS={
+ "pi_sri_manifest_sha256":"locks/pi-sri-manifest.json",
+ "pi_derived_install_lock_sha256":"locks/pi-derived-install-package-lock.json",
  "runtime_config_sha256":"runtime.env",
  "agent_models_sha256":"config/models.json",
  "agent_settings_sha256":"config/settings.json",

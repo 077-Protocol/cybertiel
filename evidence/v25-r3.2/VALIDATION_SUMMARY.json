@@ -1,0 +1,13 @@
+{
+  "package_revision": "2026-10-06.v25-r3.2",
+  "managed_installer_identity": "2026-10-06.v25-r3",
+  "checker": "CT-CHECK-2.9.2",
+  "linux_tests": {
+    "passed": 355,
+    "failed": 0,
+    "suites": 16
+  },
+  "installer_sha256": "df7d5acfcf595eee7c979b44e7aededac8cd107dc771c8ee18489d1a9578b4f7",
+  "target_qualification": "pending resume",
+  "scope": "Isolated x86_64 Alpine Linux with GNU tools; prior target build succeeds but r3.1 failed lock permissions"
+}

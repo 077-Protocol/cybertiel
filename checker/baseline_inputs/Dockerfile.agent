@@ -20,16 +20,25 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && test "$(pwsh --version)" = "PowerShell ${POWERSHELL_VERSION}" \
     && rm -f /tmp/powershell.deb \
     && rm -rf /var/lib/apt/lists/*
+# Debian splits the mypy CLI from python3-mypy; retain the cached toolchain layer.
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mypy \
+    && mypy --version && rm -rf /var/lib/apt/lists/*
 # Install from Pi's own release installer root and its hash-verified package-lock.
-# Do not run npm ci inside the published coding-agent library: its development
-# manifest and production-only shrinkwrap need not form a valid root ci graph.
+# Never install at the published library root. Use the official installer
+# manifest/lock pair and reject dependency drift before any Pi code executes.
+COPY verify-pi-lock.py /opt/cybertiel/verify-pi-lock.py
 COPY pi-official-install-package.json /opt/pi/install/package.json
-COPY pi-official-install-package-lock.json /opt/pi/install/package-lock.json
+COPY pi-official-install-package-lock.json /opt/pi/install/official-package-lock.json
+COPY pi-derived-install-package-lock.json /opt/pi/install/package-lock.json
+COPY pi-sri-manifest.json /opt/cybertiel/pi-sri-manifest.json
 RUN cd /opt/pi/install \
+    && python3 /opt/cybertiel/verify-pi-lock.py package.json official-package-lock.json --require-release-hashes >/dev/null \
+    && python3 /opt/cybertiel/verify-pi-lock.py package.json package-lock.json --require-release-hashes >/dev/null \
     && npm ci --omit=dev --ignore-scripts --no-audit --no-fund \
     && ln -s /opt/pi/install/node_modules/@earendil-works/pi-coding-agent /opt/pi/package \
-    && test "$(node -p "require('/opt/pi/package/package.json').version")" = "1.0.0" \
-    && test -s /opt/pi/package/npm-shrinkwrap.json \
+    && test "$(node -p "require('/opt/pi/package/package.json').version")" = "1.0.3" \
+    && mkdir -p /opt/cybertiel/receipts \
+    && python3 /opt/cybertiel/verify-pi-lock.py package.json package-lock.json --require-release-hashes --installed-root /opt/pi/install > /opt/cybertiel/receipts/pi-lock-runtime.json \
     && node -e 'const fs=require("fs"),p=require("/opt/pi/package/package.json"); const b=typeof p.bin==="string"?p.bin:(p.bin&&p.bin.pi); if(!b) throw new Error("Pi bin missing"); const target="/opt/pi/package/"+b; fs.chmodSync(target,0o755); fs.symlinkSync(target,"/usr/local/bin/pi");' \
     && pi --version >/dev/null
 ENV PATH="/opt/pi/install/node_modules/.bin:${PATH}" \

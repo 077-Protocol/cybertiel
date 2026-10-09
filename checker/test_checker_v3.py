@@ -11,16 +11,16 @@ def check(n,f):
  R.append({'id':n,'status':s,'detail':detail})
 def need(x):
  if not x:raise AssertionError('predicate false')
-b=m.BASELINES['2026-10-06.v25'];parent=ROOT.parent
+b=m.BASELINES['2026-10-06.v25-r3'];parent=ROOT.parent
 check('v18_installer_hash_exact',lambda:need(b['installer_sha256']==hashlib.sha256((parent/'install-cybertiel.sh').read_bytes()).hexdigest()))
 check('v16_history_preserved',lambda:need('2026-10-05.v16' in m.BASELINES))
-check('current_no_shrinkwrap_receipt',lambda:need('pi_published_shrinkwrap_sha256' not in m.ready_bindings('2026-10-06.v25')))
+check('current_no_shrinkwrap_receipt',lambda:need('pi_published_shrinkwrap_sha256' not in m.ready_bindings('2026-10-06.v25-r3')))
 check('v16_keeps_historical_binding',lambda:need('pi_published_shrinkwrap_sha256' in m.ready_bindings('2026-10-05.v16')))
 for path,h in b['managed_files'].items():
  name=Path(path).name
  if name=='cybertiel':name='cybertiel-launcher'
  check('bundle_binding_'+name,lambda name=name,h=h:need(hashlib.sha256((parent/'generated-config'/name).read_bytes()).hexdigest()==h))
-proof={'status':'PASS','pi_version':'1.0.3','brace_expansion':'5.0.12','lock_sha256':b['pi_lock_sha256'],
+proof={'status':'PASS','pi_version':'1.0.3','brace_expansion':'5.0.12','lock_sha256':b['pi_derived_lock_sha256'],'official_lock_sha256':b['pi_lock_sha256'],'derived_lock_sha256':b['pi_derived_lock_sha256'],'sri_manifest_sha256':b['pi_sri_manifest_sha256'],
  'package_sha256':b['pi_package_sha256'],'release_hashes_checked':True,'installed_metadata_checked':True,
  'installed_packages':{'a':{'name':'@earendil-works/pi-coding-agent','version':'1.0.3'},'b':{'name':'brace-expansion','version':'5.0.12'}}}
 check('live_proof_positive',lambda:need(not m.live_lock_problems(proof,b)))
@@ -30,7 +30,7 @@ for k,v in [('status','FAIL'),('pi_version','1.0.0'),('brace_expansion','5.0.9')
 check('live_proof_missing_rejected',lambda:need(m.live_lock_problems(None,b)))
 check('runtime_version_injected_not_hardcoded',lambda:need("@PI_VERSION_EXPECTED@" in m.TOOLCHAIN_PROBE and "'1.0.3'" in m.TOOLCHAIN_PROBE))
 # Only emulate installed managed data for selection logic; NOT a live install.
-real=m.read_managed;wanted='2026-10-06.v25';data={str(m.BASE/'.cybertiel-install-id'):wanted.encode()}
+real=m.read_managed;wanted='2026-10-06.v25-r3';data={str(m.BASE/'.cybertiel-install-id'):wanted.encode()}
 def rd(p,*args,**kwargs):
  if str(p) not in data:raise FileNotFoundError(str(p))
  return data[str(p)],types.SimpleNamespace(st_uid=0,st_gid=0,st_mode=stat.S_IFREG|0o600)

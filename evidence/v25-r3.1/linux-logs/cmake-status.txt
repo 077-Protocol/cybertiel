@@ -1,0 +1,2 @@
+cmake-old 1
+cmake-fixed 0

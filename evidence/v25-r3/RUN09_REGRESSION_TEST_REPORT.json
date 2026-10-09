@@ -1,0 +1,37 @@
+{
+  "schema": "cybertiel-run09-regressions/v1",
+  "installer_release": "2026-10-06.v25-r3",
+  "passed": 3,
+  "failed": 0,
+  "results": [
+    {
+      "name": "v24_verifier_does_not_hide_skipped_unsafe_symlink",
+      "status": "PASS",
+      "seconds": 0.0001,
+      "detail": {
+        "copy_safe_links": true,
+        "verify_safe_links": false
+      }
+    },
+    {
+      "name": "v24_unsafe_source_symlink_rejected_atomically",
+      "status": "PASS",
+      "seconds": 0.2026,
+      "detail": {
+        "rc": 1,
+        "canonical_empty": true,
+        "unsafe_symlink_published": false
+      }
+    },
+    {
+      "name": "v24_safe_internal_symlink_preserved",
+      "status": "PASS",
+      "seconds": 0.1958,
+      "detail": {
+        "rc": 0,
+        "safe_relative_symlink_preserved": true,
+        "target": "../target.txt"
+      }
+    }
+  ]
+}

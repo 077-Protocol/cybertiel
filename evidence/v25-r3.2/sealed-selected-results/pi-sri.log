@@ -1,0 +1,187 @@
+{
+  "passed": 36,
+  "failed": 0,
+  "results": [
+    {
+      "id": "original_release_hashes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "manifest_exact_hash_and_embedded_match",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "derived_exact_sha256",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "exactly_eight_missing_SRI",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "original_validator_failure_reproduced",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "derived_graph_accepted",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "only_eight_SRI_fields_changed",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/chord",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-agent-core",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-ai",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-codemode",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-coding-agent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-mcp",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-telemetry",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "metadata_@earendil-works/pi-tui",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_derivation_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_derivation_url",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_derivation_extra_missing_sri",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_derivation_extra_dependency",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_derivation_root_override",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_real_derived_positive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_reject_changed_SRI",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_reject_changed_registry",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_reject_changed_version",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_derive_real_official",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_reject_overwrite_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "CLI_reject_symlink_output",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_derived_and_manifest_independent_pins",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_real_contract_positive",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_reject_official_lock_sha256",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_reject_derived_lock_sha256",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_reject_sri_manifest_sha256",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "checker_reject_lock_sha256",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "Docker_npm_uses_derived_lock",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "installed_lock_uses_derived_pin",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "READY_binds_manifest_and_derived",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "scope": "Actual upstream release bytes and registry metadata; deterministic derivation and negative tests; no server or Pi runtime"
+}

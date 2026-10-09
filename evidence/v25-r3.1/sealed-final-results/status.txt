@@ -1,0 +1,1 @@
+16 suites passed on exact ZIP 896bf6498605d792f74cd0f2b4b40736fb1343635fb4d7a631e5a68882a2d6d5. test_setup and test_run08 require root; first ordinary-user attempt rejected fixture assumptions, then correct root execution passed.

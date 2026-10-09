@@ -101,15 +101,12 @@
     "host_runtime_lock_dir": "/run/cybertiel mode 0700 root:root; operation/log-ingress flock files live only below this private directory"
   },
   "researched_on": "2026-10-06",
-  "installer_id": "2026-10-06.v25",
-  "checker": "CT-CHECK-2.8.0",
+  "installer_id": "2026-10-06.v25-r3",
+  "checker": "CT-CHECK-2.9.6",
   "lineage": {
-    "parent": "2026-10-06.v25-r1",
-    "parent_installer_sha256": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
-    "parent_checker_sha256": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5e",
-    "parent_setup_sha256": "e4e7ee977b3dc52975c68441f0f282967baceff59a509be46e17bf86e4f83c77",
-    "parent_zip_sha256": "d390a22b63fc88ecd6bc2b55a725e0e1d6a82a9a76498921665a7bba65f764b8",
-    "parent_retained": true
+    "parent": "2026-10-06.v25-r3",
+    "parent_git_commit": "ec855899a137c15463c22846e3c974f64595e414",
+    "parent_zip_sha256": "d4c7ab1ea5592ff5e0e1519bcc03af0be02a17f1da870144d4e0d5148f0b4634"
   },
   "agent": {
     "npm_package": "@earendil-works/pi-coding-agent",
@@ -118,7 +115,7 @@
     "node_base": "node:24-bookworm-slim@sha256:2fe369e969550cde8e867afc3fe370b260140cab4a23d467074295b42163d553",
     "node_version": "24.21.0",
     "npm_version": "11.19.0",
-    "install_mode": "npm ci --omit=dev --ignore-scripts from official installer root /opt/pi/install",
+    "install_mode": "npm ci --omit=dev --ignore-scripts from pinned derived lock at official installer root",
     "official_package_url": "https://github.com/earendil-works/pi/releases/download/v1.0.3/pi-coding-agent-install-package.json",
     "official_package_sha256": "9cae3572dc8090c7fd3ff7c7662ec7bba1b95529126e2054d6b42220be3b2fea",
     "official_lock_url": "https://github.com/earendil-works/pi/releases/download/v1.0.3/pi-coding-agent-install-package-lock.json",
@@ -137,9 +134,12 @@
     "session_mode": "ephemeral --no-session; fresh writable settings runtime from read-only templates; Git/WORKLOG recovery",
     "extensions": "discovery disabled, only pinned local bash-timeout.ts explicitly loaded",
     "asset_metadata_verified": true,
-    "actual_new_asset_bytes_downloaded_here": false,
-    "actual_npm_ci_executed_here": false,
-    "target_required": "Verify official asset SHA256; verify graph and installed metadata before Pi executes; run actual Pi SDK and end-to-end smoke."
+    "actual_new_asset_bytes_downloaded_here": true,
+    "actual_npm_ci_executed_here": true,
+    "target_required": "Verify official asset SHA256; verify graph and installed metadata before Pi executes; run actual Pi SDK and end-to-end smoke.",
+    "sri_manifest_sha256": "0ccc765161d1a5023ab8ac02f06642d99cf51156738a76075362af3f2ec56bd8",
+    "derived_lock_sha256": "1d93efc1f55498590ec6d3c8aabda72654a22f67360c2507906c9c5449e0da0a",
+    "npm_ci_evidence_scope": "macOS arm64; exact Node 24.21.0/npm 11.19.0; Linux Docker and Pi runtime still target-pending"
   },
   "primary_sources": [
     {
@@ -176,24 +176,32 @@
     }
   ],
   "deployment_qualification": {
-    "status": "LOCAL_CORRECTED_V23_CANDIDATE_TARGET_PENDING",
-    "Docker_build": false,
-    "Pi_actual_runtime": false,
-    "full_model_download": false,
-    "model_inference": false,
-    "user_server": false,
-    "Windows_execution": false
+    "status": "V25_R3_6_UBUNTU_INSTALLATION_AND_PI_SMOKE_PASS",
+    "Docker_build": true,
+    "Pi_actual_runtime": true,
+    "full_model_download": true,
+    "model_inference": true,
+    "user_server": true,
+    "Windows_execution": false,
+    "local_llama_Docker_configure": true,
+    "receipt": "evidence/v25-r3.6/SERVER_QUALIFICATION.json"
   },
   "changed_scope": [
-    "CT-BUG-034: SOURCE_LOCK.json is corrected from stale v23/checker-2.6 lineage metadata to the actual v25/checker-2.8 package state and exact v25-r1 parent ZIP.",
-    "Package revision advances to 2026-10-06.v25-r2; installer and checker runtime bytes are deliberately unchanged; setup only reports the corrected package revision.",
-    "SOURCE_LOCK now explicitly binds the exact installer, checker and setup script SHA-256 values so future package validation can reject semantic drift."
+    "Add pkg-config to the llama Docker builder: pinned upstream BLAS configuration requires it.",
+    "Preserve verified executable alias paths in checker command discovery: modprobe symlink must retain argv[0], without weakening ownership/mode checks.",
+    "Package revision r3.6; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated.",
+    "Verified public derived build-context lock is 0644 for the final node user; private host receipt remains 0600.",
+    "Install the Debian mypy CLI package in addition to its Python module, required by the real toolchain smoke.",
+    "Install Debian mypy CLI while retaining its module package.",
+    "Prepare private temporary HOME/XDG directories before PowerShell starts in the read-only toolchain sandbox.",
+    "Use a lint-clean native C fixture with the same expected exit-zero result; retain cppcheck enforcement.",
+    "Enable execution only in bounded temporary agent/build scratch required for native compiled tests; retain all host/network/container isolation gates."
   ],
-  "unchanged_scope": "CyberTiel installer runtime remains 2026-10-06.v25 and checker remains CT-CHECK-2.8.0. Model/revision/hashes, Pi 1.0.3 locked package, Node digest/version, llama.cpp v0.5.0 pin, generated runtime files, Docker/toolchain policy, project/log safety and target constraints are unchanged. The investigated FIFO/Unix-socket special-node hypothesis was falsified: v25 already fails closed because rsync emits the skipped non-regular path into the verifier pipeline. No target Docker/model/Pi/Windows execution is claimed.",
-  "package_revision": "2026-10-06.v25-r2",
+  "unchanged_scope": "Model, Node/npm base, llama, host and container gates retained.",
+  "package_revision": "2026-10-06.v25-r3.6",
   "script_bindings": {
-    "install-cybertiel.sh": "9b43a8b7f04162391a892c717c6377973edd2722f171ac034951e68bea7c0761",
-    "check-cybertiel-server.sh": "333710579427a1c3494f1a84a94cdf93188860356b5d4cf44518e81caf9fb2e5",
-    "setup-cybertiel.sh": "dfcf9fe5a5c7e4bf15667e4f1929d15a637b8e9702d61150c1242ff9ab2a9796"
+    "install-cybertiel.sh": "d66dd8be840d75d35954df58de67b6b8cbc56e9809129bd6786106e941c76d45",
+    "check-cybertiel-server.sh": "5e2452a477fe89f549567ba957bb2098d800384f54b92fdfd7476550b94ed33a",
+    "setup-cybertiel.sh": "fb475c00117413ea4796aea52e18c935223995f3362f20c686cdfeb4dd5a91fa"
   }
 }

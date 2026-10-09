@@ -1,0 +1,17 @@
+{
+  "status": "PASS",
+  "zip_sha256": "fe444e0079d75b5b306106a87f09a1150975bc75d1572d3e4c51f40b05bd1684",
+  "checked_files": 237,
+  "zip_bytes": 493793,
+  "scope": "Complete archive byte integrity and safe paths; no publisher signature or server qualification",
+  "source_verification": {
+    "status": "PASS",
+    "checked_files": 237,
+    "errors": [],
+    "warnings": [],
+    "scope": "Local byte/identity consistency; not publisher authentication or runtime qualification"
+  },
+  "tests": {
+    "status": "target validation in progress; historical tests under evidence/v25-r3.1"
+  }
+}

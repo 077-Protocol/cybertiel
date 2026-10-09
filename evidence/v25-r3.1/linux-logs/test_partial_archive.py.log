@@ -1,0 +1,42 @@
+{
+  "passed": 7,
+  "failed": 0,
+  "results": [
+    {
+      "id": "genuine_partial_intake",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_qualified_install",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_other_release",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_existing_project",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_modified_official_lock",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_symlink_lock",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "reject_writable_managed_directory",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "scope": "temporary intake fixtures; no archive performed on server"
+}
