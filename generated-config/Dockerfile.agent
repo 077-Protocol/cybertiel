@@ -20,6 +20,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && test "$(pwsh --version)" = "PowerShell ${POWERSHELL_VERSION}" \
     && rm -f /tmp/powershell.deb \
     && rm -rf /var/lib/apt/lists/*
+# Debian splits the mypy CLI from python3-mypy; retain the cached toolchain layer.
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mypy \
+    && mypy --version && rm -rf /var/lib/apt/lists/*
 # Install from Pi's own release installer root and its hash-verified package-lock.
 # Never install at the published library root. Use the official installer
 # manifest/lock pair and reject dependency drift before any Pi code executes.

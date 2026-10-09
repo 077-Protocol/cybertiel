@@ -1,0 +1,92 @@
+{
+  "passed": 17,
+  "failed": 0,
+  "results": [
+    {
+      "id": "builder_installs_pkg_config_explicitly",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "builder_retains_OpenBLAS_and_disabled_features",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "resume_keeps_v25_r3_managed_identity",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "setup_and_source_report_current_revision",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "builder_checksum_rebound",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "validated_symlink_retains_applet_name",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "modprobe_alias_real_subprocess_dispatch",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "old_resolved_path_failure_reproduced",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "unsafe_command_name_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "world_writable_target_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "world_writable_alias_parent_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "nonroot_alias_owner_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "nonexecutable_target_rejected",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "private_derived_lock_denies_nonroot_before_publish",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "public_mode_set_after_digest_verification",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "published_lock_readable_without_byte_changes",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "private_host_lock_receipt_retained",
+      "status": "PASS",
+      "detail": ""
+    }
+  ],
+  "scope": "actual argv0-dispatch subprocess plus trusted-root negative fixtures; installer dependency/pin checks; no real server mutation"
+}

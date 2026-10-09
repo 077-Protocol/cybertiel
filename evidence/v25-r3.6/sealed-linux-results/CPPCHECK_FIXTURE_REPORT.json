@@ -1,0 +1,21 @@
+{
+  "passed": 2,
+  "failed": 0,
+  "checks": [
+    {
+      "case": "old",
+      "exit_code": 35,
+      "expected": 35,
+      "status": "PASS",
+      "stderr": "/tmp/tmpzzsyl8nb/native.c:5:19: style: Condition 'answer()==42' is always true [knownConditionTrueFalse]\n  return answer() == 42 ? 0 : 1;\n                  ^\n/tmp/tmpzzsyl8nb/native.c:5:16: note: Calling function 'answer' returns 42\n  return answer() == 42 ? 0 : 1;\n               ^\n/tmp/tmpzzsyl8nb/native.c:5:19: note: Condition 'answer()==42' is always true\n  return answer() == 42 ? 0 : 1;\n                  ^\n"
+    },
+    {
+      "case": "fixed",
+      "exit_code": 0,
+      "expected": 0,
+      "status": "PASS",
+      "stderr": ""
+    }
+  ],
+  "cppcheck": "Cppcheck 2.14.2"
+}

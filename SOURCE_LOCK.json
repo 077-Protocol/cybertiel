@@ -102,7 +102,7 @@
   },
   "researched_on": "2026-10-06",
   "installer_id": "2026-10-06.v25-r3",
-  "checker": "CT-CHECK-2.9.2",
+  "checker": "CT-CHECK-2.9.6",
   "lineage": {
     "parent": "2026-10-06.v25-r3",
     "parent_git_commit": "ec855899a137c15463c22846e3c974f64595e414",
@@ -176,26 +176,32 @@
     }
   ],
   "deployment_qualification": {
-    "status": "V25_R3_SRI_REPAIR_LOCAL_TESTS_PASS_TARGET_PENDING",
-    "Docker_build": false,
-    "Pi_actual_runtime": false,
-    "full_model_download": false,
-    "model_inference": false,
-    "user_server": false,
+    "status": "V25_R3_6_UBUNTU_INSTALLATION_AND_PI_SMOKE_PASS",
+    "Docker_build": true,
+    "Pi_actual_runtime": true,
+    "full_model_download": true,
+    "model_inference": true,
+    "user_server": true,
     "Windows_execution": false,
-    "local_llama_Docker_configure": true
+    "local_llama_Docker_configure": true,
+    "receipt": "evidence/v25-r3.6/SERVER_QUALIFICATION.json"
   },
   "changed_scope": [
     "Add pkg-config to the llama Docker builder: pinned upstream BLAS configuration requires it.",
     "Preserve verified executable alias paths in checker command discovery: modprobe symlink must retain argv[0], without weakening ownership/mode checks.",
-    "Package revision r3.1; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated.",
-    "Verified public derived build-context lock is 0644 for the final node user; private host receipt remains 0600."
+    "Package revision r3.6; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated.",
+    "Verified public derived build-context lock is 0644 for the final node user; private host receipt remains 0600.",
+    "Install the Debian mypy CLI package in addition to its Python module, required by the real toolchain smoke.",
+    "Install Debian mypy CLI while retaining its module package.",
+    "Prepare private temporary HOME/XDG directories before PowerShell starts in the read-only toolchain sandbox.",
+    "Use a lint-clean native C fixture with the same expected exit-zero result; retain cppcheck enforcement.",
+    "Enable execution only in bounded temporary agent/build scratch required for native compiled tests; retain all host/network/container isolation gates."
   ],
   "unchanged_scope": "Model, Node/npm base, llama, host and container gates retained.",
-  "package_revision": "2026-10-06.v25-r3.2",
+  "package_revision": "2026-10-06.v25-r3.6",
   "script_bindings": {
-    "install-cybertiel.sh": "df7d5acfcf595eee7c979b44e7aededac8cd107dc771c8ee18489d1a9578b4f7",
-    "check-cybertiel-server.sh": "baea056d4d1cdc292bd1e758e3ab9d8141d0d93a8b7a6c7273fc155b4da01bb6",
-    "setup-cybertiel.sh": "5485f558bd3b195cca23600359b38866d5d77efa1c96ca22ccf2670da7bf5505"
+    "install-cybertiel.sh": "d66dd8be840d75d35954df58de67b6b8cbc56e9809129bd6786106e941c76d45",
+    "check-cybertiel-server.sh": "5e2452a477fe89f549567ba957bb2098d800384f54b92fdfd7476550b94ed33a",
+    "setup-cybertiel.sh": "fb475c00117413ea4796aea52e18c935223995f3362f20c686cdfeb4dd5a91fa"
   }
 }

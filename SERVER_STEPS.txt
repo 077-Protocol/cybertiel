@@ -1,48 +1,54 @@
-CyberTiel v25-r3.2 — resume after the llama CMake/PkgConfig failure
+CyberTiel v25-r3.6 — verified Ubuntu installation package
 
-The original v25-r3 Pi SRI repair is retained. This update adds pkg-config to the
-llama builder and corrects the checker's verified modprobe alias invocation.
-Package revision is v25-r3.2; the managed installer identity stays v25-r3 so the
-existing partial /opt/cybertiel and /srv/cybertiel directories can resume.
+This package passed a real Ubuntu 24.04.5 LTS x86_64 deployment, model loading,
+Pi debug-log/source repair, four native acceptance cases, toolchain execution,
+and independent deep-hash/runtime checks. The user's project and Windows
+execution are separate qualifications. Evidence is under evidence/v25-r3.6.
 
-DO NOT archive the partial v25-r3 installation or change its markers. Keep the
-v25-r2 backups. Docker remains installed. No security gate is disabled.
+1. Download the release ZIP and compare its SHA256 with the independently
+supplied release hash. Preserve the v25-r2 backups. For a partial v25-r3 install,
+resume with this package; do not archive its directories or change its markers.
+A new server can use the same plan/install commands below.
 
-1. Download cybertiel-v25-r3.2.zip into a new server directory and compare its
-SHA256 with the separately supplied delivery hash. Use the ZIP from the pinned
-GitHub commit in the delivery, not a moving branch or main.
+2. After the ZIP hash matches, in its download directory:
 
-2. From the download directory, after the ZIP hash matches:
-
-  python3 -m zipfile -e cybertiel-v25-r3.2.zip .
-  cd cybertiel-v25-r3.2
+  python3 -m zipfile -e cybertiel-v25-r3.6.zip .
+  cd cybertiel-v25-r3.6
   sha256sum -c SHA256SUMS
   python3 tools/verify_release.py
-  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.2.zip
+  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.6.zip
   python3 tools/verify_pi_sri.py
 
-Every check must pass. SRI verification must report the official pair + 8/8
-metadata/tarballs. Original and derived Pi lock hashes are unchanged.
+All integrity checks must pass. Pi verification must report the official pair
+and 8/8 metadata/tarballs. It downloads tarballs but does not execute their code.
 
-3. Resume with this package's paired, pinned scripts:
+3. Plan and install on the intended Ubuntu 24.04 x86_64 server:
 
   bash preflight-server.sh
   bash setup-cybertiel.sh --plan
   sudo bash setup-cybertiel.sh --install --accept-official-q8
 
-Docker may reuse previous layers; the changed dependency layer installs
-pkg-config inside the builder. Installing pkg-config only on the host would
-not fix the container. Do not manually edit a hash-bound Dockerfile or installer.
+The paired setup/installer/checker scripts verify each other's pinned bytes.
+Docker reuses compatible cached layers. Do not edit a hash-bound script,
+Dockerfile or marker on the server. Stop on a reported failure and retain its
+log. If a host gate explicitly requires a reboot, reboot and resume the same
+command; do not weaken the gate or remove coordination locks.
 
-If the existing host gate explicitly requires a reboot, reboot normally and
-repeat only this same setup installation command. Stop on any other failure and
-retain the reported log. Do not weaken a gate or remove coordination locks.
+4. After install, inspect status and independent runtime/deep-hash checks:
 
-4. After setup succeeds:
-
-  sudo bash check-cybertiel-server.sh --installer ./install-cybertiel.sh --deep-model-hash --runtime
   sudo cybertiel status
+  sudo bash check-cybertiel-server.sh --installer ./install-cybertiel.sh --deep-model-hash --runtime
 
-Review the checker and setup reports. Their independent live/ready checks remain
-required; local regression/configure success does not prove model inference or
-Windows runtime. No server installation was executed by the assistant.
+READY must show INSTALLATION_SMOKE_PASS. Installation/runtime checks must have
+zero FAIL. The checker may report INCOMPLETE for deliberately untested project,
+Windows, full security-update audit and performance areas. The real Pi repair
+receipt separately proves model inference and completed read/edit tools.
+
+5. To use your own project after installation:
+
+  sudo cybertiel import /absolute/path/to/project
+  sudo cybertiel
+
+Import is allowed only into the managed empty project and preserves the source.
+Consult docs/USAGE.md for checkpoint, import and recovery behavior. An installed
+model and successful synthetic acceptance do not qualify an arbitrary project.

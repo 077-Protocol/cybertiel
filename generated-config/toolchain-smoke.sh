@@ -4,12 +4,14 @@ required=(node npm pi git gcc g++ clang clang-tidy clang-format clangd cmake nin
 for tool in "${required[@]}"; do
     command -v "$tool" >/dev/null || { echo "MISSING:$tool" >&2; exit 31; }
 done
-[[ "$(pwsh --version)" == "PowerShell 7.6.6" ]] || { pwsh --version >&2; exit 32; }
 smoke_dir=$(mktemp -d /tmp/cybertiel-toolchain.XXXXXXXX)
 trap 'rm -rf -- "$smoke_dir"' EXIT
 cd "$smoke_dir"
 export HOME="$smoke_dir/home"
 mkdir -m 0700 "$HOME"
+export XDG_CONFIG_HOME="$HOME/.config" XDG_CACHE_HOME="$HOME/.cache" XDG_DATA_HOME="$HOME/.local/share"
+mkdir -p -m 0700 "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME"
+[[ "$(pwsh --version)" == "PowerShell 7.6.6" ]] || { pwsh --version >&2; exit 32; }
 
 # A real local Git checkpoint, not only `git --version`.
 git init -q git-smoke
@@ -33,7 +35,7 @@ int answer(void) {
   return 42;
 }
 int main(void) {
-  return answer() == 42 ? 0 : 1;
+  return answer() - 42;
 }
 EOF_NATIVE
 # Normalize our generated fixture with the installed formatter first.

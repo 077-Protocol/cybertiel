@@ -1,0 +1,61 @@
+{"id": "installer_no_world_writable_lock_path", "status": "PASS", "detail": null}
+{"id": "launcher_no_world_writable_lock_path", "status": "PASS", "detail": null}
+{"id": "installer_private_runtime_dir_contract", "status": "PASS", "detail": null}
+{"id": "launcher_private_runtime_dir_contract", "status": "PASS", "detail": null}
+{"id": "checker_current_lock_path", "status": "PASS", "detail": null}
+{"id": "checker_v17_compat_lock_path", "status": "PASS", "detail": null}
+{"id": "old_redirection_follows_symlink_and_truncates", "status": "PASS", "detail": {"victim_truncated": true, "simulated_parent_mode": "1777"}}
+{"id": "private_0700_parent_blocks_precreation", "status": "PASS", "detail": {"unprivileged_symlink_creation_rejected": true, "victim_unchanged": true}}
+{
+  "results": [
+    {
+      "id": "installer_no_world_writable_lock_path",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "launcher_no_world_writable_lock_path",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "installer_private_runtime_dir_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "launcher_private_runtime_dir_contract",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "checker_current_lock_path",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "checker_v17_compat_lock_path",
+      "status": "PASS",
+      "detail": null
+    },
+    {
+      "id": "old_redirection_follows_symlink_and_truncates",
+      "status": "PASS",
+      "detail": {
+        "victim_truncated": true,
+        "simulated_parent_mode": "1777"
+      }
+    },
+    {
+      "id": "private_0700_parent_blocks_precreation",
+      "status": "PASS",
+      "detail": {
+        "unprivileged_symlink_creation_rejected": true,
+        "victim_unchanged": true
+      }
+    }
+  ],
+  "passed": 8,
+  "failed": 0,
+  "scope": "synthetic local lock-path regression only; not a target-server installation test"
+}

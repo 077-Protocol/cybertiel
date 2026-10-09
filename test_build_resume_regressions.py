@@ -14,7 +14,7 @@ s=(ROOT/'install-cybertiel.sh').read_text();df=(ROOT/'generated-config/Dockerfil
 check('builder_installs_pkg_config_explicitly',lambda:need('ninja-build pkg-config libopenblas-dev' in df))
 check('builder_retains_OpenBLAS_and_disabled_features',lambda:need(all(x in df for x in ['-DGGML_BLAS=ON','-DGGML_BLAS_VENDOR=OpenBLAS','-DLLAMA_SUBPROCESS=OFF','-DLLAMA_OPENSSL=OFF'])))
 check('resume_keeps_v25_r3_managed_identity',lambda:need('readonly INSTALL_ID=2026-10-06.v25-r3\n' in s))
-check('setup_and_source_report_current_revision',lambda:need(json.loads((ROOT/'SOURCE_LOCK.json').read_text())['package_revision']=='2026-10-06.v25-r3.2' and "'package_revision':'2026-10-06.v25-r3.2'" in (ROOT/'setup_helper.py').read_text()))
+check('setup_and_source_report_current_revision',lambda:need(json.loads((ROOT/'SOURCE_LOCK.json').read_text())['package_revision']=='2026-10-06.v25-r3.6' and "'package_revision':'2026-10-06.v25-r3.6'" in (ROOT/'setup_helper.py').read_text()))
 check('builder_checksum_rebound',lambda:need(m.BASELINES['2026-10-06.v25-r3']['managed_files']['/opt/cybertiel/bundle/Dockerfile.llama']==hashlib.sha256(df.encode()).hexdigest()))
 if os.geteuid()!=0:raise SystemExit('Run in disposable Linux VM as root; only /root temporary fixtures are used.')
 with tempfile.TemporaryDirectory(dir='/root',prefix='ct-command-alias-') as td:

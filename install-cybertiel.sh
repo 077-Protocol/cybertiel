@@ -346,6 +346,9 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-ins
     && test "$(pwsh --version)" = "PowerShell ${POWERSHELL_VERSION}" \
     && rm -f /tmp/powershell.deb \
     && rm -rf /var/lib/apt/lists/*
+# Debian splits the mypy CLI from python3-mypy; retain the cached toolchain layer.
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends mypy \
+    && mypy --version && rm -rf /var/lib/apt/lists/*
 # Install from Pi's own release installer root and its hash-verified package-lock.
 # Never install at the published library root. Use the official installer
 # manifest/lock pair and reject dependency drift before any Pi code executes.
@@ -511,12 +514,14 @@ required=(node npm pi git gcc g++ clang clang-tidy clang-format clangd cmake nin
 for tool in "${required[@]}"; do
     command -v "$tool" >/dev/null || { echo "MISSING:$tool" >&2; exit 31; }
 done
-[[ "$(pwsh --version)" == "PowerShell 7.6.6" ]] || { pwsh --version >&2; exit 32; }
 smoke_dir=$(mktemp -d /tmp/cybertiel-toolchain.XXXXXXXX)
 trap 'rm -rf -- "$smoke_dir"' EXIT
 cd "$smoke_dir"
 export HOME="$smoke_dir/home"
 mkdir -m 0700 "$HOME"
+export XDG_CONFIG_HOME="$HOME/.config" XDG_CACHE_HOME="$HOME/.cache" XDG_DATA_HOME="$HOME/.local/share"
+mkdir -p -m 0700 "$XDG_CONFIG_HOME" "$XDG_CACHE_HOME" "$XDG_DATA_HOME"
+[[ "$(pwsh --version)" == "PowerShell 7.6.6" ]] || { pwsh --version >&2; exit 32; }
 
 # A real local Git checkpoint, not only `git --version`.
 git init -q git-smoke
@@ -540,7 +545,7 @@ int answer(void) {
   return 42;
 }
 int main(void) {
-  return answer() == 42 ? 0 : 1;
+  return answer() - 42;
 }
 EOF_NATIVE
 # Normalize our generated fixture with the installed formatter first.
@@ -989,7 +994,7 @@ args=(run --rm --init --name cybertiel-agent
     --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only
     --pids-limit 1024 --memory 16g --memory-swap 16g --cpus 8
     --ulimit core=0:0
-    --tmpfs /tmp:rw,nosuid,nodev,size=2g,mode=1777
+    --tmpfs /tmp:rw,exec,nosuid,nodev,size=2g,mode=1777
     --tmpfs /home/node:rw,nosuid,nodev,size=2g,mode=0700,uid=1000,gid=1000
     --tmpfs /sessions:rw,nosuid,nodev,size=1g,mode=0700,uid=1000,gid=1000
     --mount "type=bind,src=$DATA/project,dst=/workspace"
@@ -1998,7 +2003,7 @@ PY_LLAMA_PROV
     docker run --rm --init --network none --user 1000:1000 \
         --cap-drop=ALL --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only \
         --pids-limit 128 --memory 2g --memory-swap 2g --cpus 2 \
-        --ulimit core=0:0 --tmpfs /tmp:rw,nosuid,nodev,size=512m,mode=1777 \
+        --ulimit core=0:0 --tmpfs /tmp:rw,exec,nosuid,nodev,size=512m,mode=1777 \
         --entrypoint /opt/cybertiel/toolchain-smoke.sh "$agent_image" \
         > "$BASE/locks/toolchain-smoke.txt"
     grep -qx 'CT_TOOLCHAIN_OK' "$BASE/locks/toolchain-smoke.txt" ||
@@ -2226,7 +2231,7 @@ CT_SOURCE_FIXTURE
     docker run --rm --init --network none --user 1000:1000 \
         --cap-drop=ALL --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only \
         --pids-limit 64 --memory 1g --memory-swap 1g --cpus 1 \
-        --tmpfs /tmp:rw,nosuid,nodev,size=64m,mode=1777 \
+        --tmpfs /tmp:rw,exec,nosuid,nodev,size=64m,mode=1777 \
         --tmpfs /home/node:rw,nosuid,nodev,size=64m,mode=0700,uid=1000,gid=1000 \
         --mount "type=bind,src=$BASE/config,dst=/opt/cybertiel/pi-config,readonly" \
         "$agent_image" --ct-runtime-check > "$BASE/locks/agent-config-isolation.txt"
@@ -2247,7 +2252,7 @@ CT_SOURCE_FIXTURE
         --network cybertiel-internal --user 1000:1000 \
         --cap-drop=ALL --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only \
         --pids-limit 128 --memory 4g --memory-swap 4g --cpus 4 \
-        --ulimit core=0:0 --tmpfs /tmp:rw,nosuid,nodev,size=1g,mode=1777 \
+        --ulimit core=0:0 --tmpfs /tmp:rw,exec,nosuid,nodev,size=1g,mode=1777 \
         --tmpfs /home/node:rw,nosuid,nodev,size=512m,mode=0700,uid=1000,gid=1000 \
         --mount "type=bind,src=$smoke/project,dst=/workspace" \
         --mount "type=bind,src=$BASE/config,dst=/opt/cybertiel/pi-config,readonly" \
@@ -2271,7 +2276,7 @@ CT_SOURCE_FIXTURE
     docker run --rm --init --network none --user 1000:1000 \
         --cap-drop=ALL --security-opt=no-new-privileges:true --security-opt=seccomp=builtin --security-opt=apparmor=docker-default --read-only \
         --pids-limit 128 --memory 4g --memory-swap 4g --cpus 4 \
-        --ulimit core=0:0 --tmpfs /tmp:rw,nosuid,nodev,size=1g,mode=1777 \
+        --ulimit core=0:0 --tmpfs /tmp:rw,exec,nosuid,nodev,size=1g,mode=1777 \
         --mount "type=bind,src=$smoke/project,dst=/workspace,readonly" \
         --mount "type=bind,src=$smoke/checks,dst=/checks,readonly" \
         --mount "type=bind,src=$smoke/artifacts,dst=/artifacts" \
