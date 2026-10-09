@@ -102,7 +102,7 @@
   },
   "researched_on": "2026-10-06",
   "installer_id": "2026-10-06.v25-r3",
-  "checker": "CT-CHECK-2.9.1",
+  "checker": "CT-CHECK-2.9.2",
   "lineage": {
     "parent": "2026-10-06.v25-r3",
     "parent_git_commit": "ec855899a137c15463c22846e3c974f64595e414",
@@ -188,13 +188,14 @@
   "changed_scope": [
     "Add pkg-config to the llama Docker builder: pinned upstream BLAS configuration requires it.",
     "Preserve verified executable alias paths in checker command discovery: modprobe symlink must retain argv[0], without weakening ownership/mode checks.",
-    "Package revision r3.1; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated."
+    "Package revision r3.1; installer managed namespace remains v25-r3 to resume the existing partial installation; script hashes and checker baselines updated.",
+    "Verified public derived build-context lock is 0644 for the final node user; private host receipt remains 0600."
   ],
   "unchanged_scope": "Model, Node/npm base, llama, host and container gates retained.",
-  "package_revision": "2026-10-06.v25-r3.1",
+  "package_revision": "2026-10-06.v25-r3.2",
   "script_bindings": {
-    "install-cybertiel.sh": "69461b077c5d8391b8282691d4eeb9d6486302f6dd2c97c085760d2e90c54362",
-    "check-cybertiel-server.sh": "76a1d13c6b2ebaab90d438d6a2be323adf950d93a9d6be23c14393ef147caffb",
-    "setup-cybertiel.sh": "a6dc500227fc32b7aafda3b4f73db7517f468826c3ef04fb88ddee4ac81df4fc"
+    "install-cybertiel.sh": "df7d5acfcf595eee7c979b44e7aededac8cd107dc771c8ee18489d1a9578b4f7",
+    "check-cybertiel-server.sh": "baea056d4d1cdc292bd1e758e3ab9d8141d0d93a8b7a6c7273fc155b4da01bb6",
+    "setup-cybertiel.sh": "5485f558bd3b195cca23600359b38866d5d77efa1c96ca22ccf2670da7bf5505"
   }
 }

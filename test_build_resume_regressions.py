@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """Linux root fixtures for the observed pkg-config and modprobe-alias failures."""
-import hashlib,importlib.util,json,os,stat,tempfile
+import hashlib,importlib.util,json,os,stat,tempfile,subprocess
 from pathlib import Path
 ROOT=Path(__file__).resolve().parent
 sp=importlib.util.spec_from_file_location('checker',ROOT/'checker/check_cybertiel.py');m=importlib.util.module_from_spec(sp);sp.loader.exec_module(m)
@@ -14,7 +14,7 @@ s=(ROOT/'install-cybertiel.sh').read_text();df=(ROOT/'generated-config/Dockerfil
 check('builder_installs_pkg_config_explicitly',lambda:need('ninja-build pkg-config libopenblas-dev' in df))
 check('builder_retains_OpenBLAS_and_disabled_features',lambda:need(all(x in df for x in ['-DGGML_BLAS=ON','-DGGML_BLAS_VENDOR=OpenBLAS','-DLLAMA_SUBPROCESS=OFF','-DLLAMA_OPENSSL=OFF'])))
 check('resume_keeps_v25_r3_managed_identity',lambda:need('readonly INSTALL_ID=2026-10-06.v25-r3\n' in s))
-check('setup_and_source_report_r3_1',lambda:need(json.loads((ROOT/'SOURCE_LOCK.json').read_text())['package_revision']=='2026-10-06.v25-r3.1' and "'package_revision':'2026-10-06.v25-r3.1'" in (ROOT/'setup_helper.py').read_text()))
+check('setup_and_source_report_current_revision',lambda:need(json.loads((ROOT/'SOURCE_LOCK.json').read_text())['package_revision']=='2026-10-06.v25-r3.2' and "'package_revision':'2026-10-06.v25-r3.2'" in (ROOT/'setup_helper.py').read_text()))
 check('builder_checksum_rebound',lambda:need(m.BASELINES['2026-10-06.v25-r3']['managed_files']['/opt/cybertiel/bundle/Dockerfile.llama']==hashlib.sha256(df.encode()).hexdigest()))
 if os.geteuid()!=0:raise SystemExit('Run in disposable Linux VM as root; only /root temporary fixtures are used.')
 with tempfile.TemporaryDirectory(dir='/root',prefix='ct-command-alias-') as td:
@@ -34,5 +34,13 @@ with tempfile.TemporaryDirectory(dir='/root',prefix='ct-command-alias-') as td:
   os.lchown(alias,65534,65534);check('nonroot_alias_owner_rejected',lambda:need(m.find_command('modprobe') is None));os.lchown(alias,0,0)
   real.chmod(0o644);check('nonexecutable_target_rejected',lambda:need(m.find_command('modprobe') is None));real.chmod(0o755)
  finally:m.Path=orig
+with tempfile.TemporaryDirectory(prefix='ct-public-lock-') as td:
+ root=Path(td);root.chmod(0o755);lock=root/'package-lock.json';raw=(ROOT/'upstream/pi-derived-install-package-lock.json').read_bytes();lock.write_bytes(raw);lock.chmod(0o600)
+ read=lambda:subprocess.run(['runuser','-u','nobody','--','cat',str(lock)],capture_output=True)
+ check('private_derived_lock_denies_nonroot_before_publish',lambda:need(read().returncode!=0))
+ check('public_mode_set_after_digest_verification',lambda:need(s.index('verify_hash "$BASE/bundle/pi-derived-install-package-lock.json"') < s.index('chmod 0644 "$BASE/bundle/pi-derived-install-package-lock.json"') < s.index('    docker build --build-arg')))
+ lock.chmod(0o644)
+ check('published_lock_readable_without_byte_changes',lambda:need(read().returncode==0 and read().stdout==raw))
+ check('private_host_lock_receipt_retained',lambda:need('install -m 0600 "$BASE/bundle/pi-derived-install-package-lock.json" "$BASE/locks/pi-derived-install-package-lock.json"' in s))
 report={'passed':sum(x['status']=='PASS' for x in rows),'failed':sum(x['status']=='FAIL' for x in rows),'results':rows,'scope':'actual argv0-dispatch subprocess plus trusted-root negative fixtures; installer dependency/pin checks; no real server mutation'}
 (ROOT/'BUILD_RESUME_TEST_REPORT.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2));raise SystemExit(bool(report['failed']))

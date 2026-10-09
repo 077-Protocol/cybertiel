@@ -1926,6 +1926,9 @@ PY_NODE_NPM
     python3 "$BASE/bundle/verify-pi-lock.py" "$BASE/bundle/pi-official-install-package.json" "$BASE/bundle/pi-official-install-package-lock.json" --require-release-hashes --write-install-lock "$BASE/bundle/pi-derived-install-package-lock.json" > "$BASE/locks/pi-lock-derivation.json"
     verify_hash "$BASE/bundle/pi-derived-install-package-lock.json" sha256 "$PI_DERIVED_LOCK_SHA256" || die "Derived lock mismatch."
     install -m 0600 "$BASE/bundle/pi-derived-install-package-lock.json" "$BASE/locks/pi-derived-install-package-lock.json"
+    # Public dependency lock must be readable after COPY by the node image user.
+    # Keep the private host receipt at 0600; do not change any lock bytes.
+    chmod 0644 "$BASE/bundle/pi-derived-install-package-lock.json"
     python3 "$BASE/bundle/verify-pi-lock.py"         "$BASE/bundle/pi-official-install-package.json"         "$BASE/bundle/pi-official-install-package-lock.json" --require-release-hashes         > "$BASE/locks/pi-preinstall-lock-check.json"
 
     docker build --build-arg "BASE_IMAGE=$base_image" \

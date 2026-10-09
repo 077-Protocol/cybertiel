@@ -1,24 +1,24 @@
-CyberTiel v25-r3.1 — resume after the llama CMake/PkgConfig failure
+CyberTiel v25-r3.2 — resume after the llama CMake/PkgConfig failure
 
 The original v25-r3 Pi SRI repair is retained. This update adds pkg-config to the
 llama builder and corrects the checker's verified modprobe alias invocation.
-Package revision is v25-r3.1; the managed installer identity stays v25-r3 so the
+Package revision is v25-r3.2; the managed installer identity stays v25-r3 so the
 existing partial /opt/cybertiel and /srv/cybertiel directories can resume.
 
 DO NOT archive the partial v25-r3 installation or change its markers. Keep the
 v25-r2 backups. Docker remains installed. No security gate is disabled.
 
-1. Download cybertiel-v25-r3.1.zip into a new server directory and compare its
+1. Download cybertiel-v25-r3.2.zip into a new server directory and compare its
 SHA256 with the separately supplied delivery hash. Use the ZIP from the pinned
 GitHub commit in the delivery, not a moving branch or main.
 
 2. From the download directory, after the ZIP hash matches:
 
-  python3 -m zipfile -e cybertiel-v25-r3.1.zip .
-  cd cybertiel-v25-r3.1
+  python3 -m zipfile -e cybertiel-v25-r3.2.zip .
+  cd cybertiel-v25-r3.2
   sha256sum -c SHA256SUMS
   python3 tools/verify_release.py
-  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.1.zip
+  python3 tools/verify_sealed_zip.py ../cybertiel-v25-r3.2.zip
   python3 tools/verify_pi_sri.py
 
 Every check must pass. SRI verification must report the official pair + 8/8

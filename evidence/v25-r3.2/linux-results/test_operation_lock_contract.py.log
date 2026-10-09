@@ -1,0 +1,67 @@
+{
+  "passed": 8,
+  "failed": 0,
+  "tests": [
+    {
+      "id": "emit_bundle",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "import_log_exact_lock_order",
+      "status": "PASS",
+      "detail": {
+        "positions": [
+          344,
+          378,
+          523,
+          559,
+          655
+        ]
+      }
+    },
+    {
+      "id": "import_log_operation_lock_is_nonblocking",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "import_log_does_not_bypass_operation_lock",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "import_log_rejects_orphan_running_agent",
+      "status": "PASS",
+      "detail": ""
+    },
+    {
+      "id": "project_import_rejects_orphan_running_agent",
+      "status": "PASS",
+      "detail": {
+        "guard": 4919,
+        "function": 5143,
+        "rsync": 7793,
+        "import": 9571,
+        "call": 9712
+      }
+    },
+    {
+      "id": "old_contract_reproduction",
+      "status": "PASS",
+      "detail": {
+        "rc": 0,
+        "meaning": "ingress-only importer enters while operation lock is held"
+      }
+    },
+    {
+      "id": "fixed_contract_exclusion",
+      "status": "PASS",
+      "detail": {
+        "rc": 1,
+        "meaning": "importer is excluded while operation lock is held"
+      }
+    }
+  ],
+  "scope": "exact generated launcher + local flock concurrency; not target-server runtime"
+}

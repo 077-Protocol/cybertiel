@@ -1,6 +1,6 @@
 # Operator guide
 
-For this v25-r3.1 distribution, first follow `../SERVER_STEPS.txt`, including independent ZIP/SRI checks. Resume an existing partial v25-r3 installation without archiving it. Use the delivered package rather than the still-published v25-r2 GitHub checkout. Current validation evidence lives in `../evidence/v25-r3`.
+For this v25-r3.2 distribution, first follow `../SERVER_STEPS.txt`, including independent ZIP/SRI checks. Resume an existing partial v25-r3 installation without archiving it. Use the delivered package rather than the still-published v25-r2 GitHub checkout. Current validation evidence lives in `../evidence/v25-r3`.
 
 ## Before installation
 

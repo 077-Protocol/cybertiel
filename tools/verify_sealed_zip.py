@@ -2,7 +2,7 @@
 """Verify archive paths, entry types and complete SHA256 coverage without extracting."""
 import argparse,hashlib,json,re,stat,zipfile
 from pathlib import PurePosixPath,Path
-PREFIX='cybertiel-v25-r3.1/'
+PREFIX='cybertiel-v25-r3.2/'
 def verify(path,expected=None):
  raw=Path(path).read_bytes();digest=hashlib.sha256(raw).hexdigest()
  if expected and digest!=expected:raise ValueError('ZIP SHA256 mismatch')
